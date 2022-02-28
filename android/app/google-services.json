@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "423434259272",
+    "project_id": "askexpert-c08d6",
+    "storage_bucket": "askexpert-c08d6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:423434259272:android:d25180bba8f4a7a1e2817d",
+        "android_client_info": {
+          "package_name": "rmuti.askexpert.askexpertapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "423434259272-0knl0g6dckfj6bvoopld7p3i8svb3uq4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "rmuti.askexpert.askexpertapp",
+            "certificate_hash": "3e00eb1c62450721f7603a33207e95ee77c3c885"
+          }
+        },
+        {
+          "client_id": "423434259272-nop8j4atnjj2i1tgtgmji414ejdipcv4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBliUES4uEb10Mg-eigj6Z084QVuSbtXbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "423434259272-nop8j4atnjj2i1tgtgmji414ejdipcv4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
