@@ -7,9 +7,7 @@ import "dart:io";
 import 'config/config.dart';
 
 class LoginMenu extends StatefulWidget {
-  final FacebookLogin plugin;
-
-  const LoginMenu({Key? key, required this.plugin}) : super(key: key);
+  final plugin = FacebookLogin(debug: true);
 
   @override
   _LoginMenuState createState() => _LoginMenuState();
