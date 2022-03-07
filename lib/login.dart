@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:askexpertapp/register.dart';
+import 'package:askexpertapp/registerInfo.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -68,7 +69,7 @@ class _LoginMenuState extends State<LoginMenu> {
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if(resMap["message"] == "register"){
-        Get.to(register());
+        Get.to(registerInfo());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');
@@ -224,7 +225,7 @@ class _LoginMenuState extends State<LoginMenu> {
                     controller: _email,
                     validator: (input) {
                       if (input!.isEmpty) {
-                        return "plass enter Email";
+                        return "please enter Email";
                       } else {
                         return null;
                       }
@@ -236,7 +237,7 @@ class _LoginMenuState extends State<LoginMenu> {
                     controller: _passWord,
                     validator: (input) {
                       if (input!.isEmpty) {
-                        return "plass enter PassWord";
+                        return "please enter PassWord";
                       } else {
                         return null;
                       }
@@ -279,10 +280,20 @@ class _LoginMenuState extends State<LoginMenu> {
                     width: 300,
                     child: TextButton(
                       style: TextButton.styleFrom(
-                          //primary: Colors.red, // foreground
-                          ),
+                        //primary: Colors.red, // foreground
+                      ),
                       onPressed: _FBsignIn,
                       child: Text('FACEBOOk'),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 500,
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        //primary: Colors.red, // foreground
+                      ),
+                      onPressed: (){Get.to(register());},
+                      child: Text('REGISTER'),
                     ),
                   ),
                 ],
