@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'package:askexpertapp/register.dart';
+import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
@@ -6,6 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
 import 'config/config.dart';
+import 'package:get/get.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
@@ -51,12 +54,25 @@ class _LoginMenuState extends State<LoginMenu> {
     super.initState();
   }
 
-  void _SuccessLogin(){
+  Future<void> _HandleLogin(var response) async{
 
-  }
+    //full json DATA model form LoginCallAPi() funcion
 
-  void _FailLogin(){
+    Map resMap = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      print('\nResponse status: ${response.statusCode}');
+      print('\nResponse message: ${resMap["message"]}');
+      print('\nResponse body data: ${resMap["data"]}');
 
+      //SAVE TOKEN
+      String? getToken = await tokenStore.getToken();
+      print("data SecureStorage : ${getToken}");
+      if(resMap["message"] == "register"){
+        Get.to(register());
+      }
+    } else {
+      print('\nResponse message: ${resMap["message"]}');
+    }
   }
 
   Future<void> _LoginCallApi() async {
@@ -69,16 +85,7 @@ class _LoginMenuState extends State<LoginMenu> {
       "Accept": "application/json",
       "content-type": "application/json"
     });
-
-    Map resMap = jsonDecode(response.body);
-
-    if (resMap["message"] == null) {
-      print('Response status: ${response.statusCode}\n\n');
-      print('Response body data: ${resMap["data"]}\n\n');
-    } else {
-      print('Response body: ${response.body}\n\n');
-      print('Response body: ${resMap["message"]}\n\n');
-    }
+    await _HandleLogin(response);
   }
 
   Future<void> _LoginCallApiFb() async {
@@ -91,16 +98,7 @@ class _LoginMenuState extends State<LoginMenu> {
       "Accept": "application/json",
       "content-type": "application/json"
     });
-
-    Map resMap = jsonDecode(response.body);
-
-    if (resMap["message"] == null) {
-      print('Response status: ${response.statusCode}\n\n');
-      print('Response body data: ${resMap["data"]}\n\n');
-    } else {
-      print('Response body: ${response.body}\n\n');
-      print('Response body: ${resMap["message"]}\n\n');
-    }
+    await _HandleLogin(response);
   }
 
   Future<void> _LoginCallApiG() async {
@@ -113,16 +111,7 @@ class _LoginMenuState extends State<LoginMenu> {
       "Accept": "application/json",
       "content-type": "application/json"
     });
-
-    Map resMap = jsonDecode(response.body);
-
-    if (resMap["message"] == null) {
-      print('Response status: ${response.statusCode}\n\n');
-      print('Response body data: ${resMap["data"]}\n\n');
-    } else {
-      print('Response body: ${response.body}\n\n');
-      print('Response body: ${resMap["message"]}\n\n');
-    }
+    await _HandleLogin(response);
   }
 
   Future<void> _GsignIn() async {
