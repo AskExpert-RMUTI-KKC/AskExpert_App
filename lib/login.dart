@@ -2,9 +2,20 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
 import 'config/config.dart';
+
+final GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+  ],
+);
+
 
 class LoginMenu extends StatefulWidget {
   final plugin = FacebookLogin(debug: true);
@@ -18,23 +29,37 @@ class _LoginMenuState extends State<LoginMenu> {
   final _email = TextEditingController();
   final _passWord = TextEditingController();
 
-  //fb login
+  //Fb login
   String? _sdkVersion;
   FacebookAccessToken? _token;
   FacebookUserProfile? _profile;
-  String? _email2;
+  String? _emailFb;
   String? _imageUrl;
   String? _passWordFb;
 
+  //G login
+  GoogleSignInAccount? _currentUser;
+  String? _Gmail;
+  String? _passWordG; //ID
+
   @override
   void initState() {
-    super.initState();
 
+    _googleSignIn.signInSilently();
     _getSdkVersion();
-    _updateLoginInfo();
+
+    super.initState();
   }
 
-  Future<void> LoginCallApi() async {
+  void _SuccessLogin(){
+
+  }
+
+  void _FailLogin(){
+
+  }
+
+  Future<void> _LoginCallApi() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _email.text, 'password': _passWord.text});
@@ -56,10 +81,10 @@ class _LoginMenuState extends State<LoginMenu> {
     }
   }
 
-  Future<void> LoginCallApiFb() async {
+  Future<void> _LoginCallApiFb() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
-    var body = jsonEncode({'email': _email2, 'password': _passWordFb});
+    var body = jsonEncode({'email': _emailFb, 'password': _passWordFb});
 
     var url = Uri.parse('${Config.API_URL}/user/loginfb');
     var response = await http.post(url, body: body, headers: {
@@ -78,13 +103,56 @@ class _LoginMenuState extends State<LoginMenu> {
     }
   }
 
-  Future<void> _onPressedLogInButton() async {
+  Future<void> _LoginCallApiG() async {
+    Map<String, String> params = Map();
+    //Map<String, String> data = Map();
+    var body = jsonEncode({'email': _Gmail, 'password': _passWordG});
+
+    var url = Uri.parse('${Config.API_URL}/user/logingoogle');
+    var response = await http.post(url, body: body, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json"
+    });
+
+    Map resMap = jsonDecode(response.body);
+
+    if (resMap["message"] == null) {
+      print('Response status: ${response.statusCode}\n\n');
+      print('Response body data: ${resMap["data"]}\n\n');
+    } else {
+      print('Response body: ${response.body}\n\n');
+      print('Response body: ${resMap["message"]}\n\n');
+    }
+  }
+
+  Future<void> _GsignIn() async {
+    _googleSignIn.disconnect();
+    try{
+      await _googleSignIn.signIn();
+    }catch (e){
+      print('Error signing in $e');
+    }
+    // _Gmail = _googleSignIn.currentUser?.email;
+    // _passWordG = _googleSignIn.currentUser?.id;
+    setState(() {
+      _Gmail = _googleSignIn.currentUser?.email;
+      _passWordG = _googleSignIn.currentUser?.id;
+    });
+
+    print(_Gmail);
+    print(_passWordG);
+    _googleSignIn.disconnect();
+
+    await _LoginCallApiG();
+  }
+
+  Future<void> _FBsignIn() async {
     await widget.plugin.logIn(permissions: [
       FacebookPermission.publicProfile,
       FacebookPermission.email,
     ]);
     await _updateLoginInfo();
-    await LoginCallApiFb();
+    await _LoginCallApiFb();
   }
 
   Future<void> _onPressedExpressLogInButton(BuildContext context) async {
@@ -138,7 +206,7 @@ class _LoginMenuState extends State<LoginMenu> {
     setState(() {
       _token = token;
       _profile = profile;
-      _email2 = email;
+      _emailFb = email;
       _imageUrl = imageUrl;
       _passWordFb = passWordFb;
     });
@@ -148,7 +216,7 @@ class _LoginMenuState extends State<LoginMenu> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("LOGIN PAGE"),
+          title: Text("LOGIN"),
         ),
         body: Container(
           child: Padding(
@@ -200,7 +268,7 @@ class _LoginMenuState extends State<LoginMenu> {
                         if (pass) {
                           // TODO : pass
                           //_formKey.currentState!.reset();
-                          LoginCallApi();
+                          _LoginCallApi();
                           print("${_email.text}");
                           print("${_passWord.text}");
                         }
@@ -214,7 +282,7 @@ class _LoginMenuState extends State<LoginMenu> {
                       style: TextButton.styleFrom(
                           //primary: Colors.red, // foreground
                           ),
-                      onPressed: () {},
+                      onPressed: _GsignIn,
                       child: Text('GOOGLE'),
                     ),
                   ),
@@ -224,7 +292,7 @@ class _LoginMenuState extends State<LoginMenu> {
                       style: TextButton.styleFrom(
                           //primary: Colors.red, // foreground
                           ),
-                      onPressed: _onPressedLogInButton,
+                      onPressed: _FBsignIn,
                       child: Text('FACEBOOk'),
                     ),
                   ),

@@ -11,6 +11,6 @@ import 'example/google.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
-    home: GoogleSingIn(),
+    home: LoginMenu(),
   ));
 }
