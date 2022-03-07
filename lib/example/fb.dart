@@ -4,14 +4,14 @@ import 'dart:io';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 
 
-class MyHomeFbtest extends StatefulWidget {
+class FacebookSingIn extends StatefulWidget {
   final plugin = FacebookLogin(debug: true);
 
   @override
-  _MyHomeFbtestState createState() => _MyHomeFbtestState();
+  _FacebookSingInState createState() => _FacebookSingInState();
 }
 
-class _MyHomeFbtestState extends State<MyHomeFbtest> {
+class _FacebookSingInState extends State<FacebookSingIn> {
   String? _sdkVersion;
   FacebookAccessToken? _token;
   FacebookUserProfile? _profile;
