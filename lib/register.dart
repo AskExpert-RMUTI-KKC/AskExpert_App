@@ -61,7 +61,7 @@ class _registerState extends State<register> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("LOGIN"),
+          title: Text("Register"),
         ),
         body: Container(
           child: Padding(
