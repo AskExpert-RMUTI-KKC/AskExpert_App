@@ -43,22 +43,22 @@ class _registerInfoState extends State<registerInfo> {
       'userName': _userName.text
     });
     String? _authen = await tokenStore.getToken();
-    print("body ${body}");
-    print("_authen ${_authen}");
-    var url = Uri.parse('${Config.API_URL}/user/setuserinfo');
+    _authen = "Bearer "  + _authen! ;
+    print("body : ${body}");
+    print("_authen : ${_authen}");
+    var url = Uri.parse('${Config.API_URL}/user/userinfoWrite');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json",
-      "Authorization": "Bearer ${_authen}"
+      "Authorization": "${_authen}"
     });
     Map resMap = jsonDecode(response.body);
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200) {
-      print('\nResponse status: ${response.statusCode}');
-      print('\nResponse message: ${resMap["message"]}');
-      print('\nResponse body data: ${resMap["data"]}');
       Get.to(registerPicProgile());
-    } else {
-      print('\nResponse message: ${resMap["message"]}');
     }
   }
 

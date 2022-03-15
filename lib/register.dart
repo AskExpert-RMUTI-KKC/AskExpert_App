@@ -49,6 +49,7 @@ class _registerState extends State<register> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
+      await tokenStore.setToken(resMap["data"]);
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       Get.to(registerInfo());
