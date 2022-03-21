@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:askexpertapp/register.dart';
 import 'package:askexpertapp/registerInfo.dart';
+import 'package:askexpertapp/topicPage.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -70,6 +71,8 @@ class _LoginMenuState extends State<LoginMenu> {
       print("data SecureStorage : ${getToken}");
       if(resMap["message"] == "register"){
         Get.to(registerInfo());
+      }else{
+        Get.to(topicPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');

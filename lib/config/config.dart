@@ -1,5 +1,5 @@
 class Config {
-  static const String API_URL = "http://192.168.1.6:8080";
+  static const String API_URL = "http://192.168.1.2:8080";
 
   static const String Page_User     = "/user";
   static const String Page_Comment  = "/comment";
