@@ -1,7 +1,8 @@
 import 'dart:convert';
 import 'package:askexpertapp/register.dart';
 import 'package:askexpertapp/registerInfo.dart';
-import 'package:askexpertapp/topicPage.dart';
+import 'package:askexpertapp/page/topicPage.dart';
+import 'package:askexpertapp/utils/routes.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -50,6 +51,8 @@ class _LoginMenuState extends State<LoginMenu> {
   @override
   void initState() {
 
+    //routes("token");
+
     _googleSignIn.signInSilently();
     _getSdkVersion();
 
@@ -70,9 +73,9 @@ class _LoginMenuState extends State<LoginMenu> {
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if(resMap["message"] == "register"){
-        Get.to(registerInfo());
+        Get.off(registerInfo());
       }else{
-        Get.to(topicPage());
+        Get.off(topicPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');

@@ -1,4 +1,4 @@
-import 'package:askexpertapp/topicPage.dart';
+import 'package:askexpertapp/page/topicPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -14,7 +14,7 @@ class _registerPicProgileState extends State<registerPicProgile> {
   @override
   void initState() {
     // TODO: implement initState
-    Get.to(topicPage());
+    Get.off(topicPage());
     super.initState();
   }
   @override
