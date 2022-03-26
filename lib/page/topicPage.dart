@@ -2,7 +2,10 @@ import 'dart:convert';
 
 import 'package:askexpertapp/config/config.dart';
 import 'package:askexpertapp/dataModel/topicDataModel.dart';
+import 'package:askexpertapp/page/commentPage.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:http/http.dart' as http;
 
 class topicPage extends StatefulWidget {
@@ -65,12 +68,14 @@ class _topicPageState extends State<topicPage> {
           return Card(
             child: ListTile(
               title: Text('${topics[index].topicCaption}'),
+              // TODO: ให้มันแสดงรูปและจัดระเบียบการแสดงผล พร้อมส่งข้อมูลไปหน้าทัดไป
               // leading: SizedBox(
               //   width: 50,
               //   height: 50,
               //   child: Image.network(topics[index].ImageUrl),
               // ),
               onTap: (){
+                Get.to(commentPage(),arguments: topics[index]);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
               },
             ),
