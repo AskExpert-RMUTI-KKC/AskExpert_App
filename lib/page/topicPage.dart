@@ -42,26 +42,30 @@ class _topicPageState extends State<topicPage> {
     // print('\nResponse body data: ${resMap["data"]}');
   }
 
+  Future<void> Refresh () async{
+    setState(() {
+      topics=[];
+      topicCall();
+    });
+
+    //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
+  }
+
   @override
   void initState() {
-    // TODO: implement initState
+
     topicCall();
     super.initState();
   }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('TOPIC ALL'),
       ),
-      body: ListView.builder(
+      body:RefreshIndicator(
+      onRefresh: Refresh,
+      child: ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: topics.length,
         itemBuilder: (context, index) {
@@ -81,7 +85,7 @@ class _topicPageState extends State<topicPage> {
             ),
           );
         },
-      ), // ListView.builder
+    ),), // ListView.builder
     );
   }
 }

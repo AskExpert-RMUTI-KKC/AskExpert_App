@@ -16,7 +16,7 @@ class _commentPageState extends State<commentPage> {
   topicDataModel topic = new topicDataModel();
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     topic = Get.arguments;
     print(topic.topicCaption);
@@ -24,7 +24,7 @@ class _commentPageState extends State<commentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
+      appBar: AppBar(title: Text("TOPIC-COMMENT"),),
     );
   }
 }

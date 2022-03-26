@@ -13,7 +13,7 @@ class registerPicProgile extends StatefulWidget {
 class _registerPicProgileState extends State<registerPicProgile> {
   @override
   void initState() {
-    // TODO: implement initState
+
     Get.off(topicPage());
     super.initState();
   }
