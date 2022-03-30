@@ -13,7 +13,11 @@ import 'example/store.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(GetMaterialApp(
-      home: LoginMenu(),
+    debugShowCheckedModeBanner: false,
+    theme: ThemeData(
+      //primarySwatch: Colors.black,
+    ),
+    home: LoginMenu(),
     //home: LoginMenu(),
   ));
 }

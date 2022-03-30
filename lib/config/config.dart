@@ -22,6 +22,7 @@ class Config {
 
   //Comment
   static const String API_COMMENT_FINDALL   = API_URL + Page_Comment + "/findAll";
+  static const String API_TOPIC_TOPICID     = API_URL + Page_Comment + "/findByTopicID";
   static const String API_COMMENT_ADD       = API_URL + Page_Comment + "/add";
   static const String API_COMMENT_REMOVE    = API_URL + Page_Comment + "/remove";
   static const String API_COMMENT_FINDME    = API_URL + Page_Comment + "/findMyTopic";

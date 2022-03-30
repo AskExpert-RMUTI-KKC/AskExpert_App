@@ -16,7 +16,6 @@ class topicPage extends StatefulWidget {
 }
 
 class _topicPageState extends State<topicPage> {
-  List<topicDataModel> topicAll = [];
   List<topicDataModel> topics = List.generate(
     0,
         (index) => topicDataModel(),
@@ -33,6 +32,12 @@ class _topicPageState extends State<topicPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
+      for(int i = 0; i < resMap["data"].length;i++){
+        topics.add(topicDataModel.fromJson(resMap["data"][i]));
+      }
+      for(int i = 0; i < resMap["data"].length;i++){
+        topics.add(topicDataModel.fromJson(resMap["data"][i]));
+      }
       for(int i = 0; i < resMap["data"].length;i++){
         topics.add(topicDataModel.fromJson(resMap["data"][i]));
       }
@@ -66,6 +71,8 @@ class _topicPageState extends State<topicPage> {
       body:RefreshIndicator(
       onRefresh: Refresh,
       child: ListView.builder(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
         padding: const EdgeInsets.all(8),
         itemCount: topics.length,
         itemBuilder: (context, index) {
