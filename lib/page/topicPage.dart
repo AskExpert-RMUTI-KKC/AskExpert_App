@@ -24,7 +24,7 @@ class _topicPageState extends State<topicPage> {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-    var url = Uri.parse('${Config.API_TOPIC_FINDALL}');
+    var url = Uri.parse('${Config.apiTopicTopicId}');
     var response = await http.post(url);
     Map resMap = jsonDecode(response.body);
 

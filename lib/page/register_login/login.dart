@@ -1,6 +1,7 @@
 import 'dart:convert';
-import 'package:askexpertapp/register.dart';
-import 'package:askexpertapp/registerInfo.dart';
+import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/page/register_login/register.dart';
+import 'package:askexpertapp/page/register_login/registerInfo.dart';
 import 'package:askexpertapp/page/topicPage.dart';
 import 'package:askexpertapp/utils/routes.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
@@ -10,7 +11,6 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
-import 'config/config.dart';
 import 'package:get/get.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -87,7 +87,7 @@ class _LoginMenuState extends State<LoginMenu> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _email.text, 'password': _passWord.text});
 
-    var url = Uri.parse('${Config.API_URL}/user/login');
+    var url = Uri.parse('${Config.apiLogin}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -100,7 +100,7 @@ class _LoginMenuState extends State<LoginMenu> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _emailFb, 'password': _passWordFb});
 
-    var url = Uri.parse('${Config.API_URL}/user/loginfb');
+    var url = Uri.parse('${Config.apiLoginFacebook}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -113,7 +113,7 @@ class _LoginMenuState extends State<LoginMenu> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _Gmail, 'password': _passWordG});
 
-    var url = Uri.parse('${Config.API_URL}/user/logingoogle');
+    var url = Uri.parse('${Config.apiLoginGoogle}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"

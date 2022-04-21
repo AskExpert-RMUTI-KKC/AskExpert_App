@@ -1,10 +1,8 @@
 import 'dart:convert';
-import 'package:askexpertapp/registerInfo.dart';
-import 'package:askexpertapp/registerPic.dart';
+import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/page/register_login/registerInfo.dart';
 import 'package:flutter/material.dart';
-import 'config/config.dart';
 import 'dart:convert';
-import 'package:askexpertapp/register.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -12,22 +10,20 @@ import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
-import 'config/config.dart';
 import 'package:get/get.dart';
 
-class registerInfo extends StatefulWidget {
-  const registerInfo({Key? key}) : super(key: key);
+class register extends StatefulWidget {
+  const register({Key? key}) : super(key: key);
 
   @override
-  _registerInfoState createState() => _registerInfoState();
+  _registerState createState() => _registerState();
 }
 
-class _registerInfoState extends State<registerInfo> {
-  @override
+class _registerState extends State<register> {
   final _formKey = GlobalKey<FormState>();
-  final _firstName = TextEditingController();
-  final _lastName = TextEditingController();
-  final _userName = TextEditingController();
+  final _email = TextEditingController();
+  final _passWord = TextEditingController();
+  final _passWord2 = TextEditingController();
 
   @override
   void initState() {
@@ -37,28 +33,26 @@ class _registerInfoState extends State<registerInfo> {
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
-    var body = jsonEncode({
-      'firstName': _firstName.text,
-      'lastName': _lastName.text,
-      'userName': _userName.text
-    });
-    String? _authen = await tokenStore.getToken();
-    _authen = "Bearer "  + _authen! ;
-    print("body : ${body}");
-    print("_authen : ${_authen}");
-    var url = Uri.parse('${Config.API_URL}/user/userinfoWrite');
+    var body = jsonEncode({'email': _email.text, 'passWord': _passWord.text});
+    print("body ${body}");
+    var url = Uri.parse('${Config.apiRegister}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
-      "content-type": "application/json",
-      "Authorization": "${_authen}"
+      "content-type": "application/json"
     });
     Map resMap = jsonDecode(response.body);
-
-    print('\nResponse status: ${response.statusCode}');
-    print('\nResponse message: ${resMap["message"]}');
-    print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200) {
-      Get.to(registerPicProgile());
+      print('\nResponse status: ${response.statusCode}');
+      print('\nResponse message: ${resMap["message"]}');
+      print('\nResponse body data: ${resMap["data"]}');
+
+      //SAVE TOKEN
+      await tokenStore.setToken(resMap["data"]);
+      String? getToken = await tokenStore.getToken();
+      print("data SecureStorage : ${getToken}");
+      Get.to(registerInfo());
+    } else {
+      print('\nResponse message: ${resMap["message"]}');
     }
   }
 
@@ -66,7 +60,7 @@ class _registerInfoState extends State<registerInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Info"),
+          title: Text("Register"),
         ),
         body: Container(
           child: Padding(
@@ -80,23 +74,26 @@ class _registerInfoState extends State<registerInfo> {
                   //   decoration: new InputDecoration(label: Text("UserName")),
                   // ),
                   TextFormField(
-                    decoration: new InputDecoration(label: Text("firstName")),
+                    decoration: new InputDecoration(label: Text("Email")),
                     keyboardType: TextInputType.emailAddress,
-                    controller: _firstName,
+                    controller: _email,
                     validator: (input) {
                       if (input!.isEmpty) {
-                        return "please enter firstName";
+                        return "plass enter Email";
                       } else {
                         return null;
                       }
                     },
                   ),
                   TextFormField(
-                    decoration: new InputDecoration(label: Text("lastName")),
-                    controller: _lastName,
+                    decoration: new InputDecoration(label: Text("PassWord")),
+                    obscureText: true,
+                    controller: _passWord,
                     validator: (input) {
                       if (input!.isEmpty) {
-                        return "please enter lastName";
+                        return "please enter PassWord";
+                      } else if (_passWord.text != _passWord2.text) {
+                        return "password not match!";
                       } else {
                         return null;
                       }
@@ -104,11 +101,14 @@ class _registerInfoState extends State<registerInfo> {
                   ),
                   TextFormField(
                     decoration:
-                        new InputDecoration(label: Text("userName")),
-                    controller: _userName,
+                        new InputDecoration(label: Text("ReEnter-PassWord")),
+                    obscureText: true,
+                    controller: _passWord2,
                     validator: (input) {
                       if (input!.isEmpty) {
-                        return "please enter userName";
+                        return "please enter PassWord";
+                      } else if (_passWord.text != _passWord2.text) {
+                        return "password not match!";
                       } else {
                         return null;
                       }
@@ -130,12 +130,11 @@ class _registerInfoState extends State<registerInfo> {
                           // TODO : pass
                           //_formKey.currentState!.reset();
                           _registerCallApi();
-                          print("firstName : ${_firstName.text}");
-                          print("passwlrd : ${_lastName.text}");
-                          print("userName : ${_userName.text}");
+                          print("email : ${_email.text}");
+                          print("passwlrd : ${_passWord.text}");
                         }
                       },
-                      child: Text('Next'),
+                      child: Text('Register'),
                     ),
                   ),
                 ],
