@@ -55,7 +55,7 @@ class _welcomePageState extends State<welcomePage> {
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(LoginMenu());
+                    Get.to(LoginPage());
                   },
                   child: const Text(
                     "Login",
@@ -65,8 +65,8 @@ class _welcomePageState extends State<welcomePage> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300,50),
-                    primary:  Color(Config.buttonPrimary),
+                    minimumSize: const Size(300, 50),
+                    primary: Color(Config.buttonPrimary),
                     elevation: 5,
                     shape: shape,
                     //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -79,13 +79,16 @@ class _welcomePageState extends State<welcomePage> {
                   onPressed: () {
                     Get.to(register());
                   },
-                  child: const Text("Register",style: TextStyle(
-                    fontSize: 18,
-                    color: Color(Config.buttonPrimary),
-                  ),),
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(Config.buttonPrimary),
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300,50),
-                    primary:  Color(Config.buttonSecondary),
+                    minimumSize: const Size(300, 50),
+                    primary: Color(Config.buttonSecondary),
                     elevation: 5,
                     shape: shape,
                     //side: BorderSide(width: 1,color: Color(Config.textColor),)

@@ -69,9 +69,9 @@ class _registerState extends State<register> {
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if(resMap["message"] == "register"){
-        Get.off(registerInfo());
+        Get.offAll(registerInfo());
       }else{
-        Get.off(topicPage());
+        Get.offAll(topicPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');
@@ -223,7 +223,7 @@ class _registerState extends State<register> {
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
 
-      Get.off(registerInfo());
+      Get.offAll(registerInfo());
     } else {
       print('\nResponse message: ${resMap["message"]}');
 
@@ -420,7 +420,7 @@ class _registerState extends State<register> {
                               //side: BorderSide(width: 1,color: Color(Config.textColor),)
                             ),
                             onPressed: () {
-                              Get.to(LoginMenu());
+                              Get.offAll(LoginPage());
                             },
                             child: const Text(
                               "Login",

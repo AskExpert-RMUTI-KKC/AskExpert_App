@@ -23,14 +23,14 @@ final GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
-class LoginMenu extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   final plugin = FacebookLogin(debug: true);
 
   @override
-  _LoginMenuState createState() => _LoginMenuState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginMenuState extends State<LoginMenu> {
+class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _email = TextEditingController();
   final _passWord = TextEditingController();
@@ -71,9 +71,9 @@ class _LoginMenuState extends State<LoginMenu> {
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if (resMap["message"] == "register") {
-        Get.off(registerInfo());
+        Get.offAll(registerInfo());
       } else {
-        Get.off(topicPage());
+        Get.offAll(topicPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');
@@ -364,7 +364,7 @@ class _LoginMenuState extends State<LoginMenu> {
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
                           ),
                           onPressed: () {
-                            Get.off(register());
+                            Get.offAll(register());
                           },
                           child: Text(
                             'REGISTER',
