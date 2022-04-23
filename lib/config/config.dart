@@ -1,4 +1,16 @@
 class Config {
+  static const int appbarBg = 0xFFF1F4F8;
+  static const int textColor = 0xFF0F1113;
+  static const int buttonPrimary = 0xFFF1F4F8;
+  static const int buttonSecondary =  0xFF0F1113;
+  static const int warningSnackBar = 0xFFE3170A;
+  static const int warningSnackBarText = 0xFFEFEFFEA;
+  static const int iconEmail = 0xFF0F1113;
+  static const int cursorColor = 0xFF0F1113;
+
+
+
+
   static const String apiUrl = "http://192.168.1.2:8080";
 
   static const String pageUser = "/user";

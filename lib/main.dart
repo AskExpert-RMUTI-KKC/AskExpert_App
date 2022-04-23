@@ -1,5 +1,6 @@
 
 import 'package:askexpertapp/page/register_login/login.dart';
+import 'package:askexpertapp/page/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -16,9 +17,10 @@ void main() {
   runApp(GetMaterialApp(
     debugShowCheckedModeBanner: false,
     theme: ThemeData(
-      //primarySwatch: Colors.black,
+      fontFamily: 'Kanit',
     ),
-    home: LoginMenu(),
-    //home: LoginMenu(),
+    home: welcomePage(),
+
+    //home: WelcomePage(),
   ));
 }

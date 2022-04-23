@@ -40,6 +40,7 @@ dependencies:
   flutter_login_facebook: ^1.4.0+1
   get: ^4.6.1
   flutter_secure_storage: ^5.0.2
+  font_awesome_flutter: ^10.1.0
 
 dev_dependencies:
   flutter_test:
@@ -57,7 +58,14 @@ dev_dependencies:
 
 # The following section is specific to Flutter.
 flutter:
-
+  fonts:
+    - family: Kanit
+      fonts:
+        - asset: fonts/Kanit-Regular.ttf
+        - asset: fonts/Kanit-Italic.ttf
+          style: italic
+        - asset: fonts/Kanit-Bold.ttf
+          weight: 700
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

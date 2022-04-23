@@ -16,4 +16,16 @@ void routes(String check) async{
     }
   }
 
+  if(check == "welcomePage"){
+    String? token = await tokenStore.getToken();
+    if(token == null){
+      //Get.to(LoginMenu());
+    }
+    else{
+
+      //Get.off(topicPage());
+
+    }
+  }
+
 }
