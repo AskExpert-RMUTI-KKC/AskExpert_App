@@ -1,5 +1,6 @@
 class Config {
   static const int appbarBg = 0xFFF1F4F8;
+  static const int bgApp = 0xFFF1F4F8;
   static const int textColor = 0xFF0F1113;
   static const int buttonPrimary = 0xFFF1F4F8;
   static const int buttonSecondary =  0xFF0F1113;

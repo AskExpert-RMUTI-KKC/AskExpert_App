@@ -40,7 +40,7 @@ class _registerInfoState extends State<registerInfo> {
       'userName': _userName.text
     });
     String? _authen = await tokenStore.getToken();
-    _authen = "Bearer "  + _authen! ;
+    _authen = "Bearer " + _authen!;
     print("body : ${body}");
     print("_authen : ${_authen}");
     var url = Uri.parse('${Config.apiRegisterUpdate}');
@@ -61,81 +61,169 @@ class _registerInfoState extends State<registerInfo> {
 
   @override
   Widget build(BuildContext context) {
+    final shape = RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+    );
+
     return Scaffold(
         appBar: AppBar(
-          title: Text("Info"),
+          title: const Text(
+            "Register-Info",
+            style: TextStyle(
+              color: Color(Config.textColor),
+              fontSize: 32,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          actions: [],
+          elevation: 0,
+          centerTitle: false,
+          backgroundColor: const Color(Config.appbarBg),
         ),
-        body: Container(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  // TextFormField(
-                  //   decoration: new InputDecoration(label: Text("UserName")),
-                  // ),
-                  TextFormField(
-                    decoration: new InputDecoration(label: Text("firstName")),
-                    keyboardType: TextInputType.emailAddress,
-                    controller: _firstName,
-                    validator: (input) {
-                      if (input!.isEmpty) {
-                        return "please enter firstName";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  TextFormField(
-                    decoration: new InputDecoration(label: Text("lastName")),
-                    controller: _lastName,
-                    validator: (input) {
-                      if (input!.isEmpty) {
-                        return "please enter lastName";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  TextFormField(
-                    decoration:
-                        new InputDecoration(label: Text("userName")),
-                    controller: _userName,
-                    validator: (input) {
-                      if (input!.isEmpty) {
-                        return "please enter userName";
-                      } else {
-                        return null;
-                      }
-                    },
-                  ),
-                  // TextFormField(
-                  //   decoration: new InputDecoration(label: Text("re-PassWord")),
-                  //   obscureText: true,
-                  // ),
-                  SizedBox(
-                    width: 300,
-                    child: TextButton(
-                      style: TextButton.styleFrom(
-                          //primary: Colors.red, // foreground
+        backgroundColor: const Color(Config.appbarBg),
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Column(
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                label: Text("Firstname"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color: Color(Config.buttonSecondary))),
+                              ),
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _firstName,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter firstName";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
                           ),
-                      onPressed: () {
-                        bool pass = _formKey.currentState!.validate();
-                        if (pass) {
-                          // TODO : pass
-                          //_formKey.currentState!.reset();
-                          _registerCallApi();
-                          print("firstName : ${_firstName.text}");
-                          print("passwlrd : ${_lastName.text}");
-                          print("userName : ${_userName.text}");
-                        }
-                      },
-                      child: Text('Next'),
-                    ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                label: Text("Lastname"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color: Color(Config.buttonSecondary))),
+                              ),
+                              controller: _lastName,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter lastName";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                label: Text("Username"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color: Color(Config.buttonSecondary))),
+                              ),
+                              controller: _userName,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter userName";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      // TODO : Expert List DropDown
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(140.0),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(12),
+                        child: TextButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(300, 50),
+                            primary: Color(Config.buttonSecondary),
+                            elevation: 5,
+                            shape: shape,
+                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                          ),
+                          onPressed: () {
+                            bool pass = _formKey.currentState!.validate();
+                            if (pass) {
+                              // TODO : pass
+                              //_formKey.currentState!.reset();
+                              _registerCallApi();
+                              print("firstName : ${_firstName.text}");
+                              print("passwlrd : ${_lastName.text}");
+                              print("userName : ${_userName.text}");
+                            }
+                          },
+                          child: Text(
+                            'Next',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(Config.buttonPrimary),
+                            ),
+                          ),
+                        ),
+                      )
+                      // TextFormField(
+                      //   decoration: new InputDecoration(label: Text("UserName")),
+                      // ),
+
+                      // TextFormField(
+                      //   decoration: new InputDecoration(label: Text("re-PassWord")),
+                      //   obscureText: true,
+                      // ),
+                    ],
                   ),
-                ],
+                ),
               ),
             ),
           ),

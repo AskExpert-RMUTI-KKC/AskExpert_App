@@ -50,51 +50,59 @@ class _welcomePageState extends State<welcomePage> {
       body: Container(
         child: Center(
           child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(LoginPage());
-                  },
-                  child: const Text(
-                    "Login",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color(Config.buttonSecondary),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300, 50),
-                    primary: Color(Config.buttonPrimary),
-                    elevation: 5,
-                    shape: shape,
-                    //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(register());
-                  },
-                  child: const Text(
-                    "Register",
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Color(Config.buttonPrimary),
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    minimumSize: const Size(300, 50),
-                    primary: Color(Config.buttonSecondary),
-                    elevation: 5,
-                    shape: shape,
-                    //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                  ),
-                ),
-              ),
+            children: <Widget>[
+              Expanded(flex: 8, child: Placeholder()),
+
+              Expanded(
+                  flex: 2,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(LoginPage());
+                          },
+                          child: const Text(
+                            "Login",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(Config.buttonSecondary),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(300, 50),
+                            primary: Color(Config.buttonPrimary),
+                            elevation: 5,
+                            shape: shape,
+                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Get.to(register());
+                          },
+                          child: const Text(
+                            "Register",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Color(Config.buttonPrimary),
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: const Size(300, 50),
+                            primary: Color(Config.buttonSecondary),
+                            elevation: 5,
+                            shape: shape,
+                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
             ],
           ),
         ),

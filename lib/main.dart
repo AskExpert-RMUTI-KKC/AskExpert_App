@@ -1,5 +1,7 @@
 
+import 'package:askexpertapp/page/navigationBar.dart';
 import 'package:askexpertapp/page/register_login/login.dart';
+import 'package:askexpertapp/page/register_login/registerInfo.dart';
 import 'package:askexpertapp/page/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -19,7 +21,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: welcomePage(),
+    home: NavigationBarPage(),
 
     //home: WelcomePage(),
   ));

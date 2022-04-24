@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:askexpertapp/config/config.dart';
 import 'package:askexpertapp/page/register_login/register.dart';
 import 'package:askexpertapp/page/register_login/registerInfo.dart';
-import 'package:askexpertapp/page/topicPage.dart';
+import 'package:askexpertapp/page/topic/topicPage.dart';
 import 'package:askexpertapp/utils/routes.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
@@ -350,7 +350,7 @@ class _LoginPageState extends State<LoginPage> {
                             ]),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(100.0),
+                        padding: const EdgeInsets.all(80.0),
                       ),
 
                       Padding(
@@ -367,7 +367,7 @@ class _LoginPageState extends State<LoginPage> {
                             Get.offAll(register());
                           },
                           child: Text(
-                            'REGISTER',
+                            'Register',
                             style: TextStyle(
                               fontSize: 18,
                               color: Color(Config.buttonSecondary),

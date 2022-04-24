@@ -14,7 +14,7 @@ import "dart:io";
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-import '../topicPage.dart';
+import '../topic/topicPage.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
@@ -272,9 +272,6 @@ class _registerState extends State<register> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // TextFormField(
-                        //   decoration: new InputDecoration(label: Text("UserName")),
-                        // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                           child: TextFormField(
@@ -362,10 +359,6 @@ class _registerState extends State<register> {
                             },
                           ),
                         ),
-                        // TextFormField(
-                        //   decoration: new InputDecoration(label: Text("re-PassWord")),
-                        //   obscureText: true,
-                        // ),
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                           child: Row(
@@ -406,9 +399,11 @@ class _registerState extends State<register> {
                                 ),)
                               ]),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(40.0),
                         ),
+
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: TextButton(
@@ -431,12 +426,11 @@ class _registerState extends State<register> {
                             ),
                           ),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: TextButton(
                             style: ElevatedButton.styleFrom(
-                              
+
                               minimumSize: const Size(300, 50),
                               primary: Color(Config.buttonSecondary),
                               elevation: 5,
