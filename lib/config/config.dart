@@ -15,13 +15,13 @@ class Config {
   static const String apiUrl = "http://192.168.1.2:8080";
 
   static const String pageUser = "/user";
-  static const String pageComment = "/Comment";
+  static const String pageComment = "/comment";
   static const String pageImg = "/image";
-  static const String pageTopic = "/Topic";
+  static const String pageTopic = "/topic";
   static const String pageLike = "/like";
   static const String pageExpertGroupList = "/expertGroupList";
   static const String pageReport = "/report";
-  static const String pageTopicGroupList = "/TopicGroupList";
+  static const String pageTopicGroupList = "/topicGroupList";
   static const String pageTransaction = "/transaction";
   static const String pageVerify = "/verify";
 

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:askexpertapp/config/config.dart';
 import 'package:askexpertapp/dataModel/topicDataModel.dart';
-import 'package:askexpertapp/page/commentPage.dart';
+import 'package:askexpertapp/page/topic/commentPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -24,7 +24,8 @@ class _topicPageState extends State<topicPage> {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-    var url = Uri.parse('${Config.apiTopicTopicId}');
+    var url = Uri.parse('${Config.apiTopicFindAll}');
+    print('\n URL :${url.toString()}');
     var response = await http.post(url);
     Map resMap = jsonDecode(response.body);
 
@@ -66,8 +67,18 @@ class _topicPageState extends State<topicPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('TOPIC ALL'),
+        title: const Text('TOPIC ALL',
+          style: TextStyle(
+            color: Color(Config.textColor),
+            fontSize: 32,
+            fontWeight: FontWeight.w500,
+          ),),
+        actions: [],
+        elevation: 0,
+        centerTitle: false,
+        backgroundColor: const Color(Config.appbarBg),
       ),
+      backgroundColor: const Color(Config.appbarBg),
       body:RefreshIndicator(
       onRefresh: Refresh,
       child: ListView.builder(
