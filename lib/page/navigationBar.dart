@@ -35,10 +35,10 @@ class _NavigationBarState extends State<NavigationBarPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
         showUnselectedLabels: false,
         unselectedItemColor: Colors.grey.withOpacity(0.7),
-        selectedItemColor: Color(Config.textColor),
+        selectedItemColor: Color(ConfigApp.textColor),
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
         onTap: (index) => setState(() => currentIndex = index),

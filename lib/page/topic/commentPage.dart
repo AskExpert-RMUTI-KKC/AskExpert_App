@@ -27,7 +27,7 @@ class _commentPageState extends State<commentPage> {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-    var url = Uri.parse('${Config.apiTopicTopicId}');
+    var url = Uri.parse('${ConfigApp.apiTopicTopicId}');
     var response = await http.post(url, body: topicId);
     Map resMap = jsonDecode(response.body);
 

@@ -36,7 +36,7 @@ class _welcomePageState extends State<welcomePage> {
         title: const Text(
           "Welcome",
           style: TextStyle(
-            color: Color(Config.textColor),
+            color: Color(ConfigApp.textColor),
             fontSize: 32,
             fontWeight: FontWeight.w500,
           ),
@@ -44,9 +44,9 @@ class _welcomePageState extends State<welcomePage> {
         actions: [],
         elevation: 0,
         centerTitle: false,
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
       ),
-      backgroundColor: const Color(Config.appbarBg),
+      backgroundColor: const Color(ConfigApp.appbarBg),
       body: Container(
         child: Center(
           child: Column(
@@ -67,12 +67,12 @@ class _welcomePageState extends State<welcomePage> {
                             "Login",
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(Config.buttonSecondary),
+                              color: Color(ConfigApp.buttonSecondary),
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 50),
-                            primary: Color(Config.buttonPrimary),
+                            primary: Color(ConfigApp.buttonPrimary),
                             elevation: 5,
                             shape: shape,
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -89,12 +89,12 @@ class _welcomePageState extends State<welcomePage> {
                             "Register",
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(Config.buttonPrimary),
+                              color: Color(ConfigApp.buttonPrimary),
                             ),
                           ),
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 50),
-                            primary: Color(Config.buttonSecondary),
+                            primary: Color(ConfigApp.buttonSecondary),
                             elevation: 5,
                             shape: shape,
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)

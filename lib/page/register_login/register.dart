@@ -84,7 +84,7 @@ class _registerState extends State<register> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _emailFb, 'password': _passWordFb});
 
-    var url = Uri.parse('${Config.apiLoginFacebook}');
+    var url = Uri.parse('${ConfigApp.apiLoginFacebook}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -97,7 +97,7 @@ class _registerState extends State<register> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _Gmail, 'password': _passWordG});
 
-    var url = Uri.parse('${Config.apiLoginGoogle}');
+    var url = Uri.parse('${ConfigApp.apiLoginGoogle}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -208,7 +208,7 @@ class _registerState extends State<register> {
       'passWordForAdmin': "user"
     });
     print("body ${body}");
-    var url = Uri.parse('${Config.apiRegister}');
+    var url = Uri.parse('${ConfigApp.apiRegister}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -233,8 +233,8 @@ class _registerState extends State<register> {
         '${resMap["message"]}',
         icon: Icon(Icons.person, color: Colors.white),
         snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Color(Config.warningSnackBar),
-        colorText: Color(Config.warningSnackBarText),
+        backgroundColor: Color(ConfigApp.warningSnackBar),
+        colorText: Color(ConfigApp.warningSnackBarText),
       );
     }
   }
@@ -250,7 +250,7 @@ class _registerState extends State<register> {
           title: const Text(
             "Register",
             style: TextStyle(
-              color: Color(Config.textColor),
+              color: Color(ConfigApp.textColor),
               fontSize: 32,
               fontWeight: FontWeight.w500,
             ),
@@ -258,9 +258,9 @@ class _registerState extends State<register> {
           actions: [],
           elevation: 0,
           centerTitle: false,
-          backgroundColor: const Color(Config.appbarBg),
+          backgroundColor: const Color(ConfigApp.appbarBg),
         ),
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: Container(
@@ -276,11 +276,11 @@ class _registerState extends State<register> {
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                           child: TextFormField(
-                            cursorColor: Color(Config.cursorColor),
+                            cursorColor: Color(ConfigApp.cursorColor),
                             decoration: const InputDecoration(
                                 icon: Icon(
                                   Icons.email,
-                                  color: Color(Config.iconEmail),
+                                  color: Color(ConfigApp.iconEmail),
                                 ),
                                 border: OutlineInputBorder(
                                   borderRadius:
@@ -290,7 +290,7 @@ class _registerState extends State<register> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(Config.buttonSecondary))),
+                                        color: Color(ConfigApp.buttonSecondary))),
                                 label: Text("Email"),
                                 hintText: "example@rmuti.ac.th"),
                             keyboardType: TextInputType.emailAddress,
@@ -311,13 +311,13 @@ class _registerState extends State<register> {
                               label: Text("PassWord"),
                               icon: Icon(
                                 Icons.password,
-                                color: Color(Config.iconEmail),
+                                color: Color(ConfigApp.iconEmail),
                               ),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
-                                      color: Color(Config.buttonPrimary))),
+                                      color: Color(ConfigApp.buttonPrimary))),
                             ),
                             obscureText: true,
                             controller: _passWord,
@@ -339,13 +339,13 @@ class _registerState extends State<register> {
                               label: Text("ReEnter-PassWord"),
                               icon: Icon(
                                 Icons.password,
-                                color: Color(Config.iconEmail),
+                                color: Color(ConfigApp.iconEmail),
                               ),
                               border: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
-                                      color: Color(Config.buttonPrimary))),
+                                      color: Color(ConfigApp.buttonPrimary))),
                             ),
                             obscureText: true,
                             controller: _passWord2,
@@ -372,7 +372,7 @@ class _registerState extends State<register> {
                                   iconSize: 40,
                                   icon: const Icon(
                                     FontAwesomeIcons.google,
-                                    color: Color(Config.iconEmail),
+                                    color: Color(ConfigApp.iconEmail),
                                   ),
                                 ),
                                 Text("Google",style: TextStyle(
@@ -392,7 +392,7 @@ class _registerState extends State<register> {
                                   iconSize: 40,
                                   icon: const Icon(
                                     FontAwesomeIcons.facebook,
-                                    color: Color(Config.iconEmail),
+                                    color: Color(ConfigApp.iconEmail),
                                   ),
                                 ),
                                 Text("FaceBook",style: TextStyle(
@@ -410,7 +410,7 @@ class _registerState extends State<register> {
                           child: TextButton(
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(300, 50),
-                              primary: Color(Config.buttonPrimary),
+                              primary: Color(ConfigApp.buttonPrimary),
                               elevation: 5,
                               shape: shape,
                               //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -422,7 +422,7 @@ class _registerState extends State<register> {
                               "Login",
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Color(Config.buttonSecondary),
+                                color: Color(ConfigApp.buttonSecondary),
                               ),
                             ),
                           ),
@@ -433,7 +433,7 @@ class _registerState extends State<register> {
                             style: ElevatedButton.styleFrom(
 
                               minimumSize: const Size(300, 50),
-                              primary: Color(Config.buttonSecondary),
+                              primary: Color(ConfigApp.buttonSecondary),
                               elevation: 5,
                               shape: shape,
                               //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -452,7 +452,7 @@ class _registerState extends State<register> {
                               'Register',
                               style: TextStyle(
                                 fontSize: 18,
-                                color: Color(Config.buttonPrimary),
+                                color: Color(ConfigApp.buttonPrimary),
                               ),
                             ),
                           ),

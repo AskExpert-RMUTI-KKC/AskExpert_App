@@ -43,7 +43,7 @@ class _registerInfoState extends State<registerInfo> {
     _authen = "Bearer " + _authen!;
     print("body : ${body}");
     print("_authen : ${_authen}");
-    var url = Uri.parse('${Config.apiRegisterUpdate}');
+    var url = Uri.parse('${ConfigApp.apiRegisterUpdate}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json",
@@ -70,7 +70,7 @@ class _registerInfoState extends State<registerInfo> {
           title: const Text(
             "Register-Info",
             style: TextStyle(
-              color: Color(Config.textColor),
+              color: Color(ConfigApp.textColor),
               fontSize: 32,
               fontWeight: FontWeight.w500,
             ),
@@ -78,9 +78,9 @@ class _registerInfoState extends State<registerInfo> {
           actions: [],
           elevation: 0,
           centerTitle: false,
-          backgroundColor: const Color(Config.appbarBg),
+          backgroundColor: const Color(ConfigApp.appbarBg),
         ),
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
@@ -108,7 +108,7 @@ class _registerInfoState extends State<registerInfo> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(Config.buttonSecondary))),
+                                        color: Color(ConfigApp.buttonSecondary))),
                               ),
                               keyboardType: TextInputType.emailAddress,
                               controller: _firstName,
@@ -135,7 +135,7 @@ class _registerInfoState extends State<registerInfo> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(Config.buttonSecondary))),
+                                        color: Color(ConfigApp.buttonSecondary))),
                               ),
                               controller: _lastName,
                               validator: (input) {
@@ -161,7 +161,7 @@ class _registerInfoState extends State<registerInfo> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(Config.buttonSecondary))),
+                                        color: Color(ConfigApp.buttonSecondary))),
                               ),
                               controller: _userName,
                               validator: (input) {
@@ -188,7 +188,7 @@ class _registerInfoState extends State<registerInfo> {
                         child: TextButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 50),
-                            primary: Color(Config.buttonSecondary),
+                            primary: Color(ConfigApp.buttonSecondary),
                             elevation: 5,
                             shape: shape,
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -208,7 +208,7 @@ class _registerInfoState extends State<registerInfo> {
                             'Next',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(Config.buttonPrimary),
+                              color: Color(ConfigApp.buttonPrimary),
                             ),
                           ),
                         ),

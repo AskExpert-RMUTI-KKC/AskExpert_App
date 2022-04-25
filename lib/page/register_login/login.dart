@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _email.text, 'passWord': _passWord.text});
 
-    var url = Uri.parse('${Config.apiLogin}');
+    var url = Uri.parse('${ConfigApp.apiLogin}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _emailFb, 'password': _passWordFb});
 
-    var url = Uri.parse('${Config.apiLoginFacebook}');
+    var url = Uri.parse('${ConfigApp.apiLoginFacebook}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _Gmail, 'password': _passWordG});
 
-    var url = Uri.parse('${Config.apiLoginGoogle}');
+    var url = Uri.parse('${ConfigApp.apiLoginGoogle}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json"
@@ -220,7 +220,7 @@ class _LoginPageState extends State<LoginPage> {
           title: const Text(
             "Login",
             style: TextStyle(
-              color: Color(Config.textColor),
+              color: Color(ConfigApp.textColor),
               fontSize: 32,
               fontWeight: FontWeight.w500,
             ),
@@ -228,9 +228,9 @@ class _LoginPageState extends State<LoginPage> {
           actions: [],
           elevation: 0,
           centerTitle: false,
-          backgroundColor: const Color(Config.appbarBg),
+          backgroundColor: const Color(ConfigApp.appbarBg),
         ),
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
           child: SingleChildScrollView(
@@ -248,11 +248,11 @@ class _LoginPageState extends State<LoginPage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                         child: TextFormField(
-                          cursorColor: Color(Config.cursorColor),
+                          cursorColor: Color(ConfigApp.cursorColor),
                           decoration: const InputDecoration(
                               icon: Icon(
                                 Icons.email,
-                                color: Color(Config.iconEmail),
+                                color: Color(ConfigApp.iconEmail),
                               ),
                               border: OutlineInputBorder(
                                 borderRadius:
@@ -262,7 +262,7 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
-                                      color: Color(Config.buttonSecondary))),
+                                      color: Color(ConfigApp.buttonSecondary))),
                               label: Text("Email"),
                               hintText: "example@rmuti.ac.th"),
                           keyboardType: TextInputType.emailAddress,
@@ -283,13 +283,13 @@ class _LoginPageState extends State<LoginPage> {
                             label: Text("PassWord"),
                             icon: Icon(
                               Icons.password,
-                              color: Color(Config.iconEmail),
+                              color: Color(ConfigApp.iconEmail),
                             ),
                             border: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                 borderSide: BorderSide(
-                                    color: Color(Config.buttonPrimary))),
+                                    color: Color(ConfigApp.buttonPrimary))),
                           ),
                           obscureText: true,
                           controller: _passWord,
@@ -318,7 +318,7 @@ class _LoginPageState extends State<LoginPage> {
                                 iconSize: 40,
                                 icon: const Icon(
                                   FontAwesomeIcons.google,
-                                  color: Color(Config.iconEmail),
+                                  color: Color(ConfigApp.iconEmail),
                                 ),
                               ),
                               Text(
@@ -341,7 +341,7 @@ class _LoginPageState extends State<LoginPage> {
                                 iconSize: 40,
                                 icon: const Icon(
                                   FontAwesomeIcons.facebook,
-                                  color: Color(Config.iconEmail),
+                                  color: Color(ConfigApp.iconEmail),
                                 ),
                               ),
                               Text(
@@ -361,7 +361,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 50),
-                            primary: Color(Config.buttonPrimary),
+                            primary: Color(ConfigApp.buttonPrimary),
                             elevation: 5,
                             shape: shape,
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -373,7 +373,7 @@ class _LoginPageState extends State<LoginPage> {
                             'Register',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(Config.buttonSecondary),
+                              color: Color(ConfigApp.buttonSecondary),
                             ),
                           ),
                         ),
@@ -383,7 +383,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextButton(
                           style: ElevatedButton.styleFrom(
                             minimumSize: const Size(300, 50),
-                            primary: Color(Config.buttonSecondary),
+                            primary: Color(ConfigApp.buttonSecondary),
                             elevation: 5,
                             shape: shape,
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
@@ -402,7 +402,7 @@ class _LoginPageState extends State<LoginPage> {
                             'LOGIN',
                             style: TextStyle(
                               fontSize: 18,
-                              color: Color(Config.buttonPrimary),
+                              color: Color(ConfigApp.buttonPrimary),
                             ),
                           ),
                         ),

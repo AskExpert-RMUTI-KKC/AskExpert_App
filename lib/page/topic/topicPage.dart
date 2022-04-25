@@ -5,6 +5,7 @@ import 'package:askexpertapp/dataModel/topicDataModel.dart';
 import 'package:askexpertapp/page/topic/commentPage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -33,15 +34,14 @@ class _topicPageState extends State<topicPage> {
     _tokenJwt = "Bearer " + _tokenJwt!;
     print("_tokenJwt : ${_tokenJwt}");
 
-    var url = Uri.parse('${Config.apiTopicFindAll}');
+    var url = Uri.parse('${ConfigApp.apiTopicFindAll}');
     print('\n URL :${url.toString()}');
-    var response = await http.post(url,headers: {
+    var response = await http.post(url, headers: {
       "Accept": "application/json",
       "content-type": "application/json",
       "Authorization": "${_tokenJwt}"
     });
     Map resMap = jsonDecode(response.body);
-
 
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
@@ -71,7 +71,8 @@ class _topicPageState extends State<topicPage> {
     super.initState();
   }
 
-  Future<void> LikePushButton(String? contentId, int? status) async {
+  Future<void> LikePushButton(
+      String? contentId, int? status, String? topicName) async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
     var body = jsonEncode({
@@ -84,7 +85,7 @@ class _topicPageState extends State<topicPage> {
     print("body : ${body}");
     print("_tokenJwt : ${_tokenJwt}");
 
-    var url = Uri.parse('${Config.apiLikeSet}');
+    var url = Uri.parse('${ConfigApp.apiLikeSet}');
     var response = await http.post(url, body: body, headers: {
       "Accept": "application/json",
       "content-type": "application/json",
@@ -97,15 +98,52 @@ class _topicPageState extends State<topicPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
 
-    Get.snackbar(
-      '',
-      'Like',
-      icon: Icon(FontAwesomeIcons.heartCircleBolt, color: Colors.white),
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.black,
-      colorText: Colors.white,
-    );
+    if (status == 0) {
+      Get.snackbar(
+        'UNLIKE',
+        '$topicName',
+        icon: Icon(FontAwesomeIcons.heartCrack, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black,
+        colorText: Colors.white,
+        animationDuration: Duration(seconds: 1),
+      );
+    } else {
+      Get.snackbar(
+        'LIKE',
+        '$topicName',
+        icon: Icon(FontAwesomeIcons.heartCircleBolt, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.black,
+        colorText: Colors.white,
+        animationDuration: Duration(seconds: 1),
+      );
+    }
   }
+
+  Widget buildImageProfile(String index) => ClipRRect(
+        // backgroundImage: CachedNetworkImageProvider(
+        //   '${Config.imgProfile}$index',
+        // ),
+        borderRadius: BorderRadius.circular(100),
+        child: CachedNetworkImage(
+          imageUrl: '${ConfigApp.imgProfile}$index',
+          width: 60,
+          height: 60,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => Center(
+            child: CircularProgressIndicator(),
+          ),
+          // errorWidget: (context, url, error) => Container(
+          //   color: Colors.black12,
+          //   child: Icon(FontAwesomeIcons.person, color: Colors.black),
+          // ), // Container
+          //
+          maxHeightDiskCache: 100,
+          maxWidthDiskCache: 100,
+          cacheManager: ConfigApp.profileCache,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -115,7 +153,7 @@ class _topicPageState extends State<topicPage> {
         title: const Text(
           'TOPIC ALL',
           style: TextStyle(
-            color: Color(Config.textColor),
+            color: Color(ConfigApp.textColor),
             fontSize: 32,
             fontWeight: FontWeight.w500,
           ),
@@ -123,9 +161,9 @@ class _topicPageState extends State<topicPage> {
         actions: [],
         elevation: 0,
         centerTitle: false,
-        backgroundColor: const Color(Config.appbarBg),
+        backgroundColor: const Color(ConfigApp.appbarBg),
       ),
-      backgroundColor: const Color(Config.appbarBg),
+      backgroundColor: const Color(ConfigApp.appbarBg),
       body: RefreshIndicator(
         onRefresh: Refresh,
         child: ListView.builder(
@@ -202,7 +240,10 @@ class _topicPageState extends State<topicPage> {
                                 topics[index].topicLikeCount =
                                     (topics[index].topicLikeCount! - 1);
                               }
-                              LikePushButton(topics[index].topicId,topics[index].likeStatus);
+                              LikePushButton(
+                                  topics[index].topicId,
+                                  topics[index].likeStatus,
+                                  topics[index].topicHeadline);
                             });
                           },
                           icon: topics[index].likeStatus == 0
@@ -231,10 +272,4 @@ class _topicPageState extends State<topicPage> {
       ), // ListView.builder
     );
   }
-
-  Widget buildImageProfile(String index) => CircleAvatar(
-        backgroundImage: CachedNetworkImageProvider(
-          '${Config.imgProfile}$index',
-        ),
-      );
 }
