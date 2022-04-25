@@ -14,6 +14,8 @@ import 'package:http/http.dart' as http;
 import "dart:io";
 import 'package:get/get.dart';
 
+import '../navigationBar.dart';
+
 final GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
   // clientId: '479882132969-9i9aqik3jfjd7qhci1nqf0bm2g71rm1u.apps.googleusercontent.com',
@@ -68,12 +70,13 @@ class _LoginPageState extends State<LoginPage> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
+      await tokenStore.setToken('${resMap["data"]}');
       String? getToken = await tokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if (resMap["message"] == "register") {
         Get.offAll(registerInfo());
       } else {
-        Get.offAll(topicPage());
+        Get.offAll(NavigationBarPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');

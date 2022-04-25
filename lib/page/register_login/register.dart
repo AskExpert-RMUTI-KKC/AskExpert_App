@@ -14,6 +14,7 @@ import "dart:io";
 import 'package:get/get.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../navigationBar.dart';
 import '../topic/topicPage.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
@@ -71,7 +72,7 @@ class _registerState extends State<register> {
       if(resMap["message"] == "register"){
         Get.offAll(registerInfo());
       }else{
-        Get.offAll(topicPage());
+        Get.offAll(NavigationBarPage());
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');

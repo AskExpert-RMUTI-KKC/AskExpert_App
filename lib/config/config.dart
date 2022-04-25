@@ -25,6 +25,12 @@ class Config {
   static const String pageTransaction = "/transaction";
   static const String pageVerify = "/verify";
 
+  //ImageCall
+  static const String imgProfile  = apiUrl+"/uploads/imgProfile/";
+  static const String imgTopic  = apiUrl+"/uploads/imgTopic/";
+  static const String imgComment  = apiUrl+"/uploads/imgComment/";
+  static const String imgVerify  = apiUrl+"/uploads/imgVerify/";
+
   //user
   static const String apiRegisterInfo = apiUrl + pageUser + "/userinfoWrite";
   static const String apiRegister = apiUrl + pageUser + "/register";

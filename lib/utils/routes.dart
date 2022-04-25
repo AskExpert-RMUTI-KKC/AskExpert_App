@@ -1,3 +1,4 @@
+import 'package:askexpertapp/page/navigationBar.dart';
 import 'package:askexpertapp/page/register_login/login.dart';
 import 'package:askexpertapp/page/topic/topicPage.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
@@ -10,7 +11,7 @@ void routes(String check) async {
     if (token == null) {
       Get.to(LoginPage());
     } else {
-      Get.off(topicPage());
+      Get.off(NavigationBarPage());
     }
   }
 
@@ -19,7 +20,7 @@ void routes(String check) async {
     if (token == null) {
       //Get.to(LoginPage());
     } else {
-      //Get.off(topicPage());
+      //Get.off(NavigationBarPage());
 
     }
   }
