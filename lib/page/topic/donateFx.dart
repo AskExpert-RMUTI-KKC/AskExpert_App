@@ -45,8 +45,25 @@ Future<void> tranferToken(
 
   if (response.statusCode == 200 && resMap["message"] == null) {
     Get.back();
+    Get.snackbar(
+      "TokenTransfer Report Status",
+      'Success',
+      icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.green,
+      colorText: Colors.black,
+      animationDuration: Duration(seconds: 2)
+    );
   } else {
-
+    Get.back();
+    Get.snackbar(
+      "TokenTransfer Report Status",
+      '${resMap["message"]}',
+      icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Color(ConfigApp.warningSnackBar),
+      colorText: Color(ConfigApp.warningSnackBarText),
+    );
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
@@ -104,6 +121,20 @@ Future<void> donateSheet(
     print("resMap DATA  : ${resMap["data"]}");
     print("user token : ${user.token}");
     //TODO : เขียนเช็คถ้า userId คนรับคนส่งเป็นคนเดียวกันให้ Get.back
+    // if(user.userInfoId == userIdReceiver)
+    //   {
+    //     Get.back();
+    //     Get.snackbar(
+    //       "TokenTransfer Report Status",
+    //       'Loop Transfer',
+    //       icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+    //       snackPosition: SnackPosition.BOTTOM,
+    //       backgroundColor: Color(ConfigApp.warningSnackBar),
+    //       colorText: Color(ConfigApp.warningSnackBarText),
+    //     );
+    //     Get.back();
+    //   }
+
     Get.bottomSheet(
       Container(
         child: Column(
@@ -124,8 +155,8 @@ Future<void> donateSheet(
                   children: [
                     Column(
                       children: [
-                        buildImageProfileDonateSheet('$imgProfileReceiver'),
-                        Text("$userNameReceiver")
+                        buildImageProfileDonateSheet('${user.profilePic}'),
+                        Text("${user.userName}"),
                       ],
                     ),
                     Padding(
@@ -134,12 +165,13 @@ Future<void> donateSheet(
                     ),
                     Column(
                       children: [
-                        buildImageProfileDonateSheet('${user.profilePic}'),
-                        Text("${user.userName}"),
+                        buildImageProfileDonateSheet('$imgProfileReceiver'),
+                        Text("$userNameReceiver")
                       ],
                     ),
                   ],
                 ),
+                Text("you have ${user.token} token"),
                 Padding(
                   padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                   child: TextFormField(
