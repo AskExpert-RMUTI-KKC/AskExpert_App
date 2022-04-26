@@ -178,12 +178,13 @@ class _topicPageState extends State<topicPage> {
                             Row(children: <Widget>[
                               Text(
                                   'Expert : ${topics[index].userInfoData?.expert}'),
-
-
-                              //TODO verrify Icon
-                              Icon(FontAwesomeIcons.anchor)
-
-
+                              Padding(
+                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                  child: topics[index] .userInfoData ?.verifyStatus == false
+                                      ? Icon(FontAwesomeIcons.square,
+                                          color: Colors.black)
+                                      : Icon(FontAwesomeIcons.squareCheck,
+                                          color: Colors.green)),
                             ]),
                           ],
                         ),
