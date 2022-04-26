@@ -5,6 +5,7 @@ import 'package:askexpertapp/dataModel/topicDataModel.dart';
 import 'package:askexpertapp/dataModel/userDataModel.dart';
 import 'package:askexpertapp/page/topic/commentPage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,58 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
+
+
+Future<void> LikePushButton(
+    String? contentId, int? status, String? topicName) async {
+  Map<String, String> params = Map();
+  //Map<String, String> data = Map();
+  var body = jsonEncode({
+    'likeContentId': contentId,
+    'likeStatus': status,
+  });
+  print("body ${body}");
+  String? _tokenJwt = await tokenStore.getToken();
+  _tokenJwt = "Bearer " + _tokenJwt!;
+  print("body : ${body}");
+  print("_tokenJwt : ${_tokenJwt}");
+
+  var url = Uri.parse('${ConfigApp.apiLikeSet}');
+  var response = await http.post(url, body: body, headers: {
+    "Accept": "application/json",
+    "content-type": "application/json",
+    "Authorization": "${_tokenJwt}"
+  });
+
+  Map resMap = jsonDecode(response.body);
+
+  print('\nResponse status: ${response.statusCode}');
+  print('\nResponse message: ${resMap["message"]}');
+  print('\nResponse body data: ${resMap["data"]}');
+
+  if (status == 0) {
+    Get.snackbar(
+      'UNLIKE',
+      '$topicName',
+      icon: Icon(FontAwesomeIcons.heartCrack, color: Colors.white),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.black,
+      colorText: Colors.white,
+      animationDuration: Duration(seconds: 1),
+    );
+  } else {
+    Get.snackbar(
+      'LIKE',
+      '$topicName',
+      icon: Icon(FontAwesomeIcons.heartCircleBolt, color: Colors.white),
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.black,
+      colorText: Colors.white,
+      animationDuration: Duration(seconds: 1),
+    );
+  }
+}
+
 
 Future<void> tranferToken(
     String? ContentId, String? donatePoint, String? userIdReceiver) async {
@@ -152,6 +205,7 @@ Future<void> donateSheet(
             Column(
               children: <Widget>[
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Column(
                       children: [

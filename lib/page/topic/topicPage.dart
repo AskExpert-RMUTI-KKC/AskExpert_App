@@ -14,7 +14,7 @@ import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
 
-import 'donateFx.dart';
+import 'donateFxlikeFx.dart';
 
 class topicPage extends StatefulWidget {
   const topicPage({Key? key}) : super(key: key);
@@ -74,54 +74,24 @@ class _topicPageState extends State<topicPage> {
     super.initState();
   }
 
-  Future<void> LikePushButton(
-      String? contentId, int? status, String? topicName) async {
-    Map<String, String> params = Map();
-    //Map<String, String> data = Map();
-    var body = jsonEncode({
-      'likeContentId': contentId,
-      'likeStatus': status,
-    });
-    print("body ${body}");
+  Future<void> topicReadCount(String? contentId)async {
+
     String? _tokenJwt = await tokenStore.getToken();
     _tokenJwt = "Bearer " + _tokenJwt!;
-    print("body : ${body}");
     print("_tokenJwt : ${_tokenJwt}");
 
-    var url = Uri.parse('${ConfigApp.apiLikeSet}');
-    var response = await http.post(url, body: body, headers: {
+    var url = Uri.parse('${ConfigApp.apiTopicRead}');
+    print('\n URL :${url.toString()}');
+    var response = await http.post(url, body: contentId, headers: {
       "Accept": "application/json",
       "content-type": "application/json",
       "Authorization": "${_tokenJwt}"
     });
-
     Map resMap = jsonDecode(response.body);
 
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
-
-    if (status == 0) {
-      Get.snackbar(
-        'UNLIKE',
-        '$topicName',
-        icon: Icon(FontAwesomeIcons.heartCrack, color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black,
-        colorText: Colors.white,
-        animationDuration: Duration(seconds: 1),
-      );
-    } else {
-      Get.snackbar(
-        'LIKE',
-        '$topicName',
-        icon: Icon(FontAwesomeIcons.heartCircleBolt, color: Colors.white),
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.black,
-        colorText: Colors.white,
-        animationDuration: Duration(seconds: 1),
-      );
-    }
   }
 
   Widget buildImageProfile(String index) => ClipRRect(
@@ -177,6 +147,11 @@ class _topicPageState extends State<topicPage> {
           itemCount: topics.length,
           itemBuilder: (context, index) => Card(
             child: ListTile(
+              onTap: () {
+                topicReadCount(topics[index].topicId);
+                Get.to(commentPage(), arguments: topics[index]);
+                //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
+              },
               title: Column(
                 children: <Widget>[
                   Row(
@@ -294,10 +269,6 @@ class _topicPageState extends State<topicPage> {
               //   height: 50,
               //   child: Image.network(topics[index].ImageUrl),
               // ),
-              onTap: () {
-                Get.to(commentPage(), arguments: topics[index]);
-                //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
-              },
             ),
           ),
         ),
