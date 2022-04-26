@@ -36,22 +36,7 @@ class _commentPageState extends State<commentPage> {
     print('\nResponse body data: ${resMap["data"]}');
 
     setState(() {
-      for(int i = 0; i < resMap["data"].length;i++){
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
-      }
-      for(int i = 0; i < resMap["data"].length;i++){
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
-      }
-      for(int i = 0; i < resMap["data"].length;i++){
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
-      }
-      for(int i = 0; i < resMap["data"].length;i++){
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
-      }
-      for(int i = 0; i < resMap["data"].length;i++){
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
-      }
-      for(int i = 0; i < resMap["data"].length;i++){
+      for (int i = 0; i < resMap["data"].length; i++) {
         comments.add(commentDataModel.fromJson(resMap["data"][i]));
       }
       print('\nResponse topicAll: ${comments.length}');
@@ -91,8 +76,8 @@ class _commentPageState extends State<commentPage> {
           child: Column(
             children: <Widget>[
               Card(
-                  child: Text(
-                      '${topic.topicCaption}\n ${topic.topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')),
+                  //เอามาวางมันเลยก็ได้นะ 555
+              ),
               Container(
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,

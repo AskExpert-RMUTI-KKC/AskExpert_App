@@ -74,8 +74,7 @@ class _topicPageState extends State<topicPage> {
     super.initState();
   }
 
-  Future<void> topicReadCount(String? contentId)async {
-
+  Future<void> topicReadCount(String? contentId) async {
     String? _tokenJwt = await tokenStore.getToken();
     _tokenJwt = "Bearer " + _tokenJwt!;
     print("_tokenJwt : ${_tokenJwt}");
@@ -176,8 +175,16 @@ class _topicPageState extends State<topicPage> {
                           children: <Widget>[
                             Text(
                                 'Username : ${topics[index].userInfoData?.userName}'),
-                            Text(
-                                'Expert : ${topics[index].userInfoData?.expert}'),
+                            Row(children: <Widget>[
+                              Text(
+                                  'Expert : ${topics[index].userInfoData?.expert}'),
+
+
+                              //TODO verrify Icon
+                              Icon(FontAwesomeIcons.anchor)
+
+
+                            ]),
                           ],
                         ),
                       )
@@ -198,12 +205,19 @@ class _topicPageState extends State<topicPage> {
                       ),
                     ],
                   ),
-                  Row(
+                  Wrap(
+                    crossAxisAlignment: WrapCrossAlignment.center,
                     children: <Widget>[
                       Icon(FontAwesomeIcons.bookOpenReader),
-                      Text('${topics[index].topicReadCount}'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                        child: Text('${topics[index].topicReadCount}'),
+                      ),
                       Icon(FontAwesomeIcons.comment),
-                      Text('${topics[index].topicCommentCount}'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                        child: Text('${topics[index].topicCommentCount}'),
+                      ),
                       IconButton(
                           onPressed: () {
                             //TODO: DONATE PAGE
@@ -212,8 +226,7 @@ class _topicPageState extends State<topicPage> {
                                 topics[index].topicHeadline,
                                 topics[index].userInfoData?.userInfoId,
                                 topics[index].userInfoData?.profilePic,
-                                topics[index].userInfoData?.userName
-                            );
+                                topics[index].userInfoData?.userName);
                             /*Get.bottomSheet(
                               Container(
                                 child: Column(
@@ -234,7 +247,10 @@ class _topicPageState extends State<topicPage> {
                             );*/
                           },
                           icon: Icon(FontAwesomeIcons.btc)),
-                      Text('${topics[index].topicDonateCount}'),
+                      Padding(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Text('${topics[index].topicDonateCount}'),
+                      ),
                       IconButton(
                           onPressed: () {
                             setState(() {
@@ -258,7 +274,10 @@ class _topicPageState extends State<topicPage> {
                                   color: Colors.black)
                               : Icon(FontAwesomeIcons.heartCircleCheck,
                                   color: Colors.red)),
-                      Text('${topics[index].topicLikeCount}'),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                        child: Text('${topics[index].topicLikeCount}'),
+                      ),
                     ],
                   )
                 ],
