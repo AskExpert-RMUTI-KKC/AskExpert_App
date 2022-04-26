@@ -1,4 +1,5 @@
 import 'package:askexpertapp/page/register_login/login.dart';
+import 'package:askexpertapp/page/welcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
@@ -17,7 +18,6 @@ class _profilePageState extends State<profilePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     print("${tokenStore.getToken()}");
   }
 
@@ -27,7 +27,7 @@ class _profilePageState extends State<profilePage> {
       body: Column(
         children: [
           TextButton(onPressed: (){
-            Get.offAll(LoginPage());
+            Get.offAll(welcomePage());
           }, child: Text("LOGOUT")),
           TextButton(onPressed: (){
             DefaultCacheManager().emptyCache();

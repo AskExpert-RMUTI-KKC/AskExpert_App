@@ -196,7 +196,6 @@ class _registerInfoState extends State<registerInfo> {
                           onPressed: () {
                             bool pass = _formKey.currentState!.validate();
                             if (pass) {
-                              // TODO : pass
                               //_formKey.currentState!.reset();
                               _registerCallApi();
                               print("firstName : ${_firstName.text}");

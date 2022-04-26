@@ -391,7 +391,6 @@ class _LoginPageState extends State<LoginPage> {
                           onPressed: () {
                             bool pass = _formKey.currentState!.validate();
                             if (pass) {
-                              // TODO : pass
                               //_formKey.currentState!.reset();
                               _LoginCallApi();
                               print("${_email.text}");

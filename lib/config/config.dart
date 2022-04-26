@@ -15,7 +15,7 @@ class ConfigApp {
 
   //CACHE
   static final profileCache = CacheManager(
-      Config('customeProfileCacheManager', stalePeriod: Duration(days: 7))
+      Config('customeProfileCacheManager', stalePeriod: Duration(days: 7,),maxNrOfCacheObjects: 1000,)
   );
 
   static const String apiUrl = "http://192.168.1.2:8080";
@@ -44,7 +44,8 @@ class ConfigApp {
   static const String apiLoginGoogle = apiUrl + pageUser + "/loginGoogle";
   static const String apiLoginFacebook = apiUrl + pageUser + "/loginFb";
   static const String apiLogin = apiUrl + pageUser + "/login";
-  static const String apiFindByText = apiUrl + pageUser + "/findByText";
+  static const String apiUserFindByText = apiUrl + pageUser + "/findByText";
+  static const String apiUserFindById = apiUrl + pageUser + "/findById";
 
   //Topic
   static const String apiTopicFindAll = apiUrl + pageTopic + "/findAll";
@@ -109,7 +110,7 @@ class ConfigApp {
       apiUrl + pageTopicGroupList + "/update";
 
   //transaction
-  static const String apiTransactionTransfer = apiUrl + pageTransaction + "/";
+  static const String apiTransactionTransfer = apiUrl + pageTransaction + "/transfer";
   static const String apiTransactionWithdraw =
       apiUrl + pageTransaction + "/withdraw";
   static const String apiTransactionDeposit =
