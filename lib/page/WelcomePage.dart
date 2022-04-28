@@ -1,11 +1,11 @@
 import 'dart:convert';
 
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/dataModel/topicDataModel.dart';
-import 'package:askexpertapp/page/topic/commentPage.dart';
-import 'package:askexpertapp/page/register_login/login.dart';
-import 'package:askexpertapp/page/register_login/register.dart';
-import 'package:askexpertapp/utils/routes.dart';
+import 'package:askexpertapp/dataModel/TopicDataModel.dart';
+import 'package:askexpertapp/page/topic/CommentPage.dart';
+import 'package:askexpertapp/page/register_login/Login.dart';
+import 'package:askexpertapp/page/register_login/Register.dart';
+import 'package:askexpertapp/utils/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

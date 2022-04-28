@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/page/register_login/register.dart';
-import 'package:askexpertapp/page/register_login/registerInfo.dart';
-import 'package:askexpertapp/page/topic/topicPage.dart';
-import 'package:askexpertapp/utils/routes.dart';
+import 'package:askexpertapp/page/register_login/Register.dart';
+import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
+import 'package:askexpertapp/page/topic/TopicPage.dart';
+import 'package:askexpertapp/utils/Routes.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
@@ -14,7 +14,7 @@ import 'package:http/http.dart' as http;
 import "dart:io";
 import 'package:get/get.dart';
 
-import '../navigationBar.dart';
+import '../NavigationBar.dart';
 
 final GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId

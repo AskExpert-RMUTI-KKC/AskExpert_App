@@ -1,5 +1,5 @@
-import 'package:askexpertapp/page/register_login/login.dart';
-import 'package:askexpertapp/page/welcomePage.dart';
+import 'package:askexpertapp/page/register_login/Login.dart';
+import 'package:askexpertapp/page/WelcomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

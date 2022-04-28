@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/dataModel/topicDataModel.dart';
-import 'package:askexpertapp/dataModel/userDataModel.dart';
-import 'package:askexpertapp/page/topic/commentPage.dart';
+import 'package:askexpertapp/dataModel/TopicDataModel.dart';
+import 'package:askexpertapp/dataModel/UserDataModel.dart';
+import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -14,7 +14,7 @@ import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
 
-import 'topicLogic.dart';
+import 'TopicLogic.dart';
 
 Widget buildImageProfile(String index) => ClipRRect(
       // backgroundImage: CachedNetworkImageProvider(

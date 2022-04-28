@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/dataModel/commentDataModel.dart';
-import 'package:askexpertapp/dataModel/topicDataModel.dart';
+import 'package:askexpertapp/dataModel/CommentDataModel.dart';
+import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

@@ -1,8 +1,8 @@
 
-import 'package:askexpertapp/page/navigationBar.dart';
-import 'package:askexpertapp/page/register_login/login.dart';
-import 'package:askexpertapp/page/register_login/registerInfo.dart';
-import 'package:askexpertapp/page/welcomePage.dart';
+import 'package:askexpertapp/page/NavigationBar.dart';
+import 'package:askexpertapp/page/register_login/Login.dart';
+import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
+import 'package:askexpertapp/page/WelcomePage.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 

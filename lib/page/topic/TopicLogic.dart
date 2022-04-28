@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/dataModel/topicDataModel.dart';
-import 'package:askexpertapp/dataModel/userDataModel.dart';
-import 'package:askexpertapp/page/topic/commentPage.dart';
+import 'package:askexpertapp/dataModel/TopicDataModel.dart';
+import 'package:askexpertapp/dataModel/UserDataModel.dart';
+import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

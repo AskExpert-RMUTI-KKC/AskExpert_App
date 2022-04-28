@@ -1,4 +1,4 @@
-import 'package:askexpertapp/page/topic/topicPage.dart';
+import 'package:askexpertapp/page/topic/TopicPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';

@@ -1,8 +1,8 @@
 import 'package:askexpertapp/config/config.dart';
-import 'package:askexpertapp/page/profile/profilePage.dart';
+import 'package:askexpertapp/page/profile/ProfilePage.dart';
 import 'package:askexpertapp/page/search/SearchPages.dart';
 import 'package:askexpertapp/page/token/TokenPage.dart';
-import 'package:askexpertapp/page/topic/topicPage.dart';
+import 'package:askexpertapp/page/topic/TopicPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

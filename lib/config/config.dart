@@ -15,7 +15,7 @@ class ConfigApp {
 
   //CACHE
   static final profileCache = CacheManager(
-      Config('customeProfileCacheManager', stalePeriod: Duration(days: 7,),maxNrOfCacheObjects: 1000,)
+      Config('CustomProfileCacheManager', stalePeriod: const Duration(days: 7,),maxNrOfCacheObjects: 1000,)
   );
 
   static const String apiUrl = "http://192.168.1.2:8080";
