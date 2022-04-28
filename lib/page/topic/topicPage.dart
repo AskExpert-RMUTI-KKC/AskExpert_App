@@ -14,7 +14,7 @@ import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
 
-import 'donateFxlikeFx.dart';
+import 'topicLogic.dart';
 
 class topicPage extends StatefulWidget {
   const topicPage({Key? key}) : super(key: key);

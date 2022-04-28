@@ -66,9 +66,6 @@ class _commentPageState extends State<commentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("TOPIC-COMMENT"),
-      ),
       //Text('${topic.topicCaption}\n ${topic.topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')
       body: RefreshIndicator(
         onRefresh: Refresh,
