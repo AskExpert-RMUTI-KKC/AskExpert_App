@@ -14,6 +14,8 @@ import 'example/fb.dart';
 import 'example/google.dart';
 import 'example/store.dart';
 
+
+
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(GetMaterialApp(
@@ -21,7 +23,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: NavigationBarPage(),
+    home: WelcomePage(),
 
     //home: WelcomePage(),
   ));

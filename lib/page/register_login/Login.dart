@@ -80,6 +80,14 @@ class _LoginPageState extends State<LoginPage> {
       }
     } else {
       print('\nResponse message: ${resMap["message"]}');
+      Get.snackbar(
+        "Login Report Status",
+        '${resMap["message"]}',
+        icon: Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Color(ConfigApp.warningSnackBar),
+        colorText: Color(ConfigApp.warningSnackBarText),
+      );
     }
   }
 

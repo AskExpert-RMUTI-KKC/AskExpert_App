@@ -14,7 +14,11 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-
+  Future<void> logOut() async{
+    await TokenStore.setToken("");
+    String? getToken = await TokenStore.getToken();
+    print("data SecureStorage : ${getToken}");
+  }
 
   @override
   void initState() {
@@ -24,9 +28,13 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Test"),
+      ),
       body: Column(
         children: [
           TextButton(onPressed: (){
+            logOut();
             Get.offAll(WelcomePage());
           }, child: Text("LOGOUT")),
           TextButton(onPressed: (){

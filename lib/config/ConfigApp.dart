@@ -47,7 +47,7 @@ class ConfigApp {
   static const String apiLogin = apiUrl + pageUser + "/login";
   static const String apiUserFindByText = apiUrl + pageUser + "/findByText";
   static const String apiUserFindById = apiUrl + pageUser + "/findById";
-
+  static const String apiUserRefreshJWT = apiUrl + pageUser + "/refreshJWT";
   //Topic
   static const String apiTopicFindAll = apiUrl + pageTopic + "/findAll";
   static const String apiTopicAdd = apiUrl + pageTopic + "/add";
