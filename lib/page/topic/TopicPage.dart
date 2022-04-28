@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
@@ -127,7 +127,7 @@ class _TopicPageState extends State<TopicPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'TOPIC ALL',
+          'TOPIC',
           style: TextStyle(
             color: Color(ConfigApp.textColor),
             fontSize: 32,
@@ -147,11 +147,11 @@ class _TopicPageState extends State<TopicPage> {
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
           itemCount: topics.length,
-          itemBuilder: (context, index) => TopicCardPage(topics: topics[index])/*Card(
+          itemBuilder: (context, index) => /*TopicCardPage(topics: topics[index])*/Card(
             child: ListTile(
               onTap: () {
                 topicReadCount(topics[index].topicId);
-                Get.to(commentPage(), arguments: topics[index]);
+                Get.to(CommentPage(), arguments: topics[index]);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
               },
               title: Column(
@@ -177,15 +177,25 @@ class _TopicPageState extends State<TopicPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(
-                                'Username : ${topics[index].userInfoData?.userName}'),
+                                '${topics[index].userInfoData?.userName}'),
                             Row(children: <Widget>[
-                              Text(
-                                  'Expert : ${topics[index].userInfoData?.expert}'),
+                              Container(
+                                padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(
+                                      Radius.circular(10.0) //                 <--- border radius here
+                                  ),
+                                  color: Colors.black
+                                ),
+                                child: Text(
+                                    '${topics[index].userInfoData?.expert}',style: TextStyle(color: Colors.white),),
+
+                              ),
                               Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                                   child: topics[index] .userInfoData ?.verifyStatus == false
                                       ? Icon(FontAwesomeIcons.square,
-                                          color: Colors.black)
+                                          color: Colors.white)
                                       : Icon(FontAwesomeIcons.squareCheck,
                                           color: Colors.green)),
                             ]),
@@ -198,13 +208,28 @@ class _TopicPageState extends State<TopicPage> {
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('Headline : ${topics[index].topicHeadline}'),
-                            Text('Group : ${topics[index].topicGroup}'),
-                            Text('${topics[index].topicCaption}'),
-                          ],
+                        child: Container(
+                          width: c_width,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('${topics[index].topicHeadline}',maxLines: 2,style: TextStyle(
+                                fontSize: 20
+                              ),),
+
+                              Container(padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0) //                 <--- border radius here
+                                      ),
+                                      color: Colors.black
+                                  ),child: Text('${topics[index].topicGroup}',style: TextStyle(color: Colors.white),)),
+
+                              Text('${topics[index].topicCaption}',maxLines: 4,),
+
+
+                            ],
+                          ),
                         ),
                       ),
                     ],
@@ -293,7 +318,7 @@ class _TopicPageState extends State<TopicPage> {
               //   child: Image.network(topics[index].ImageUrl),
               // ),
             ),
-          )*/,
+          ),
         ),
       ), // ListView.builder
     );

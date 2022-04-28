@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/CommentDataModel.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:flutter/material.dart';
@@ -59,7 +59,6 @@ class _CommentPageState extends State<CommentPage> {
   void initState() {
     topic = Get.arguments;
     commentCall(topic.topicId);
-
     super.initState();
   }
 

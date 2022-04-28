@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:askexpertapp/page/register_login/Login.dart';

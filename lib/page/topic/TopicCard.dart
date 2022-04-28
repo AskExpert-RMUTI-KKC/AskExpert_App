@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
@@ -226,7 +226,7 @@ class _TopicCardPageState extends State<TopicCardPage> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                buildImageProfile('${widget.topics.userInfoData?.profilePic}'),
+                //buildImageProfile('${widget.topics.userInfoData?.profilePic}'),
                 // Container(
                 //     height: 50,
                 //     width: 50,
@@ -242,7 +242,7 @@ class _TopicCardPageState extends State<TopicCardPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text('Username : ${widget.topics.userInfoData?.userName}'),
+                      Expanded(child: Text('aaaaaaaaaaaaaaaaaaaaa Username : ${widget.topics.userInfoData?.userName}',maxLines: 1,)),
                       Row(children: <Widget>[
                         Text('Expert : ${widget.topics.userInfoData?.expert}'),
                         Padding(

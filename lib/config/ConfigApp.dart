@@ -19,6 +19,7 @@ class ConfigApp {
   );
 
   static const String apiUrl = "http://192.168.1.2:8080";
+  static const String uploadsImgPath = "/uploads";
 
   static const String pageUser = "/user";
   static const String pageComment = "/comment";
@@ -32,10 +33,10 @@ class ConfigApp {
   static const String pageVerify = "/verify";
 
   //ImageCall
-  static const String imgProfile = apiUrl + "/uploads/imgProfile/";
-  static const String imgTopic = apiUrl + "/uploads/imgTopic/";
-  static const String imgComment = apiUrl + "/uploads/imgComment/";
-  static const String imgVerify = apiUrl + "/uploads/imgVerify/";
+  static const String imgProfile = apiUrl +uploadsImgPath+ "/imgProfile/";
+  static const String imgTopic = apiUrl +uploadsImgPath+ "/imgTopic/";
+  static const String imgComment = apiUrl +uploadsImgPath+ "/imgComment/";
+  static const String imgVerify = apiUrl +uploadsImgPath+ "/imgVerify/";
 
   //user
   static const String apiRegisterInfo = apiUrl + pageUser + "/userinfoWrite";

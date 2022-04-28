@@ -10,6 +10,7 @@ class TopicDataModel {
   int? topicDonateCount;
   String? topicGroup;
   int? topicReportStatus;
+  List<TopicImg>? topicImg;
   UserInfoData? userInfoData;
 
   TopicDataModel(
@@ -24,6 +25,7 @@ class TopicDataModel {
         this.topicDonateCount,
         this.topicGroup,
         this.topicReportStatus,
+        this.topicImg,
         this.userInfoData});
 
   TopicDataModel.fromJson(Map<String, dynamic> json) {
@@ -38,6 +40,12 @@ class TopicDataModel {
     topicDonateCount = json['topicDonateCount'];
     topicGroup = json['topicGroup'];
     topicReportStatus = json['topicReportStatus'];
+    if (json['topicImg'] != null) {
+      topicImg = <TopicImg>[];
+      json['topicImg'].forEach((v) {
+        topicImg!.add(new TopicImg.fromJson(v));
+      });
+    }
     userInfoData = json['userInfoData'] != null
         ? new UserInfoData.fromJson(json['userInfoData'])
         : null;
@@ -56,9 +64,49 @@ class TopicDataModel {
     data['topicDonateCount'] = this.topicDonateCount;
     data['topicGroup'] = this.topicGroup;
     data['topicReportStatus'] = this.topicReportStatus;
+    if (this.topicImg != null) {
+      data['topicImg'] = this.topicImg!.map((v) => v.toJson()).toList();
+    }
     if (this.userInfoData != null) {
       data['userInfoData'] = this.userInfoData!.toJson();
     }
+    return data;
+  }
+}
+
+class TopicImg {
+  String? imgId;
+  String? imgContentId;
+  String? imgPath;
+  String? imgName;
+  String? createdDateForOrder;
+  int? createdDate;
+
+  TopicImg(
+      {this.imgId,
+        this.imgContentId,
+        this.imgPath,
+        this.imgName,
+        this.createdDateForOrder,
+        this.createdDate});
+
+  TopicImg.fromJson(Map<String, dynamic> json) {
+    imgId = json['imgId'];
+    imgContentId = json['imgContentId'];
+    imgPath = json['imgPath'];
+    imgName = json['imgName'];
+    createdDateForOrder = json['createdDateForOrder'];
+    createdDate = json['createdDate'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['imgId'] = this.imgId;
+    data['imgContentId'] = this.imgContentId;
+    data['imgPath'] = this.imgPath;
+    data['imgName'] = this.imgName;
+    data['createdDateForOrder'] = this.createdDateForOrder;
+    data['createdDate'] = this.createdDate;
     return data;
   }
 }

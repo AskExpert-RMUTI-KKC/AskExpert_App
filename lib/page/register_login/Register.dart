@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/page/register_login/Login.dart';
 import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
 import 'package:flutter/material.dart';

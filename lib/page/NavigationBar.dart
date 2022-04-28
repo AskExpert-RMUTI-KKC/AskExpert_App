@@ -1,4 +1,4 @@
-import 'package:askexpertapp/config/config.dart';
+import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/page/profile/ProfilePage.dart';
 import 'package:askexpertapp/page/search/SearchPages.dart';
 import 'package:askexpertapp/page/token/TokenPage.dart';
