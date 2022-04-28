@@ -7,7 +7,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 
 void routes(String check) async {
   if (check == "token") {
-    String? token = await tokenStore.getToken();
+    String? token = await TokenStore.getToken();
     if (token == null) {
       Get.to(LoginPage());
     } else {
@@ -16,7 +16,7 @@ void routes(String check) async {
   }
 
   if (check == "welcomePage") {
-    String? token = await tokenStore.getToken();
+    String? token = await TokenStore.getToken();
     if (token == null) {
       //Get.to(LoginPage());
     } else {

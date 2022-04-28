@@ -9,18 +9,18 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:http/http.dart' as http;
 
-class commentPage extends StatefulWidget {
-  const commentPage({Key? key}) : super(key: key);
+class CommentPage extends StatefulWidget {
+  const CommentPage({Key? key}) : super(key: key);
 
   @override
-  _commentPageState createState() => _commentPageState();
+  _CommentPageState createState() => _CommentPageState();
 }
 
-class _commentPageState extends State<commentPage> {
-  topicDataModel topic = new topicDataModel();
-  List<commentDataModel> comments = List.generate(
+class _CommentPageState extends State<CommentPage> {
+  TopicDataModel topic = new TopicDataModel();
+  List<CommentDataModel> comments = List.generate(
     0,
-    (index) => commentDataModel(),
+    (index) => CommentDataModel(),
   );
 
   Future<void> commentCall(String? topicId) async {
@@ -37,7 +37,7 @@ class _commentPageState extends State<commentPage> {
 
     setState(() {
       for (int i = 0; i < resMap["data"].length; i++) {
-        comments.add(commentDataModel.fromJson(resMap["data"][i]));
+        comments.add(CommentDataModel.fromJson(resMap["data"][i]));
       }
       print('\nResponse topicAll: ${comments.length}');
     });

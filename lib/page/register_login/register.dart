@@ -26,14 +26,14 @@ final GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
-class register extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   final plugin = FacebookLogin(debug: true);
 
   @override
-  _registerState createState() => _registerState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _registerState extends State<register> {
+class _RegisterPageState extends State<RegisterPage> {
 
 
   final plugin = FacebookLogin(debug: true);
@@ -67,10 +67,10 @@ class _registerState extends State<register> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
-      String? getToken = await tokenStore.getToken();
+      String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if(resMap["message"] == "register"){
-        Get.offAll(registerInfo());
+        Get.offAll(RegisterInfoPage());
       }else{
         Get.offAll(NavigationBarPage());
       }
@@ -220,11 +220,11 @@ class _registerState extends State<register> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
-      await tokenStore.setToken(resMap["data"]);
-      String? getToken = await tokenStore.getToken();
+      await TokenStore.setToken(resMap["data"]);
+      String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
 
-      Get.offAll(registerInfo());
+      Get.offAll(RegisterInfoPage());
     } else {
       print('\nResponse message: ${resMap["message"]}');
 

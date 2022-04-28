@@ -12,14 +12,14 @@ import 'package:http/http.dart' as http;
 import "dart:io";
 import 'package:get/get.dart';
 
-class registerInfo extends StatefulWidget {
-  const registerInfo({Key? key}) : super(key: key);
+class RegisterInfoPage extends StatefulWidget {
+  const RegisterInfoPage({Key? key}) : super(key: key);
 
   @override
-  _registerInfoState createState() => _registerInfoState();
+  _RegisterInfoPageState createState() => _RegisterInfoPageState();
 }
 
-class _registerInfoState extends State<registerInfo> {
+class _RegisterInfoPageState extends State<RegisterInfoPage> {
   @override
   final _formKey = GlobalKey<FormState>();
   final _firstName = TextEditingController();
@@ -39,7 +39,7 @@ class _registerInfoState extends State<registerInfo> {
       'lastName': _lastName.text,
       'userName': _userName.text
     });
-    String? _authen = await tokenStore.getToken();
+    String? _authen = await TokenStore.getToken();
     _authen = "Bearer " + _authen!;
     print("body : ${body}");
     print("_authen : ${_authen}");
@@ -55,7 +55,7 @@ class _registerInfoState extends State<registerInfo> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200) {
-      Get.to(registerPicProgile());
+      Get.to(RegisterImgPage());
     }
   }
 

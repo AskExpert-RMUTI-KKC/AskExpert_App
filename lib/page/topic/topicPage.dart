@@ -4,6 +4,7 @@ import 'package:askexpertapp/config/config.dart';
 import 'package:askexpertapp/dataModel/topicDataModel.dart';
 import 'package:askexpertapp/dataModel/userDataModel.dart';
 import 'package:askexpertapp/page/topic/commentPage.dart';
+import 'package:askexpertapp/page/topic/topicCard.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -16,24 +17,24 @@ import 'package:askexpertapp/utils/storageToken.dart';
 
 import 'topicLogic.dart';
 
-class topicPage extends StatefulWidget {
-  const topicPage({Key? key}) : super(key: key);
+class TopicPage extends StatefulWidget {
+  const TopicPage({Key? key}) : super(key: key);
 
   @override
-  _topicPageState createState() => _topicPageState();
+  _TopicPageState createState() => _TopicPageState();
 }
 
-class _topicPageState extends State<topicPage> {
-  List<topicDataModel> topics = List.generate(
+class _TopicPageState extends State<TopicPage> {
+  List<TopicDataModel> topics = List.generate(
     0,
-    (index) => topicDataModel(),
+    (index) => TopicDataModel(),
   );
 
   Future<void> topicCall() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-    String? _tokenJwt = await tokenStore.getToken();
+    String? _tokenJwt = await TokenStore.getToken();
     _tokenJwt = "Bearer " + _tokenJwt!;
     print("_tokenJwt : ${_tokenJwt}");
 
@@ -51,7 +52,7 @@ class _topicPageState extends State<topicPage> {
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
       for (int i = 0; i < resMap["data"].length; i++) {
-        topics.add(topicDataModel.fromJson(resMap["data"][i]));
+        topics.add(TopicDataModel.fromJson(resMap["data"][i]));
       }
       print('\nResponse topicAll: ${topics.length}');
     });
@@ -68,55 +69,57 @@ class _topicPageState extends State<topicPage> {
     //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
   }
 
+
+
+  // Future<void> topicReadCount(String? contentId) async {
+  //   String? _tokenJwt = await tokenStore.getToken();
+  //   _tokenJwt = "Bearer " + _tokenJwt!;
+  //   print("_tokenJwt : ${_tokenJwt}");
+  //
+  //   var url = Uri.parse('${ConfigApp.apiTopicRead}');
+  //   print('\n URL :${url.toString()}');
+  //   var response = await http.post(url, body: contentId, headers: {
+  //     "Accept": "application/json",
+  //     "content-type": "application/json",
+  //     "Authorization": "${_tokenJwt}"
+  //   });
+  //   Map resMap = jsonDecode(response.body);
+  //
+  //   print('\nResponse status: ${response.statusCode}');
+  //   print('\nResponse message: ${resMap["message"]}');
+  //   print('\nResponse body data: ${resMap["data"]}');
+  // }
+
   @override
   void initState() {
     topicCall();
     super.initState();
   }
 
-  Future<void> topicReadCount(String? contentId) async {
-    String? _tokenJwt = await tokenStore.getToken();
-    _tokenJwt = "Bearer " + _tokenJwt!;
-    print("_tokenJwt : ${_tokenJwt}");
-
-    var url = Uri.parse('${ConfigApp.apiTopicRead}');
-    print('\n URL :${url.toString()}');
-    var response = await http.post(url, body: contentId, headers: {
-      "Accept": "application/json",
-      "content-type": "application/json",
-      "Authorization": "${_tokenJwt}"
-    });
-    Map resMap = jsonDecode(response.body);
-
-    print('\nResponse status: ${response.statusCode}');
-    print('\nResponse message: ${resMap["message"]}');
-    print('\nResponse body data: ${resMap["data"]}');
-  }
-
-  Widget buildImageProfile(String index) => ClipRRect(
-        // backgroundImage: CachedNetworkImageProvider(
-        //   '${Config.imgProfile}$index',
-        // ),
-        borderRadius: BorderRadius.circular(100),
-        child: CachedNetworkImage(
-          imageUrl: '${ConfigApp.imgProfile}$index',
-          width: 60,
-          height: 60,
-          fit: BoxFit.cover,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(),
-          ),
-          // errorWidget: (context, url, error) => Container(
-          //   color: Colors.black12,
-          //   child: Icon(FontAwesomeIcons.person, color: Colors.black),
-          // ), // Container
-          //
-
-          cacheManager: ConfigApp.profileCache,
-          // maxHeightDiskCache: 100,
-          // maxWidthDiskCache: 100,
-        ),
-      );
+  // Widget buildImageProfile(String index) => ClipRRect(
+  //       // backgroundImage: CachedNetworkImageProvider(
+  //       //   '${Config.imgProfile}$index',
+  //       // ),
+  //       borderRadius: BorderRadius.circular(100),
+  //       child: CachedNetworkImage(
+  //         imageUrl: '${ConfigApp.imgProfile}$index',
+  //         width: 60,
+  //         height: 60,
+  //         fit: BoxFit.cover,
+  //         placeholder: (context, url) => Center(
+  //           child: CircularProgressIndicator(),
+  //         ),
+  //         // errorWidget: (context, url, error) => Container(
+  //         //   color: Colors.black12,
+  //         //   child: Icon(FontAwesomeIcons.person, color: Colors.black),
+  //         // ), // Container
+  //         //
+  //
+  //         cacheManager: ConfigApp.profileCache,
+  //         // maxHeightDiskCache: 100,
+  //         // maxWidthDiskCache: 100,
+  //       ),
+  //     );
 
   @override
   Widget build(BuildContext context) {
@@ -144,7 +147,7 @@ class _topicPageState extends State<topicPage> {
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
           itemCount: topics.length,
-          itemBuilder: (context, index) => Card(
+          itemBuilder: (context, index) => TopicCardPage(topics: topics[index])/*Card(
             child: ListTile(
               onTap: () {
                 topicReadCount(topics[index].topicId);
@@ -290,7 +293,7 @@ class _topicPageState extends State<topicPage> {
               //   child: Image.network(topics[index].ImageUrl),
               // ),
             ),
-          ),
+          )*/,
         ),
       ), // ListView.builder
     );

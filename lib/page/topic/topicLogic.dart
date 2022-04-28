@@ -25,7 +25,7 @@ Future<void> LikePushButton(
     'likeStatus': status,
   });
   print("body ${body}");
-  String? _tokenJwt = await tokenStore.getToken();
+  String? _tokenJwt = await TokenStore.getToken();
   _tokenJwt = "Bearer " + _tokenJwt!;
   print("body : ${body}");
   print("_tokenJwt : ${_tokenJwt}");
@@ -80,7 +80,7 @@ Future<void> tranferToken(
     'tranContentId': ContentId,
     'tranRx': userIdReceiver
   });
-  String? _authen = await tokenStore.getToken();
+  String? _authen = await TokenStore.getToken();
   _authen = "Bearer " + _authen!;
   print("body : ${body}");
   print("_authen : ${_authen}");
@@ -158,7 +158,7 @@ Future<void> donateSheet(
     borderRadius: BorderRadius.circular(15),
   );
   final _donatePoint = TextEditingController();
-  String? _tokenJwt = await tokenStore.getToken();
+  String? _tokenJwt = await TokenStore.getToken();
 
   _tokenJwt = "Bearer " + _tokenJwt!;
   print("_tokenJwt : ${_tokenJwt}");
@@ -170,7 +170,7 @@ Future<void> donateSheet(
   });
   if (response.statusCode == 200) {
     Map resMap = jsonDecode(response.body);
-    userDataModel user = userDataModel.fromJson(resMap["data"]);
+    UserDataModel user = UserDataModel.fromJson(resMap["data"]);
     print("resMap DATA  : ${resMap["data"]}");
     print("user token : ${user.token}");
     //TODO : เขียนเช็คถ้า userId คนรับคนส่งเป็นคนเดียวกันให้ Get.back

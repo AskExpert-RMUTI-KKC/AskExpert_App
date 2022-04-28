@@ -1,4 +1,4 @@
-class commentDataModel {
+class CommentDataModel {
   String? commentId;
   String? commentTopicOwnerId;
   String? commentOwnerId;
@@ -7,7 +7,7 @@ class commentDataModel {
   String? createdDateForOrder;
   int? createdDate;
 
-  commentDataModel(
+  CommentDataModel(
       {this.commentId,
         this.commentTopicOwnerId,
         this.commentOwnerId,
@@ -16,7 +16,7 @@ class commentDataModel {
         this.createdDateForOrder,
         this.createdDate});
 
-  commentDataModel.fromJson(Map<String, dynamic> json) {
+  CommentDataModel.fromJson(Map<String, dynamic> json) {
     commentId = json['commentId'];
     commentTopicOwnerId = json['commentTopicOwnerId'];
     commentOwnerId = json['commentOwnerId'];

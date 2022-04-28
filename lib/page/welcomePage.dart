@@ -11,14 +11,14 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:http/http.dart' as http;
 
-class welcomePage extends StatefulWidget {
-  const welcomePage({Key? key}) : super(key: key);
+class WelcomePage extends StatefulWidget {
+  const WelcomePage({Key? key}) : super(key: key);
 
   @override
-  State<welcomePage> createState() => _welcomePageState();
+  State<WelcomePage> createState() => _WelcomePageState();
 }
 
-class _welcomePageState extends State<welcomePage> {
+class _WelcomePageState extends State<WelcomePage> {
   final shape = RoundedRectangleBorder(
     borderRadius: BorderRadius.circular(15),
   );
@@ -83,7 +83,7 @@ class _welcomePageState extends State<welcomePage> {
                         padding: const EdgeInsets.all(12.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            Get.to(register());
+                            Get.to(RegisterPage());
                           },
                           child: const Text(
                             "Register",

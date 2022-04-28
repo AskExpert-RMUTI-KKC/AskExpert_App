@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class tokenPage extends StatefulWidget {
-  const tokenPage({Key? key}) : super(key: key);
+class TokenPage extends StatefulWidget {
+  const TokenPage({Key? key}) : super(key: key);
 
   @override
-  State<tokenPage> createState() => _tokenPageState();
+  State<TokenPage> createState() => _TokenPageState();
 }
 
-class _tokenPageState extends State<tokenPage> {
+class _TokenPageState extends State<TokenPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold();

@@ -70,11 +70,11 @@ class _LoginPageState extends State<LoginPage> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
-      await tokenStore.setToken('${resMap["data"]}');
-      String? getToken = await tokenStore.getToken();
+      await TokenStore.setToken('${resMap["data"]}');
+      String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
       if (resMap["message"] == "register") {
-        Get.offAll(registerInfo());
+        Get.offAll(RegisterInfoPage());
       } else {
         Get.offAll(NavigationBarPage());
       }
@@ -367,7 +367,7 @@ class _LoginPageState extends State<LoginPage> {
                             //side: BorderSide(width: 1,color: Color(Config.textColor),)
                           ),
                           onPressed: () {
-                            Get.offAll(register());
+                            Get.offAll(RegisterPage());
                           },
                           child: Text(
                             'Register',

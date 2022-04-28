@@ -1,4 +1,4 @@
-class userDataModel {
+class UserDataModel {
   String? userInfoId;
   String? userName;
   String? firstName;
@@ -11,7 +11,7 @@ class userDataModel {
   String? createdDateForOrder;
   int? createdDate;
 
-  userDataModel(
+  UserDataModel(
       {this.userInfoId,
         this.userName,
         this.firstName,
@@ -24,7 +24,7 @@ class userDataModel {
         this.createdDateForOrder,
         this.createdDate});
 
-  userDataModel.fromJson(Map<String, dynamic> json) {
+  UserDataModel.fromJson(Map<String, dynamic> json) {
     userInfoId = json['userInfoId'];
     userName = json['userName'];
     firstName = json['firstName'];

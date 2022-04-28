@@ -6,19 +6,19 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
-class profilePage extends StatefulWidget {
-  const profilePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<profilePage> createState() => _profilePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _profilePageState extends State<profilePage> {
+class _ProfilePageState extends State<ProfilePage> {
 
 
   @override
   void initState() {
-    print("${tokenStore.getToken()}");
+    print("${TokenStore.getToken()}");
   }
 
   @override
@@ -27,7 +27,7 @@ class _profilePageState extends State<profilePage> {
       body: Column(
         children: [
           TextButton(onPressed: (){
-            Get.offAll(welcomePage());
+            Get.offAll(WelcomePage());
           }, child: Text("LOGOUT")),
           TextButton(onPressed: (){
             DefaultCacheManager().emptyCache();

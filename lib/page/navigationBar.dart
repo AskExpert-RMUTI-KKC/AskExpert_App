@@ -19,11 +19,11 @@ class _NavigationBarState extends State<NavigationBarPage> {
   int currentIndex = 0;
 
   final pages = [
-    topicPage(),
+    TopicPage(),
     SearchPage(),
     TopicAddPage(),
-    tokenPage(),
-    profilePage(),
+    TokenPage(),
+    ProfilePage(),
   ];
 
   @override

@@ -3,18 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 
-class registerPicProgile extends StatefulWidget {
-  const registerPicProgile({Key? key}) : super(key: key);
+class RegisterImgPage extends StatefulWidget {
+  const RegisterImgPage({Key? key}) : super(key: key);
 
   @override
-  _registerPicProgileState createState() => _registerPicProgileState();
+  _RegisterImgPageState createState() => _RegisterImgPageState();
 }
 
-class _registerPicProgileState extends State<registerPicProgile> {
+class _RegisterImgPageState extends State<RegisterImgPage> {
   @override
   void initState() {
 
-    Get.off(topicPage());
+    Get.off(TopicPage());
     super.initState();
   }
   @override

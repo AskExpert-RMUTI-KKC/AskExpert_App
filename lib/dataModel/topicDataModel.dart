@@ -1,4 +1,4 @@
-class topicDataModel {
+class TopicDataModel {
   int? likeStatus;
   String? topicId;
   String? topicHeadline;
@@ -12,7 +12,7 @@ class topicDataModel {
   int? topicReportStatus;
   UserInfoData? userInfoData;
 
-  topicDataModel(
+  TopicDataModel(
       {this.likeStatus,
         this.topicId,
         this.topicHeadline,
@@ -26,7 +26,7 @@ class topicDataModel {
         this.topicReportStatus,
         this.userInfoData});
 
-  topicDataModel.fromJson(Map<String, dynamic> json) {
+  TopicDataModel.fromJson(Map<String, dynamic> json) {
     likeStatus = json['likeStatus'];
     topicId = json['topicId'];
     topicHeadline = json['topicHeadline'];
