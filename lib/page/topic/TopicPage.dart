@@ -14,7 +14,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
-
+import 'package:intl/intl.dart';
 import 'TopicLogic.dart';
 
 class TopicPage extends StatefulWidget {
@@ -45,7 +45,7 @@ class _TopicPageState extends State<TopicPage> {
       "content-type": "application/json",
       "Authorization": "${_tokenJwt}"
     });
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
@@ -69,8 +69,6 @@ class _TopicPageState extends State<TopicPage> {
     //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
   }
 
-
-
   // Future<void> topicReadCount(String? contentId) async {
   //   String? _tokenJwt = await tokenStore.getToken();
   //   _tokenJwt = "Bearer " + _tokenJwt!;
@@ -83,7 +81,7 @@ class _TopicPageState extends State<TopicPage> {
   //     "content-type": "application/json",
   //     "Authorization": "${_tokenJwt}"
   //   });
-  //   Map resMap = jsonDecode(response.body);
+  //   Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
   //
   //   print('\nResponse status: ${response.statusCode}');
   //   print('\nResponse message: ${resMap["message"]}');
@@ -93,6 +91,8 @@ class _TopicPageState extends State<TopicPage> {
   @override
   void initState() {
     topicCall();
+    String i = NumberFormat.compact().format(1000000000000);
+    print("${i}");
     super.initState();
   }
 
@@ -147,7 +147,8 @@ class _TopicPageState extends State<TopicPage> {
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
           itemCount: topics.length,
-          itemBuilder: (context, index) => /*TopicCardPage(topics: topics[index])*/Card(
+          itemBuilder:
+              (context, index) => /*TopicCardPage(topics: topics[index])*/ Card(
             child: ListTile(
               onTap: () {
                 topicReadCount(topics[index].topicId);
@@ -176,24 +177,27 @@ class _TopicPageState extends State<TopicPage> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
-                            Text(
-                                '${topics[index].userInfoData?.userName}'),
+                            Text('${topics[index].userInfoData?.userName}'),
                             Row(children: <Widget>[
                               Container(
                                 padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
                                 decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(10.0) //                 <--- border radius here
-                                  ),
-                                  color: Colors.black
-                                ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(
+                                            10.0) //                 <--- border radius here
+                                        ),
+                                    color: Colors.black),
                                 child: Text(
-                                    '${topics[index].userInfoData?.expert}',style: TextStyle(color: Colors.white),),
-
+                                  '${topics[index].userInfoData?.expert}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
                               Padding(
                                   padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: topics[index] .userInfoData ?.verifyStatus == false
+                                  child: topics[index]
+                                              .userInfoData
+                                              ?.verifyStatus ==
+                                          false
                                       ? Icon(FontAwesomeIcons.square,
                                           color: Colors.white)
                                       : Icon(FontAwesomeIcons.squareCheck,
@@ -213,21 +217,27 @@ class _TopicPageState extends State<TopicPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text('${topics[index].topicHeadline}',maxLines: 2,style: TextStyle(
-                                fontSize: 20
-                              ),),
-
-                              Container(padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                              Text(
+                                '${topics[index].topicHeadline}',
+                                maxLines: 2,
+                                style: TextStyle(fontSize: 20),
+                              ),
+                              Container(
+                                  padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
-                                          Radius.circular(10.0) //                 <--- border radius here
-                                      ),
-                                      color: Colors.black
-                                  ),child: Text('${topics[index].topicGroup}',style: TextStyle(color: Colors.white),)),
-
-                              Text('${topics[index].topicCaption}',maxLines: 4,),
-
-
+                                          Radius.circular(
+                                              10.0) //                 <--- border radius here
+                                          ),
+                                      color: Colors.black),
+                                  child: Text(
+                                    '${topics[index].topicGroup}',
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                              Text(
+                                '${topics[index].topicCaption}',
+                                maxLines: 4,
+                              ),
                             ],
                           ),
                         ),
@@ -240,12 +250,14 @@ class _TopicPageState extends State<TopicPage> {
                       Icon(FontAwesomeIcons.bookOpenReader),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                        child: Text('${topics[index].topicReadCount}'),
+                        child: Text(
+                            '${NumberFormat.compact().format(topics[index].topicReadCount)}'),
                       ),
                       Icon(FontAwesomeIcons.comment),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                        child: Text('${topics[index].topicCommentCount}'),
+                        child: Text(
+                            '${NumberFormat.compact().format(topics[index].topicCommentCount)}'),
                       ),
                       IconButton(
                           onPressed: () {
@@ -278,7 +290,8 @@ class _TopicPageState extends State<TopicPage> {
                           icon: Icon(FontAwesomeIcons.btc)),
                       Padding(
                         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Text('${topics[index].topicDonateCount}'),
+                        child: Text(
+                            '${NumberFormat.compact().format(topics[index].topicDonateCount)}'),
                       ),
                       IconButton(
                           onPressed: () {

@@ -53,7 +53,7 @@ Future<void> topicReadCount(String? contentId) async {
     "content-type": "application/json",
     "Authorization": "${_tokenJwt}"
   });
-  Map resMap = jsonDecode(response.body);
+  Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
   print('\nResponse status: ${response.statusCode}');
   print('\nResponse message: ${resMap["message"]}');
@@ -242,12 +242,17 @@ class _TopicCardPageState extends State<TopicCardPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Expanded(child: Text('aaaaaaaaaaaaaaaaaaaaa Username : ${widget.topics.userInfoData?.userName}',maxLines: 1,)),
+                      Expanded(
+                          child: Text(
+                        'aaaaaaaaaaaaaaaaaaaaa Username : ${widget.topics.userInfoData?.userName}',
+                        maxLines: 1,
+                      )),
                       Row(children: <Widget>[
                         Text('Expert : ${widget.topics.userInfoData?.expert}'),
                         Padding(
                             padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                            child: widget.topics.userInfoData?.verifyStatus == false
+                            child: widget.topics.userInfoData?.verifyStatus ==
+                                    false
                                 ? Icon(FontAwesomeIcons.square,
                                     color: Colors.black)
                                 : Icon(FontAwesomeIcons.squareCheck,
@@ -325,11 +330,11 @@ class _TopicCardPageState extends State<TopicCardPage> {
                         if (widget.topics.likeStatus == 0) {
                           widget.topics.likeStatus = 1;
                           widget.topics.topicLikeCount =
-                          (widget.topics.topicLikeCount! + 1);
+                              (widget.topics.topicLikeCount! + 1);
                         } else {
                           widget.topics.likeStatus = 0;
                           widget.topics.topicLikeCount =
-                          (widget.topics.topicLikeCount! - 1);
+                              (widget.topics.topicLikeCount! - 1);
                         }
                         LikePushButton(
                             widget.topics.topicId,

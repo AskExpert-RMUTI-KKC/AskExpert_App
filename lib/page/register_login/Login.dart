@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _HandleLogin(var response) async {
     //full json DATA model form LoginCallAPi() funcion
 
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       print('\nResponse status: ${response.statusCode}');
       print('\nResponse message: ${resMap["message"]}');

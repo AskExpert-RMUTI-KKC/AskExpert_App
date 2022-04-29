@@ -34,8 +34,6 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-
-
   final plugin = FacebookLogin(debug: true);
 
   final _formKey = GlobalKey<FormState>();
@@ -56,11 +54,10 @@ class _RegisterPageState extends State<RegisterPage> {
   String? _Gmail;
   String? _passWordG; //ID
 
-  Future<void> _HandleLogin(var response) async{
-
+  Future<void> _HandleLogin(var response) async {
     //full json DATA model form LoginCallAPi() funcion
 
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       print('\nResponse status: ${response.statusCode}');
       print('\nResponse message: ${resMap["message"]}');
@@ -69,9 +66,9 @@ class _RegisterPageState extends State<RegisterPage> {
       //SAVE TOKEN
       String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
-      if(resMap["message"] == "register"){
+      if (resMap["message"] == "register") {
         Get.offAll(RegisterInfoPage());
-      }else{
+      } else {
         Get.offAll(NavigationBarPage());
       }
     } else {
@@ -107,9 +104,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   Future<void> _GsignIn() async {
     _googleSignIn.disconnect();
-    try{
+    try {
       await _googleSignIn.signIn();
-    }catch (e){
+    } catch (e) {
       print('Error signing in $e');
     }
     // _Gmail = _googleSignIn.currentUser?.email;
@@ -213,7 +210,7 @@ class _RegisterPageState extends State<RegisterPage> {
       "Accept": "application/json",
       "content-type": "application/json"
     });
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     if (response.statusCode == 200) {
       print('\nResponse status: ${response.statusCode}');
       print('\nResponse message: ${resMap["message"]}');
@@ -290,7 +287,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(ConfigApp.buttonSecondary))),
+                                        color:
+                                            Color(ConfigApp.buttonSecondary))),
                                 label: Text("Email"),
                                 hintText: "example@rmuti.ac.th"),
                             keyboardType: TextInputType.emailAddress,
@@ -375,9 +373,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Color(ConfigApp.iconEmail),
                                   ),
                                 ),
-                                Text("Google",style: TextStyle(
-                                  fontSize: 16,
-                                ),)
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
                               ]),
                         ),
                         Padding(
@@ -395,16 +396,17 @@ class _RegisterPageState extends State<RegisterPage> {
                                     color: Color(ConfigApp.iconEmail),
                                   ),
                                 ),
-                                Text("FaceBook",style: TextStyle(
-                                  fontSize: 16,
-                                ),)
+                                Text(
+                                  "FaceBook",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
                               ]),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(00.0),
                         ),
-
                         Padding(
                           padding: const EdgeInsets.all(12.0),
                           child: TextButton(
@@ -431,7 +433,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           padding: const EdgeInsets.all(12.0),
                           child: TextButton(
                             style: ElevatedButton.styleFrom(
-
                               minimumSize: const Size(300, 50),
                               primary: Color(ConfigApp.buttonSecondary),
                               elevation: 5,

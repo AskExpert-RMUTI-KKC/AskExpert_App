@@ -37,7 +37,7 @@ void routes(String check) async {
       "content-type": "application/json",
       "Authorization": "${_authen}"
     });
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
@@ -48,14 +48,10 @@ void routes(String check) async {
       print("data SecureStorage : ${getToken}");
 
       Get.offAll(NavigationBarPage());
-    }
-    else
-    {
+    } else {
       Get.offAll(const WelcomePage());
     }
+  } else {
+    Get.offAll(const WelcomePage());
   }
-  else
-    {
-      Get.offAll(const WelcomePage());
-    }
 }

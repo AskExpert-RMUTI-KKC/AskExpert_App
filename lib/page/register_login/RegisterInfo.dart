@@ -49,7 +49,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
       "content-type": "application/json",
       "Authorization": "${_authen}"
     });
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
@@ -108,7 +108,8 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(ConfigApp.buttonSecondary))),
+                                        color:
+                                            Color(ConfigApp.buttonSecondary))),
                               ),
                               keyboardType: TextInputType.emailAddress,
                               controller: _firstName,
@@ -135,7 +136,8 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(ConfigApp.buttonSecondary))),
+                                        color:
+                                            Color(ConfigApp.buttonSecondary))),
                               ),
                               controller: _lastName,
                               validator: (input) {
@@ -161,7 +163,8 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(ConfigApp.buttonSecondary))),
+                                        color:
+                                            Color(ConfigApp.buttonSecondary))),
                               ),
                               controller: _userName,
                               validator: (input) {

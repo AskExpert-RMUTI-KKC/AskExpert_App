@@ -15,7 +15,6 @@ import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:askexpertapp/utils/storageToken.dart';
 
-
 Future<void> LikePushButton(
     String? contentId, int? status, String? topicName) async {
   Map<String, String> params = Map();
@@ -37,7 +36,7 @@ Future<void> LikePushButton(
     "Authorization": "${_tokenJwt}"
   });
 
-  Map resMap = jsonDecode(response.body);
+  Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
   print('\nResponse status: ${response.statusCode}');
   print('\nResponse message: ${resMap["message"]}');
@@ -66,7 +65,6 @@ Future<void> LikePushButton(
   }
 }
 
-
 Future<void> tranferToken(
     String? ContentId, String? donatePoint, String? userIdReceiver) async {
   // print("ContentID : ${ContentID}  ");
@@ -90,7 +88,7 @@ Future<void> tranferToken(
     "content-type": "application/json",
     "Authorization": "${_authen}"
   });
-  Map resMap = jsonDecode(response.body);
+  Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
   print('\nResponse status: ${response.statusCode}');
   print('\nResponse message: ${resMap["message"]}');
@@ -98,15 +96,12 @@ Future<void> tranferToken(
 
   if (response.statusCode == 200 && resMap["message"] == null) {
     Get.back();
-    Get.snackbar(
-      "TokenTransfer Report Status",
-      'Success',
-      icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.black,
-      animationDuration: Duration(seconds: 2)
-    );
+    Get.snackbar("TokenTransfer Report Status", 'Success',
+        icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.black,
+        animationDuration: Duration(seconds: 2));
   } else {
     Get.back();
     Get.snackbar(
@@ -169,7 +164,7 @@ Future<void> donateSheet(
     "Authorization": "${_tokenJwt}"
   });
   if (response.statusCode == 200) {
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     UserDataModel user = UserDataModel.fromJson(resMap["data"]);
     print("resMap DATA  : ${resMap["data"]}");
     print("user token : ${user.token}");

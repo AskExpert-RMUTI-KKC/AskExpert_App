@@ -29,7 +29,7 @@ class _CommentPageState extends State<CommentPage> {
 
     var url = Uri.parse('${ConfigApp.apiTopicTopicId}');
     var response = await http.post(url, body: topicId);
-    Map resMap = jsonDecode(response.body);
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
@@ -73,7 +73,7 @@ class _CommentPageState extends State<CommentPage> {
             children: <Widget>[
               Card(
                   //เอามาวางมันเลยก็ได้นะ 555
-              ),
+                  ),
               Container(
                 child: ListView.builder(
                   scrollDirection: Axis.vertical,
