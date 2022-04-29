@@ -25,7 +25,6 @@ class _WelcomePageState extends State<WelcomePage> {
 
   @override
   void initState() {
-    routes("welcomePage");
     super.initState();
   }
 
@@ -51,7 +50,7 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Expanded(flex: 8, child: Placeholder()),
+              Expanded(flex: 6, child: Placeholder()),
 
               Expanded(
                   flex: 2,

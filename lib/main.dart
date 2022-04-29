@@ -3,6 +3,7 @@ import 'package:askexpertapp/page/NavigationBar.dart';
 import 'package:askexpertapp/page/register_login/Login.dart';
 import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
 import 'package:askexpertapp/page/WelcomePage.dart';
+import 'package:askexpertapp/utils/Routes.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 
@@ -23,8 +24,29 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: WelcomePage(),
+    home: MainPage(),
 
     //home: WelcomePage(),
   ));
+}
+
+
+class MainPage extends StatefulWidget {
+  const MainPage({Key? key}) : super(key: key);
+
+  @override
+  State<MainPage> createState() => _MainPageState();
+}
+
+class _MainPageState extends State<MainPage> {
+  @override
+  void initState() {
+    routes("routes");
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold();
+  }
 }

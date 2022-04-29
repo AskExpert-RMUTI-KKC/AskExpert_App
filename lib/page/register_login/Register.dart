@@ -402,7 +402,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         ),
 
                         Padding(
-                          padding: const EdgeInsets.all(40.0),
+                          padding: const EdgeInsets.all(00.0),
                         ),
 
                         Padding(

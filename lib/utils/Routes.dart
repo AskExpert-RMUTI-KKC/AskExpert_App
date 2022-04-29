@@ -47,15 +47,15 @@ void routes(String check) async {
       String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
 
-      Get.to(NavigationBarPage());
+      Get.offAll(NavigationBarPage());
     }
     else
     {
-      Get.to(const WelcomePage());
+      Get.offAll(const WelcomePage());
     }
   }
   else
     {
-      Get.to(const WelcomePage());
+      Get.offAll(const WelcomePage());
     }
 }

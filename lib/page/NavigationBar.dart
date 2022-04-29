@@ -29,7 +29,6 @@ class _NavigationBarState extends State<NavigationBarPage> {
 
   @override
   void initState() {
-    routes("check");
     super.initState();
   }
   @override
