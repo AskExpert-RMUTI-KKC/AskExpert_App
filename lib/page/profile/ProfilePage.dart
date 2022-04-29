@@ -5,7 +5,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-
+import 'package:jwt_decoder/jwt_decoder.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -15,14 +15,18 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Future<void> logOut() async{
+    String yourToken = "${await TokenStore.getToken()}";
+    Map<String, dynamic> decodedToken = JwtDecoder.decode(yourToken);
+    print("decodedToken : ${decodedToken["principal"]}");
+
     await TokenStore.setToken("");
     String? getToken = await TokenStore.getToken();
     print("data SecureStorage : ${getToken}");
   }
 
   @override
-  void initState() {
-    print("${TokenStore.getToken()}");
+  void initState(){
+
   }
 
   @override
