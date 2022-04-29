@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
+import 'package:askexpertapp/page/profile/ProfilePage.dart';
+import 'package:askexpertapp/page/profile/ProfileTopicPage.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:askexpertapp/page/topic/TopicCard.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -91,8 +93,6 @@ class _TopicPageState extends State<TopicPage> {
   @override
   void initState() {
     topicCall();
-    String i = NumberFormat.compact().format(1000000000000);
-    print("${i}");
     super.initState();
   }
 
@@ -159,8 +159,15 @@ class _TopicPageState extends State<TopicPage> {
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      buildImageProfile(
-                          '${topics[index].userInfoData?.profilePic}'),
+                      InkWell(
+                        child: buildImageProfile(
+                            '${topics[index].userInfoData?.profilePic}'),
+                        onTap: () {
+                          print(
+                              "Test ${topics[index].userInfoData?.userInfoId}");
+                              Get.to(ProfileTopicPage(), arguments: topics[index].userInfoData?.userInfoId);
+                        },
+                      ),
                       // Container(
                       //     height: 50,
                       //     width: 50,
@@ -261,7 +268,6 @@ class _TopicPageState extends State<TopicPage> {
                       ),
                       IconButton(
                           onPressed: () {
-                            //TODO: DONATE PAGE
                             donateSheet(
                                 topics[index].topicId,
                                 topics[index].topicHeadline,
@@ -324,12 +330,6 @@ class _TopicPageState extends State<TopicPage> {
                   )
                 ],
               ),
-              // TODO: ให้มันแสดงรูปและจัดระเบียบการแสดงผล พร้อมส่งข้อมูลไปหน้าทัดไป
-              // leading: SizedBox(
-              //   width: 50,
-              //   height: 50,
-              //   child: Image.network(topics[index].ImageUrl),
-              // ),
             ),
           ),
         ),

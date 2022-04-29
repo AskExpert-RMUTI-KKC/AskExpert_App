@@ -7,7 +7,9 @@ class UserDataModel {
   String? profilePic;
   bool? verifyStatus;
   String? userCaption;
-  String? expert;
+  String? expertGroupId;
+  double? tokenCount;
+  int? likeCount;
   String? createdDateForOrder;
   int? createdDate;
 
@@ -20,7 +22,9 @@ class UserDataModel {
         this.profilePic,
         this.verifyStatus,
         this.userCaption,
-        this.expert,
+        this.expertGroupId,
+        this.tokenCount,
+        this.likeCount,
         this.createdDateForOrder,
         this.createdDate});
 
@@ -33,7 +37,9 @@ class UserDataModel {
     profilePic = json['profilePic'];
     verifyStatus = json['verifyStatus'];
     userCaption = json['userCaption'];
-    expert = json['expert'];
+    expertGroupId = json['expertGroupId'];
+    tokenCount = json['tokenCount'];
+    likeCount = json['likeCount'];
     createdDateForOrder = json['createdDateForOrder'];
     createdDate = json['createdDate'];
   }
@@ -48,7 +54,9 @@ class UserDataModel {
     data['profilePic'] = this.profilePic;
     data['verifyStatus'] = this.verifyStatus;
     data['userCaption'] = this.userCaption;
-    data['expert'] = this.expert;
+    data['expertGroupId'] = this.expertGroupId;
+    data['tokenCount'] = this.tokenCount;
+    data['likeCount'] = this.likeCount;
     data['createdDateForOrder'] = this.createdDateForOrder;
     data['createdDate'] = this.createdDate;
     return data;

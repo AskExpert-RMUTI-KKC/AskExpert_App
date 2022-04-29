@@ -137,7 +137,6 @@ Widget topicCard(context,topicDataModel topics) => Card(
             ),
             IconButton(
                 onPressed: () {
-                  //TODO: DONATE PAGE
                   donateSheet(
                       topics.topicId,
                       topics.topicHeadline,
@@ -188,12 +187,6 @@ Widget topicCard(context,topicDataModel topics) => Card(
         )
       ],
     ),
-    // TODO: ให้มันแสดงรูปและจัดระเบียบการแสดงผล พร้อมส่งข้อมูลไปหน้าทัดไป
-    // leading: SizedBox(
-    //   width: 50,
-    //   height: 50,
-    //   child: Image.network(topics.ImageUrl),
-    // ),
   ),
 );
 */
@@ -209,7 +202,6 @@ class TopicCardPage extends StatefulWidget {
 class _TopicCardPageState extends State<TopicCardPage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -293,7 +285,6 @@ class _TopicCardPageState extends State<TopicCardPage> {
                 ),
                 IconButton(
                     onPressed: () {
-                      //TODO: DONATE PAGE
                       donateSheet(
                           widget.topics.topicId,
                           widget.topics.topicHeadline,
@@ -354,12 +345,6 @@ class _TopicCardPageState extends State<TopicCardPage> {
             )
           ],
         ),
-        // TODO: ให้มันแสดงรูปและจัดระเบียบการแสดงผล พร้อมส่งข้อมูลไปหน้าทัดไป
-        // leading: SizedBox(
-        //   width: 50,
-        //   height: 50,
-        //   child: Image.network(widget.topics.ImageUrl),
-        // ),
       ),
     );
   }

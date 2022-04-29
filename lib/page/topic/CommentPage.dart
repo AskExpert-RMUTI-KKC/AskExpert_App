@@ -84,12 +84,6 @@ class _CommentPageState extends State<CommentPage> {
                     return Card(
                       child: ListTile(
                         title: Text('${comments[index].commentCaption}'),
-                        // TODO: ให้มันแสดงรูปและจัดระเบียบการแสดงผล พร้อมส่งข้อมูลไปหน้าทัดไป
-                        // leading: SizedBox(
-                        //   width: 50,
-                        //   height: 50,
-                        //   child: Image.network(topics[index].ImageUrl),
-                        // ),
                         onTap: () {
                           //Get.to(commentPage(),arguments: comments[index]);
                           //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
