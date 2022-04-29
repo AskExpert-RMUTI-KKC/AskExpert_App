@@ -51,11 +51,10 @@ class _WelcomePageState extends State<WelcomePage> {
           child: Column(
             children: <Widget>[
               Expanded(flex: 6, child: Placeholder()),
-
               Expanded(
                   flex: 2,
                   child: Column(
-                    children: [
+                    children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: ElevatedButton(

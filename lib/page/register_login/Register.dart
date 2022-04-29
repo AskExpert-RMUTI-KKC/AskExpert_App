@@ -269,7 +269,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     key: _formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
                           child: TextFormField(

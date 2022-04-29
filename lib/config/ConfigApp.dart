@@ -12,11 +12,14 @@ class ConfigApp {
   static const int iconEmail = 0xFF0F1113;
   static const int cursorColor = 0xFF0F1113;
 
-
   //CACHE
-  static final profileCache = CacheManager(
-      Config('CustomProfileCacheManager', stalePeriod: const Duration(days: 7,),maxNrOfCacheObjects: 1000,)
-  );
+  static final profileCache = CacheManager(Config(
+    'CustomProfileCacheManager',
+    stalePeriod: const Duration(
+      days: 7,
+    ),
+    maxNrOfCacheObjects: 1000,
+  ));
 
   static const String apiUrl = "http://192.168.1.2:8080";
   static const String uploadsImgPath = "/uploads";
@@ -33,10 +36,10 @@ class ConfigApp {
   static const String pageVerify = "/verify";
 
   //ImageCall
-  static const String imgProfile = apiUrl +uploadsImgPath+ "/imgProfile/";
-  static const String imgTopic = apiUrl +uploadsImgPath+ "/imgTopic/";
-  static const String imgComment = apiUrl +uploadsImgPath+ "/imgComment/";
-  static const String imgVerify = apiUrl +uploadsImgPath+ "/imgVerify/";
+  static const String imgProfile = apiUrl + uploadsImgPath + "/imgProfile/";
+  static const String imgTopic = apiUrl + uploadsImgPath + "/imgTopic/";
+  static const String imgComment = apiUrl + uploadsImgPath + "/imgComment/";
+  static const String imgVerify = apiUrl + uploadsImgPath + "/imgVerify/";
 
   //user
   static const String apiRegisterInfo = apiUrl + pageUser + "/userinfoWrite";
@@ -48,6 +51,7 @@ class ConfigApp {
   static const String apiUserFindByText = apiUrl + pageUser + "/findByText";
   static const String apiUserFindById = apiUrl + pageUser + "/findById";
   static const String apiUserRefreshJWT = apiUrl + pageUser + "/refreshJWT";
+
   //Topic
   static const String apiTopicFindAll = apiUrl + pageTopic + "/findAll";
   static const String apiTopicAdd = apiUrl + pageTopic + "/add";
@@ -111,7 +115,8 @@ class ConfigApp {
       apiUrl + pageTopicGroupList + "/update";
 
   //transaction
-  static const String apiTransactionTransfer = apiUrl + pageTransaction + "/transfer";
+  static const String apiTransactionTransfer =
+      apiUrl + pageTransaction + "/transfer";
   static const String apiTransactionWithdraw =
       apiUrl + pageTransaction + "/withdraw";
   static const String apiTransactionDeposit =

@@ -2,21 +2,17 @@ import 'dart:convert';
 
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/TopicDataModel.dart';
-import 'package:askexpertapp/dataModel/UserDataModel.dart';
-import 'package:askexpertapp/page/profile/ProfilePage.dart';
 import 'package:askexpertapp/page/profile/ProfileTopicPage.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:askexpertapp/page/topic/TopicCard.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
-import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:intl/intl.dart';
+
 import 'TopicLogic.dart';
 
 class TopicPage extends StatefulWidget {
@@ -165,7 +161,9 @@ class _TopicPageState extends State<TopicPage> {
                         onTap: () {
                           print(
                               "Test ${topics[index].userInfoData?.userInfoId}");
-                              Get.to(ProfileTopicPage(), arguments: topics[index].userInfoData?.userInfoId);
+                          Get.to(ProfileTopicPage(),
+                              arguments:
+                                  topics[index].userInfoData?.userInfoId);
                         },
                       ),
                       // Container(
@@ -194,21 +192,25 @@ class _TopicPageState extends State<TopicPage> {
                                             10.0) //                 <--- border radius here
                                         ),
                                     color: Colors.black),
-                                child: Text(
-                                  '${topics[index].userInfoData?.expert}',
-                                  style: TextStyle(color: Colors.white),
+                                child: Row(
+                                  children: [
+                                    Text(
+                                      '${topics[index].userInfoData?.expert}',
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    if (topics[index]
+                                            .userInfoData
+                                            ?.verifyStatus ==
+                                        true)
+                                      Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                          child: Icon(
+                                              FontAwesomeIcons.circleCheck,
+                                              color: Colors.lightBlueAccent)),
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                  padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: topics[index]
-                                              .userInfoData
-                                              ?.verifyStatus ==
-                                          false
-                                      ? Icon(FontAwesomeIcons.square,
-                                          color: Colors.white)
-                                      : Icon(FontAwesomeIcons.squareCheck,
-                                          color: Colors.green)),
                             ]),
                           ],
                         ),
@@ -277,7 +279,7 @@ class _TopicPageState extends State<TopicPage> {
                             /*Get.bottomSheet(
                               Container(
                                 child: Column(
-                                  children: [
+                                  children: <Widget>[
                                     ListTile(title: Text('TEST'),),
                                     Text("Test")
                                   ],

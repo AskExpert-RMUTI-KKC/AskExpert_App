@@ -17,16 +17,12 @@ import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
-Widget buildImageProfilePage(String index) => ClipRRect(
+Widget buildImageProfilePage(String index) => CircleAvatar(
   // backgroundImage: CachedNetworkImageProvider(
   //   '${Config.imgProfile}$index',
   // ),
-  borderRadius: BorderRadius.circular(100),
   child: CachedNetworkImage(
     imageUrl: '${ConfigApp.imgProfile}$index',
-    width: 120,
-    height: 120,
-    //fit: BoxFit.cover,
     placeholder: (context, url) => Center(
       child: CircularProgressIndicator(),
     ),

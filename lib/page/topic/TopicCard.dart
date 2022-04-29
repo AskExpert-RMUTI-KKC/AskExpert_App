@@ -146,7 +146,7 @@ Widget topicCard(context,topicDataModel topics) => Card(
                   /*Get.bottomSheet(
                               Container(
                                 child: Column(
-                                  children: [
+                                  children: <Widget>[
                                     ListTile(title: Text('TEST'),),
                                     Text("Test")
                                   ],
@@ -294,7 +294,7 @@ class _TopicCardPageState extends State<TopicCardPage> {
                       /*Get.bottomSheet(
                               Container(
                                 child: Column(
-                                  children: [
+                                  children: <Widget>[
                                     ListTile(title: Text('TEST'),),
                                     Text("Test")
                                   ],

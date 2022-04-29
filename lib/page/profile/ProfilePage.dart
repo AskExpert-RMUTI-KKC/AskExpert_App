@@ -1,26 +1,15 @@
-import 'package:askexpertapp/page/register_login/Login.dart';
-import 'package:askexpertapp/page/WelcomePage.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:askexpertapp/utils/storageToken.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
-import 'package:jwt_decoder/jwt_decoder.dart';
 import 'dart:convert';
+
 import 'package:askexpertapp/config/ConfigApp.dart';
-import 'package:askexpertapp/dataModel/TopicDataModel.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
-import 'package:askexpertapp/page/topic/CommentPage.dart';
-import 'package:askexpertapp/page/topic/TopicCard.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:askexpertapp/page/profile/ProfileSettingMenu.dart';
+import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
-import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
-import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:intl/intl.dart';
 
 import 'ProfileLogic.dart';
@@ -63,44 +52,146 @@ class _ProfilePageState extends State<ProfilePage> {
     // print('\nResponse body data: ${resMap["data"]}');
   }
 
+  Future<String> awaitUserCall() async {
+    await UserCall();
+    return "1";
+  }
+
   @override
   void initState() {
-    UserCall();
     print('pathProfilePic${user.profilePic}');
     print("ProfilePageLoad");
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Test"),
-      ),
-      body: ListView(
-        children: [
-          if (user.profilePic != null)
-            buildImageProfilePage('${user.profilePic}')
-          else
-            Placeholder(),
-          // TODO MAKE FUNCTION FOR THIS CODE
-          // TextButton(onPressed: (){
-          //   logOut();
-          //   Get.offAll(WelcomePage());
-          // }, child: Text("LOGOUT")),
-          //
-          // TextButton(onPressed: (){
-          //   DefaultCacheManager().emptyCache();
-          //   print("clearCache");
-          //   setState(() {
-          //
-          //   });
-          // }, child: Text("clearCache")),
-          Padding(
-            padding: EdgeInsets.fromLTRB(
-                0, 0, 0, 0), //child: buildImageProfilePage(),
-          )
-        ],
-      ),
+    return FutureBuilder(
+      future: awaitUserCall(),
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          return Scaffold(
+            appBar: AppBar(
+              title: const Text(
+                'Profile',
+                style: TextStyle(
+                  color: Color(ConfigApp.textColor),
+                  fontSize: 32,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Get.to(ProfileSettingMenu());
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.gear,
+                      color: Colors.black,
+                    ))
+              ],
+              elevation: 0,
+              centerTitle: false,
+              backgroundColor: const Color(ConfigApp.appbarBg),
+            ),
+            backgroundColor: const Color(ConfigApp.appbarBg),
+            body: ListView(
+              children: <Widget>[
+                if (user.profilePic != null)
+                  Container(
+                    child: buildImageProfilePage('${user.profilePic}'),
+                    height: 120,
+                    width: 120,
+                  )
+                else
+                  Placeholder(),
+                Column(
+                  children: <Widget>[
+                    Text('@${user.userName}'),
+                    Text('${user.firstName} ${user.lastName}'),
+                    Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                        10.0) //                 <--- border radius here
+                                    ),
+                                color: Colors.black),
+                            child: Row(
+                              children: [
+                                Text(
+                                  '${user.expertGroupId}',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                                if (user.verifyStatus ==
+                                    true)
+                                  Padding(
+                                      padding:
+                                      EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                      child: Icon(
+                                          FontAwesomeIcons.circleCheck,
+                                          color: Colors.lightBlueAccent)),
+                              ],
+                            ),
+                          ),
+                        ]),
+                  ],
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      FontAwesomeIcons.heartCircleCheck,
+                      color: Colors.red,
+                    ),
+                    Text('${NumberFormat.compact().format(user.likeCount)}'),
+                    Icon(
+                      FontAwesomeIcons.btc,
+                      color: Colors.black,
+                    ),
+                    Text('${NumberFormat.compact().format(user.likeCount)}'),
+                  ],
+                ),
+
+                Container(
+                  child: Text("Bio"),
+                ),
+                Container(
+                  child: Text("${user.userCaption}"),
+                ),
+                // TODO MAKE FUNCTION FOR THIS CODE
+
+                TextButton(
+                    onPressed: () {
+                      DefaultCacheManager().emptyCache();
+                      print("clearCache");
+                      setState(() {});
+                    },
+                    child: Text("clearCache")),
+                Padding(
+                  padding: EdgeInsets.fromLTRB(
+                      0, 0, 0, 0), //child: buildImageProfilePage(),
+                )
+              ],
+            ),
+          );
+        } else {
+          return Material(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }

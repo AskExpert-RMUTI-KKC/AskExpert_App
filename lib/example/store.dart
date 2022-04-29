@@ -23,7 +23,7 @@ enum _ItemActions { delete, edit, containsKey }
 class _ItemsWidgetState extends State<ItemsWidget> {
   final _storage = const FlutterSecureStorage();
   final _accountNameController =
-  TextEditingController(text: 'flutter_secure_storage_service');
+      TextEditingController(text: 'flutter_secure_storage_service');
 
   List<_SecItem> _items = [];
 
@@ -64,101 +64,101 @@ class _ItemsWidgetState extends State<ItemsWidget> {
   }
 
   IOSOptions _getIOSOptions() => IOSOptions(
-    accountName: _getAccountName(),
-  );
+        accountName: _getAccountName(),
+      );
 
   AndroidOptions _getAndroidOptions() => const AndroidOptions(
-    encryptedSharedPreferences: true,
-  );
+        encryptedSharedPreferences: true,
+      );
 
   String? _getAccountName() =>
       _accountNameController.text.isEmpty ? null : _accountNameController.text;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: const Text('Plugin example app'),
-      actions: <Widget>[
-        IconButton(
-            key: const Key('add_random'),
-            onPressed: _addNewItem,
-            icon: const Icon(Icons.add)),
-        PopupMenuButton<_Actions>(
-            key: const Key('popup_menu'),
-            onSelected: (action) {
-              switch (action) {
-                case _Actions.deleteAll:
-                  _deleteAll();
-                  break;
-              }
-            },
-            itemBuilder: (BuildContext context) =>
-            <PopupMenuEntry<_Actions>>[
-              const PopupMenuItem(
-                key: Key('delete_all'),
-                value: _Actions.deleteAll,
-                child: Text('Delete all'),
-              ),
-            ])
-      ],
-    ),
-    body: Column(
-      children: [
-        if (!kIsWeb && Platform.isIOS)
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            child: TextFormField(
-              controller: _accountNameController,
-              decoration:
-              const InputDecoration(labelText: 'kSecAttrService'),
-            ),
-          ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: _items.length,
-            itemBuilder: (BuildContext context, int index) => ListTile(
-              trailing: PopupMenuButton(
-                  key: Key('popup_row_$index'),
-                  onSelected: (_ItemActions action) =>
-                      _performAction(action, _items[index], context),
-                  itemBuilder: (BuildContext context) =>
-                  <PopupMenuEntry<_ItemActions>>[
-                    PopupMenuItem(
-                      value: _ItemActions.delete,
-                      child: Text(
-                        'Delete',
-                        key: Key('delete_row_$index'),
+        appBar: AppBar(
+          title: const Text('Plugin example app'),
+          actions: <Widget>[
+            IconButton(
+                key: const Key('add_random'),
+                onPressed: _addNewItem,
+                icon: const Icon(Icons.add)),
+            PopupMenuButton<_Actions>(
+                key: const Key('popup_menu'),
+                onSelected: (action) {
+                  switch (action) {
+                    case _Actions.deleteAll:
+                      _deleteAll();
+                      break;
+                  }
+                },
+                itemBuilder: (BuildContext context) =>
+                    <PopupMenuEntry<_Actions>>[
+                      const PopupMenuItem(
+                        key: Key('delete_all'),
+                        value: _Actions.deleteAll,
+                        child: Text('Delete all'),
                       ),
-                    ),
-                    PopupMenuItem(
-                      value: _ItemActions.edit,
-                      child: Text(
-                        'Edit',
-                        key: Key('edit_row_$index'),
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: _ItemActions.containsKey,
-                      child: Text(
-                        'Contains Key',
-                        key: Key('contains_row_$index'),
-                      ),
-                    ),
-                  ]),
-              title: Text(
-                _items[index].value,
-                key: Key('title_row_$index'),
-              ),
-              subtitle: Text(
-                _items[index].key,
-                key: Key('subtitle_row_$index'),
-              ),
-            ),
-          ),
+                    ])
+          ],
         ),
-      ],
-    ),
-  );
+        body: Column(
+          children: <Widget>[
+            if (!kIsWeb && Platform.isIOS)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: TextFormField(
+                  controller: _accountNameController,
+                  decoration:
+                      const InputDecoration(labelText: 'kSecAttrService'),
+                ),
+              ),
+            Expanded(
+              child: ListView.builder(
+                itemCount: _items.length,
+                itemBuilder: (BuildContext context, int index) => ListTile(
+                  trailing: PopupMenuButton(
+                      key: Key('popup_row_$index'),
+                      onSelected: (_ItemActions action) =>
+                          _performAction(action, _items[index], context),
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<_ItemActions>>[
+                            PopupMenuItem(
+                              value: _ItemActions.delete,
+                              child: Text(
+                                'Delete',
+                                key: Key('delete_row_$index'),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: _ItemActions.edit,
+                              child: Text(
+                                'Edit',
+                                key: Key('edit_row_$index'),
+                              ),
+                            ),
+                            PopupMenuItem(
+                              value: _ItemActions.containsKey,
+                              child: Text(
+                                'Contains Key',
+                                key: Key('contains_row_$index'),
+                              ),
+                            ),
+                          ]),
+                  title: Text(
+                    _items[index].value,
+                    key: Key('title_row_$index'),
+                  ),
+                  subtitle: Text(
+                    _items[index].key,
+                    key: Key('subtitle_row_$index'),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
 
   Future<void> _performAction(
       _ItemActions action, _SecItem item, BuildContext context) async {

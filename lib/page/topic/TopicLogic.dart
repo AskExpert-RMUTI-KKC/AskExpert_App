@@ -186,7 +186,7 @@ Future<void> donateSheet(
     Get.bottomSheet(
       Container(
         child: Column(
-          children: [
+          children: <Widget>[
             Padding(
               padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
               child: Text(
@@ -201,9 +201,9 @@ Future<void> donateSheet(
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Column(
-                      children: [
+                      children: <Widget>[
                         buildImageProfileDonateSheet('${user.profilePic}'),
                         Text("${user.userName}"),
                       ],
@@ -213,7 +213,7 @@ Future<void> donateSheet(
                       child: Icon(FontAwesomeIcons.arrowRightToBracket),
                     ),
                     Column(
-                      children: [
+                      children: <Widget>[
                         buildImageProfileDonateSheet('$imgProfileReceiver'),
                         Text("$userNameReceiver")
                       ],

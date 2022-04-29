@@ -91,7 +91,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       Column(
                         children: <Widget>[
                           Padding(

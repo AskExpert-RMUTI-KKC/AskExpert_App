@@ -34,10 +34,12 @@ class _NavigationBarState extends State<NavigationBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: pages,
-      ),
+      body: pages[currentIndex]
+      // IndexedStack(
+      //   index: currentIndex,
+      //   children: pages,
+      // )
+      ,
       bottomNavigationBar: BottomNavigationBar(
         
         backgroundColor: const Color(ConfigApp.appbarBg),

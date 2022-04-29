@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-
 
 class FacebookSingIn extends StatefulWidget {
   final plugin = FacebookLogin(debug: true);
@@ -46,13 +44,13 @@ class _FacebookSingInState extends State<FacebookSingIn> {
                 ),
               isLogin
                   ? OutlinedButton(
-                child: const Text('Log Out'),
-                onPressed: _onPressedLogOutButton,
-              )
+                      child: const Text('Log Out'),
+                      onPressed: _onPressedLogOutButton,
+                    )
                   : OutlinedButton(
-                child: const Text('Log In'),
-                onPressed: _onPressedLogInButton,
-              ),
+                      child: const Text('Log In'),
+                      onPressed: _onPressedLogInButton,
+                    ),
               if (!isLogin && Platform.isAndroid)
                 OutlinedButton(
                   child: const Text('Express Log In'),
@@ -70,7 +68,7 @@ class _FacebookSingInState extends State<FacebookSingIn> {
     final avatarUrl = _imageUrl;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         if (avatarUrl != null)
           Center(
             child: Image.network(avatarUrl),

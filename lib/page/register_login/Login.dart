@@ -249,7 +249,7 @@ class _LoginPageState extends State<LoginPage> {
                   key: _formKey,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: <Widget>[
                       // TextFormField(
                       //   decoration: new InputDecoration(label: Text("UserName")),
                       // ),
