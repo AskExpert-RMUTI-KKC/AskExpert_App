@@ -170,7 +170,7 @@ class _TokenPageState extends State<TokenPage> {
                                           MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(FontAwesomeIcons.deskpro),
-                                        Text("Test"),
+                                        Text("Withdraw"),
                                       ],
                                     ),
                                   ),
@@ -202,7 +202,7 @@ class _TokenPageState extends State<TokenPage> {
                                           MainAxisAlignment.center,
                                       children: <Widget>[
                                         Icon(FontAwesomeIcons.deskpro),
-                                        Text("Test"),
+                                        Text("Deposit"),
                                       ],
                                     ),
                                   ),
@@ -222,7 +222,8 @@ class _TokenPageState extends State<TokenPage> {
                                         arguments: transactionList[index].topicId);
                                     //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
                                   },
-                                  title: Column(
+                                  textColor: Colors.black,
+                                  subtitle: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Text("TranID : ${transactionList[index].tranId}",maxLines: 1,),
