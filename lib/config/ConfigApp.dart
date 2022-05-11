@@ -21,7 +21,7 @@ class ConfigApp {
     maxNrOfCacheObjects: 1000,
   ));
 
-  static const String apiUrl = "http://192.168.1.2:8080";
+  static const String apiUrl = "http://192.168.191.134:8080";
   static const String uploadsImgPath = "/uploads";
 
   static const String pageUser = "/user";
@@ -57,7 +57,7 @@ class ConfigApp {
   static const String apiTopicAdd = apiUrl + pageTopic + "/add";
   static const String apiTopicRemove = apiUrl + pageTopic + "/remove";
   static const String apiTopicTopicId = apiUrl + pageTopic + "/findMyTopic";
-  static const String apiTopicRead = apiUrl + pageTopic + "/read";
+  static const String apiTopicFindById = apiUrl + pageTopic + "/findById";
   static const String apiTopicFindByText = apiUrl + pageTopic + "/findByText";
 
   //Comment

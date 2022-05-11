@@ -41,25 +41,6 @@ Widget buildImageProfile(String index) => ClipRRect(
       ),
     );
 
-Future<void> topicReadCount(String? contentId) async {
-  String? _tokenJwt = await TokenStore.getToken();
-  _tokenJwt = "Bearer " + _tokenJwt!;
-  print("_tokenJwt : ${_tokenJwt}");
-
-  var url = Uri.parse('${ConfigApp.apiTopicRead}');
-  print('\n URL :${url.toString()}');
-  var response = await http.post(url, body: contentId, headers: {
-    "Accept": "application/json",
-    "content-type": "application/json",
-    "Authorization": "${_tokenJwt}"
-  });
-  Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
-
-  print('\nResponse status: ${response.statusCode}');
-  print('\nResponse message: ${resMap["message"]}');
-  print('\nResponse body data: ${resMap["data"]}');
-}
-
 /*
 Widget topicCard(context,topicDataModel topics) => Card(
   child: ListTile(
@@ -210,7 +191,6 @@ class _TopicCardPageState extends State<TopicCardPage> {
     return Card(
       child: ListTile(
         onTap: () {
-          topicReadCount(widget.topics.topicId);
           Get.to(CommentPage(), arguments: widget.topics);
           //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>widget.topics(fruitDataModel: widget.topics,)));
         },

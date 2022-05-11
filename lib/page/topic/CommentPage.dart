@@ -17,7 +17,7 @@ class CommentPage extends StatefulWidget {
 }
 
 class _CommentPageState extends State<CommentPage> {
-  TopicDataModel topic = new TopicDataModel();
+  late String topicId;
   List<CommentDataModel> comments = List.generate(
     0,
     (index) => CommentDataModel(),
@@ -49,7 +49,7 @@ class _CommentPageState extends State<CommentPage> {
   Future<void> Refresh() async {
     setState(() {
       comments = [];
-      commentCall(topic.topicId);
+      commentCall(topicId);
     });
 
     //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
@@ -57,15 +57,15 @@ class _CommentPageState extends State<CommentPage> {
 
   @override
   void initState() {
-    topic = Get.arguments;
-    commentCall(topic.topicId);
+    topicId = Get.arguments;
+    commentCall(topicId);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //Text('${topic.topicCaption}\n ${topic.topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')
+      //Text('${topic.topicCaption}\n ${topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')
       body: RefreshIndicator(
         onRefresh: Refresh,
         child: Container(

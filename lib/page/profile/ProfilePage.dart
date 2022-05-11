@@ -24,6 +24,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   late UserDataModel user = new UserDataModel();
 
+  late Future getUser;
   Future<void> UserCall() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
@@ -61,12 +62,13 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     print('pathProfilePic${user.profilePic}');
     print("ProfilePageLoad");
+    getUser = awaitUserCall();
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: awaitUserCall(),
+      future: getUser,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
           return Scaffold(
