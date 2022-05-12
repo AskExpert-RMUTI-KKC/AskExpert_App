@@ -3,6 +3,7 @@ import 'package:askexpertapp/page/NavigationBar.dart';
 import 'package:askexpertapp/page/register_login/Login.dart';
 import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
 import 'package:askexpertapp/page/WelcomePage.dart';
+import 'package:askexpertapp/page/topic/TopicPage.dart';
 import 'package:askexpertapp/utils/Routes.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
@@ -24,7 +25,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: RegisterInfoPage(),
+    home: WelcomePage(),
 
     //home: WelcomePage(),
   ));

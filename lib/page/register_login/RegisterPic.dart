@@ -15,7 +15,7 @@ class _RegisterImgPageState extends State<RegisterImgPage> {
   @override
   void initState() {
 
-    Get.off(NavigationBarPage());
+    Get.offAll(NavigationBarPage());
     super.initState();
   }
   @override

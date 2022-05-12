@@ -239,7 +239,7 @@ class _TopicPageState extends State<TopicPage> {
                                           ),
                                       color: Colors.black),
                                   child: Text(
-                                    '${topics[index].topicGroup}',
+                                    '${topics[index].topicGroupName}',
                                     style: TextStyle(color: Colors.white),
                                   )),
                               Text(

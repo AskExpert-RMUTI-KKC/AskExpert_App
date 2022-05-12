@@ -8,7 +8,7 @@ class TopicDataModel {
   int? topicCommentCount;
   int? topicReadCount;
   int? topicDonateCount;
-  String? topicGroup;
+  String? topicGroupName;
   int? topicReportStatus;
   List<TopicImg>? topicImg;
   UserInfoData? userInfoData;
@@ -23,7 +23,7 @@ class TopicDataModel {
         this.topicCommentCount,
         this.topicReadCount,
         this.topicDonateCount,
-        this.topicGroup,
+        this.topicGroupName,
         this.topicReportStatus,
         this.topicImg,
         this.userInfoData});
@@ -38,7 +38,7 @@ class TopicDataModel {
     topicCommentCount = json['topicCommentCount'];
     topicReadCount = json['topicReadCount'];
     topicDonateCount = json['topicDonateCount'];
-    topicGroup = json['topicGroup'];
+    topicGroupName = json['topicGroupName'];
     topicReportStatus = json['topicReportStatus'];
     if (json['topicImg'] != null) {
       topicImg = <TopicImg>[];
@@ -62,7 +62,7 @@ class TopicDataModel {
     data['topicCommentCount'] = this.topicCommentCount;
     data['topicReadCount'] = this.topicReadCount;
     data['topicDonateCount'] = this.topicDonateCount;
-    data['topicGroup'] = this.topicGroup;
+    data['topicGroupName'] = this.topicGroupName;
     data['topicReportStatus'] = this.topicReportStatus;
     if (this.topicImg != null) {
       data['topicImg'] = this.topicImg!.map((v) => v.toJson()).toList();

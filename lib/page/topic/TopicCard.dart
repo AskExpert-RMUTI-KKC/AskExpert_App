@@ -243,7 +243,7 @@ class _TopicCardPageState extends State<TopicCardPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text('Headline : ${widget.topics.topicHeadline}'),
-                      Text('Group : ${widget.topics.topicGroup}'),
+                      Text('Group : ${widget.topics.topicGroupName}'),
                       Text('${widget.topics.topicCaption}'),
                     ],
                   ),
