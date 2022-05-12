@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:askexpertapp/config/ConfigApp.dart';
+import 'package:askexpertapp/dataModel/ExpertDataModel.dart';
 import 'package:askexpertapp/page/register_login/RegisterPic.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -7,6 +8,7 @@ import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
@@ -25,11 +27,10 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
   final _firstName = TextEditingController();
   final _lastName = TextEditingController();
   final _userName = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  final _userCaption = TextEditingController();
+  List<ExpertDataModel> expertList = [];
+  String? expertSelected;
+  late Future getExpertList;
 
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
@@ -37,7 +38,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     var body = jsonEncode({
       'firstName': _firstName.text,
       'lastName': _lastName.text,
-      'userName': _userName.text
+      'userName': _userName.text,
+      'userCaption': _userCaption.text,
+      'expertGroupId': expertSelected,
     });
     String? _authen = await TokenStore.getToken();
     _authen = "Bearer " + _authen!;
@@ -54,9 +57,58 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200 && resMap["message"] == null) {
       Get.to(RegisterImgPage());
     }
+    else{
+      Get.snackbar(
+        "Register Report Status",
+        '${resMap["message"]}',
+        icon: Icon(FontAwesomeIcons.person, color: Colors.black),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Color(ConfigApp.warningSnackBar),
+        colorText: Color(ConfigApp.warningSnackBarText),
+      );
+    }
+  }
+
+  Future<void> expertListCallApi() async {
+    Map<String, String> params = Map();
+    //Map<String, String> data = Map();
+
+    String? _tokenJwt = await TokenStore.getToken();
+    _tokenJwt = "Bearer " + _tokenJwt!;
+    print("_tokenJwt : ${_tokenJwt}");
+
+    var url = Uri.parse('${ConfigApp.apiExpertFindAll}');
+    print('\n URL :${url.toString()}');
+    var response = await http.post(url, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json"
+    });
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
+    setState(() {
+      for (int i = 0; i < resMap["data"].length; i++) {
+        expertList.add(ExpertDataModel.fromJson(resMap["data"][i]));
+      }
+    });
+    // print('\nResponse body data: ${resMap["data"]}');
+    // print('\nResponse body data: ${resMap["data"]}');
+  }
+
+  Future<String> awaitExpertList() async {
+    await expertListCallApi();
+    return "Success";
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getExpertList = awaitExpertList();
   }
 
   @override
@@ -96,8 +148,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                         children: <Widget>[
                           Padding(
                             padding:
-                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
+                              maxLength: 16,
                               decoration: const InputDecoration(
                                 label: Text("Firstname"),
                                 border: OutlineInputBorder(
@@ -124,8 +177,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
+                              maxLength: 16,
                               decoration: const InputDecoration(
                                 label: Text("Lastname"),
                                 border: OutlineInputBorder(
@@ -151,8 +205,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           ),
                           Padding(
                             padding:
-                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
+                              maxLength: 16,
                               decoration: const InputDecoration(
                                 label: Text("Username"),
                                 border: OutlineInputBorder(
@@ -176,15 +231,76 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                               },
                             ),
                           ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                            child: TextFormField(
+                              maxLength: 512,
+                              maxLines: 5,
+
+                              decoration: const InputDecoration(
+                                label: Text("UserCaption"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color:
+                                            Color(ConfigApp.buttonSecondary))),
+                              ),
+                              controller: _userCaption,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter userCaption";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
                         ],
+                      ),
+                      SizedBox(
+                        height: 100,
+                        width: 200,
+                        child: DropdownButtonFormField<String>(
+                          decoration: const InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                borderSide: BorderSide(
+                                    color: Color(ConfigApp.buttonSecondary))),
+                          ),
+                          value: expertSelected,
+                          items: expertList
+                              .map((DataList) => DropdownMenuItem(
+                                    child: Text('${DataList.expertPath}'),
+                                    value: DataList.expertGroupId,
+                                  ))
+                              .toList(),
+                          onChanged: (item) => setState(() {
+                            expertSelected = item;
+                          }),
+                          validator: (input) {
+                            if (input == null) {
+                              return "please enter Expert";
+                            } else {
+                              return null;
+                            }
+                          },
+                        ),
                       ),
 
                       // TODO : Expert List DropDown
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(140.0),
+                        padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                       ),
                       Padding(
                         padding: EdgeInsets.all(12),
@@ -202,8 +318,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                               //_formKey.currentState!.reset();
                               _registerCallApi();
                               print("firstName : ${_firstName.text}");
-                              print("passwlrd : ${_lastName.text}");
+                              print("lastName : ${_lastName.text}");
                               print("userName : ${_userName.text}");
+                              print("userCaption : ${_userCaption.text}");
                             }
                           },
                           child: Text(
@@ -215,14 +332,6 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           ),
                         ),
                       )
-                      // TextFormField(
-                      //   decoration: new InputDecoration(label: Text("UserName")),
-                      // ),
-
-                      // TextFormField(
-                      //   decoration: new InputDecoration(label: Text("re-PassWord")),
-                      //   obscureText: true,
-                      // ),
                     ],
                   ),
                 ),

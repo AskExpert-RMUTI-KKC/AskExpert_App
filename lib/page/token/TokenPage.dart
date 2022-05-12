@@ -214,26 +214,50 @@ class _TokenPageState extends State<TokenPage> {
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(8),
                               itemCount: transactionList.length,
-                              itemBuilder: (context,
-                                  index) => Card(
+                              itemBuilder: (context, index) => Card(
                                 child: ListTile(
                                   onTap: () {
-                                    Get.to(CommentPage(),
-                                        arguments: transactionList[index].topicId);
+                                    if (transactionList[index].topicId != null)
+                                      Get.to(CommentPage(),
+                                          arguments:
+                                              transactionList[index].topicId);
+                                    else {}
                                     //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
                                   },
                                   textColor: Colors.black,
                                   subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
-                                      Text("TranID : ${transactionList[index].tranId}",maxLines: 1,),
-                                      Text("Amount : ${transactionList[index].tranAmount}",maxLines: 1,),
-                                      Text("TxId : ${transactionList[index].userInfoDataTx?.userName}",maxLines: 1,),
-                                      Text("RxId : ${transactionList[index].userInfoDataRx?.userName}",maxLines: 1,),
-                                      if(transactionList[index].topicContent != null)
-                                      Text("Topic : ${transactionList[index].topicContent}",maxLines: 1,),
-                                      if(transactionList[index].commentContent != null)
-                                      Text("Comment : ${transactionList[index].commentContent}",maxLines: 1,),
+                                      Text(
+                                        "TranID : ${transactionList[index].tranId}",
+                                        maxLines: 1,
+                                      ),
+                                      Text(
+                                        "Amount : ${transactionList[index].tranAmount}",
+                                        maxLines: 1,
+                                      ),
+                                      Text(
+                                        "TxId : ${transactionList[index].userInfoDataTx?.userName}",
+                                        maxLines: 1,
+                                      ),
+                                      Text(
+                                        "RxId : ${transactionList[index].userInfoDataRx?.userName}",
+                                        maxLines: 1,
+                                      ),
+                                      if (transactionList[index].topicContent !=
+                                          null)
+                                        Text(
+                                          "Topic : ${transactionList[index].topicContent}",
+                                          maxLines: 1,
+                                        ),
+                                      if (transactionList[index]
+                                              .commentContent !=
+                                          null)
+                                        Text(
+                                          "Comment : ${transactionList[index].commentContent}",
+                                          maxLines: 1,
+                                        ),
                                     ],
                                   ),
                                 ),

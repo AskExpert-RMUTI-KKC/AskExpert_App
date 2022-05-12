@@ -147,7 +147,6 @@ class _TopicPageState extends State<TopicPage> {
               (context, index) => /*TopicCardPage(topics: topics[index])*/ Card(
             child: ListTile(
               onTap: () {
-                //TODO ย้ายไปอยู่ที่หน้า Comment
                 Get.to(CommentPage(), arguments: topics[index].topicId);
                 //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
               },

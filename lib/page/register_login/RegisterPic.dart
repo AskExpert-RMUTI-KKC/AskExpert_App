@@ -1,3 +1,4 @@
+import 'package:askexpertapp/page/NavigationBar.dart';
 import 'package:askexpertapp/page/topic/TopicPage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -14,7 +15,7 @@ class _RegisterImgPageState extends State<RegisterImgPage> {
   @override
   void initState() {
 
-    Get.off(TopicPage());
+    Get.off(NavigationBarPage());
     super.initState();
   }
   @override
