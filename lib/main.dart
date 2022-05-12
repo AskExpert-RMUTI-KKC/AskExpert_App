@@ -1,5 +1,6 @@
 
 import 'package:askexpertapp/page/NavigationBar.dart';
+import 'package:askexpertapp/page/TopicAddPage.dart';
 import 'package:askexpertapp/page/register_login/Login.dart';
 import 'package:askexpertapp/page/register_login/RegisterInfo.dart';
 import 'package:askexpertapp/page/WelcomePage.dart';
@@ -25,7 +26,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: WelcomePage(),
+    home: TopicAddPage(),
 
     //home: WelcomePage(),
   ));

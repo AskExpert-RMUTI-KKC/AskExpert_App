@@ -37,14 +37,18 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
           'Profile Setting',
           style: TextStyle(
             color: Color(ConfigApp.textColor),
-            fontSize: 32,
+            fontSize: 26,
             fontWeight: FontWeight.w500,
           ),
         ),
         actions: [],
         elevation: 0,
         centerTitle: false,
+
         backgroundColor: const Color(ConfigApp.appbarBg),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
       ),
       backgroundColor: const Color(ConfigApp.appbarBg),
       body: ListView(
