@@ -26,7 +26,7 @@ void main() {
     theme: ThemeData(
       fontFamily: 'Kanit',
     ),
-    home: TopicAddPage(),
+    home: MainPage(),
 
     //home: WelcomePage(),
   ));

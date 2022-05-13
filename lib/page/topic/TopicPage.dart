@@ -217,6 +217,12 @@ class _TopicPageState extends State<TopicPage> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                    Text('${topics[index].createdDate}'),
+                  ],),
+                  //TODO today
+                  Row(
                     children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),

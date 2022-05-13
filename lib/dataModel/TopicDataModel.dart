@@ -12,6 +12,7 @@ class TopicDataModel {
   int? topicReportStatus;
   List<TopicImg>? topicImg;
   UserInfoData? userInfoData;
+  int? createdDate;
 
   TopicDataModel(
       {this.likeStatus,
@@ -26,7 +27,8 @@ class TopicDataModel {
         this.topicGroupName,
         this.topicReportStatus,
         this.topicImg,
-        this.userInfoData});
+        this.userInfoData,this.createdDate
+      });
 
   TopicDataModel.fromJson(Map<String, dynamic> json) {
     likeStatus = json['likeStatus'];
@@ -40,6 +42,7 @@ class TopicDataModel {
     topicDonateCount = json['topicDonateCount'];
     topicGroupName = json['topicGroupName'];
     topicReportStatus = json['topicReportStatus'];
+    createdDate = json['createdDate'];
     if (json['topicImg'] != null) {
       topicImg = <TopicImg>[];
       json['topicImg'].forEach((v) {
@@ -64,6 +67,7 @@ class TopicDataModel {
     data['topicDonateCount'] = this.topicDonateCount;
     data['topicGroupName'] = this.topicGroupName;
     data['topicReportStatus'] = this.topicReportStatus;
+    data['createdDate'] = this.createdDate;
     if (this.topicImg != null) {
       data['topicImg'] = this.topicImg!.map((v) => v.toJson()).toList();
     }
