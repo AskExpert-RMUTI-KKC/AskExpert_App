@@ -69,7 +69,7 @@ class ConfigApp {
   static const String apiFindByCommentId =
       apiUrl + pageComment + "/findByCommentId";
   static const String apiFindByContentId =
-      apiUrl + pageComment + "/findByContentId";
+      apiUrl + pageComment + "/findByTopicId";
   static const String apiFindByComment =
       apiUrl + pageComment + "/findMyComment";
 

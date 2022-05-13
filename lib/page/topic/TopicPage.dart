@@ -147,8 +147,7 @@ class _TopicPageState extends State<TopicPage> {
               (context, index) => /*TopicCardPage(topics: topics[index])*/ Card(
             child: ListTile(
               onTap: () {
-                Get.to(CommentPage(), arguments: topics[index].topicId);
-                //Navigator.of(context).push(MaterialPageRoute(builder: (context)=>topics(fruitDataModel: topics[index],)));
+                Get.to(CommentPage(), arguments: topics[index].topicId.toString());
               },
               title: Column(
                 children: <Widget>[
@@ -219,7 +218,7 @@ class _TopicPageState extends State<TopicPage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text('${topics[index].createdDate}'),
+                      Text('${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
                   ],),
                   //TODO today
                   Row(

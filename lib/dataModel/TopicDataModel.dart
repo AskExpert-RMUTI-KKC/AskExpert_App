@@ -27,7 +27,8 @@ class TopicDataModel {
         this.topicGroupName,
         this.topicReportStatus,
         this.topicImg,
-        this.userInfoData,this.createdDate
+        this.userInfoData,
+        this.createdDate
       });
 
   TopicDataModel.fromJson(Map<String, dynamic> json) {
