@@ -44,7 +44,7 @@ Future<void> LikePushButton(
 
 
   if(topicName!.length > 24){
-    topicName = topicName!.substring(1, 23);
+    topicName = topicName.substring(1, 23);
   }
 
   if (status == 0) {
