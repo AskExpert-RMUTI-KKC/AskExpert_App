@@ -7,7 +7,7 @@ class CommentDataModel {
   String? commentCaption;
   int? commentIsSubComment;
   int? commentLikeCount;
-  double? commentDonateCount;
+  int? commentDonateCount;
   int? commentReportStatus;
   UserInfoData? userInfoData;
   List<CommentDataModel>? subComment;
@@ -74,9 +74,9 @@ class UserInfoData {
   String? lastName;
   String? profilePic;
   bool? verifyStatus;
-  Null? expert;
+  String? expert;
   String? userCaption;
-  int? tokenCount;
+  double? tokenCount;
   int? likeCount;
 
   UserInfoData(

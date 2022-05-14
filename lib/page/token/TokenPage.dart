@@ -210,6 +210,7 @@ class _TokenPageState extends State<TokenPage> {
                               ],
                             ),
                             ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(8),

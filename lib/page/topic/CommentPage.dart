@@ -38,23 +38,27 @@ class _CommentPageState extends State<CommentPage> {
   Future<void> commentCall(topicId) async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
-
+    String? _authen = await TokenStore.getToken();
+    _authen = "Bearer " + _authen!;
+    print("_authen : ${_authen}");
     var url = Uri.parse('${ConfigApp.apiFindByContentId}');
     print('\n URL :${url.toString()}');
-    var response = await http.post(url, body: topicId);
+    var response = await http.post(url, body: topicId, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      "Authorization": "${_authen}"
+    });
     Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
-    print('\nResponse status: ${response.statusCode}');
-    print('\nResponse message: ${resMap["message"]}');
-    print('\nResponse body data: ${resMap["data"]}');
+    print('\nComment Response status: ${response.statusCode}');
+    print('\nComment Response message: ${resMap["message"]}');
+      print('\nComment Response body data: ${resMap["data"]}');
+    print('\nComment Response resMap: ${resMap}');
     setState(() {
       for (int i = 0; i < resMap["data"].length; i++) {
         comments.add(CommentDataModel.fromJson(resMap["data"][i]));
       }
-      for (int i = 0; i < comments.length; i++) {
-        print('${i} ${comments[i].commentCaption}\n');
-      }
-      print('\nResponse topicAll: ${comments.length}');
+      print('\nResponse CommentAll: ${comments.length}');
     });
 
     // print('\nResponse body data: ${resMap["data"]}');
@@ -136,7 +140,6 @@ class _CommentPageState extends State<CommentPage> {
 
   Future<String> awaitTopicCommentCall() async {
     await topicCall(topicId);
-    await commentCall(topicId);
     return "1";
   }
 
@@ -144,6 +147,7 @@ class _CommentPageState extends State<CommentPage> {
   void initState() {
     topicId = Get.arguments;
     getTopic = awaitTopicCommentCall();
+    commentCall(topicId);
   }
 
   _buildCommentAdd() {
@@ -410,21 +414,69 @@ class _CommentPageState extends State<CommentPage> {
                             ),
                             Container(
                               child: ListView.builder(
+                                physics: NeverScrollableScrollPhysics(),
                                 scrollDirection: Axis.vertical,
                                 shrinkWrap: true,
                                 padding: const EdgeInsets.all(8),
                                 itemCount: comments.length,
                                 itemBuilder: (context, index) {
                                   return Card(
-                                    child: ListTile(
-                                      textColor: Colors.black,
-                                      subtitle: Row(
+                                    color: Colors.red,
+                                    child: InkWell(
+                                      onLongPress: (){},
+                                      onTap: (){},
+                                      child: Row(
                                         children: <Widget>[
-                                          buildImageProfileDonateSheet(comments[index].commentUserId!),
+                                          Container(
+                                            height: 30,
+                                          width: 30,
+                                          padding: EdgeInsets.all(0),
+                                              decoration: BoxDecoration(
+                                                shape: BoxShape.circle,
+                                              ),
+                                              child: buildImageProfileDonateSheet(comments[index].userInfoData!.profilePic!)),
+                                          Column(
+                                            children: <Widget>[
+                                              Row(
+                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                children: <Widget>[
+                                                  Text('${comments[index].userInfoData?.userName}'),
+                                                  Row(children: <Widget>[
+                                                    Container(
+                                                      padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0) //                 <--- border radius here
+                                                          ),
+                                                          color: Colors.black),
+                                                      child: Row(
+                                                        children: [
+                                                          Text(
+                                                            '${comments[index].userInfoData?.expert}',
+                                                            style: TextStyle(color: Colors.white),
+                                                          ),
+                                                          if (comments[index]
+                                                              .userInfoData
+                                                              ?.verifyStatus ==
+                                                              true)
+                                                            Padding(
+                                                                padding:
+                                                                EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                                child: Icon(
+                                                                    FontAwesomeIcons.circleCheck,
+                                                                    color: Colors.lightBlueAccent)),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ]),
+                                                ],
+                                              )
+                                            ],
+                                          ),
 
                                         ],
                                       ),
-                                      onTap: () {},
                                     ),
                                   );
                                 },
