@@ -206,7 +206,7 @@ class _CommentPageState extends State<CommentPage> {
           onRefresh: Refresh,
           child: SafeArea(
             child: Column(
-              children: [
+              children: <Widget>[
                 Expanded(
                   child: SingleChildScrollView(
                       child: FutureBuilder(
@@ -619,7 +619,6 @@ class _CommentPageState extends State<CommentPage> {
                     },
                   )),
                 ),
-
                 _buildCommentAdd(),
                 // TextFormField(
                 //   minLines: 1,

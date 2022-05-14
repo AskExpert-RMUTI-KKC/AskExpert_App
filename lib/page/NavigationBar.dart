@@ -6,7 +6,9 @@ import 'package:askexpertapp/page/topic/TopicPage.dart';
 import 'package:askexpertapp/utils/Routes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'dart:convert';
 import 'TopicAddPage.dart';
 
 class NavigationBarPage extends StatefulWidget {
@@ -29,6 +31,16 @@ class _NavigationBarState extends State<NavigationBarPage> {
 
   @override
   void initState() {
+    // print('type ${Get.arguments.runtimeType}');
+    // if(Get.arguments != null){
+    //
+    //   print('currentIndex ${Get.arguments}');
+    //   String i = '${Get.arguments}' ;
+    //   int? index = int.tryParse(i);
+    //   setState(() {
+    //     currentIndex = index!;
+    //   });
+    // }
     super.initState();
   }
   @override
