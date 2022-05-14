@@ -21,7 +21,7 @@ class ConfigApp {
     maxNrOfCacheObjects: 1000,
   ));
 
-  static const String apiUrl = "http://192.168.191.134:8080";
+  static const String apiUrl = "http://192.168.138.173:8080";
   static const String uploadsImgPath = "/uploads";
 
   static const String pageUser = "/user";

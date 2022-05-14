@@ -115,8 +115,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 if (user.profilePic != null)
                   Container(
                     child: buildImageProfilePage('${user.profilePic}'),
-                    height: 120,
-                    width: 120,
                   )
                 else
                   Placeholder(),

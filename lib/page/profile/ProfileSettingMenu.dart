@@ -1,10 +1,12 @@
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/page/NavigationBar.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../dataModel/ExpertDataModel.dart';
 import '../WelcomePage.dart';
@@ -41,6 +43,7 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
   String? expertSelected;
   late Future getExpertList;
   UserDataModel user = UserDataModel();
+  PlatformFile? _image;
 
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
@@ -144,6 +147,10 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
     // print('\nResponse body data: ${resMap["data"]}');
   }
 
+  Future selectFile() async {
+    final test = await ImagePicker().pickImage(source: ImageSource.gallery);
+  }
+
   @override
   void initState() {
     UserCall();
@@ -177,10 +184,14 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                Container(
-                  width: 128,
-                  height: 128,
-                  child: Placeholder(),
+                InkWell(
+                  onTap: () { selectFile();},
+                  child: Container(
+                    padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                    width: 256,
+                    height: 256,
+                    child: buildImageProfilePage('${user.profilePic}'),
+                  ),
                 ),
                 Form(
                   key: _formKey,
