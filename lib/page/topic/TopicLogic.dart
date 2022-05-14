@@ -42,6 +42,11 @@ Future<void> LikePushButton(
   print('\nResponse message: ${resMap["message"]}');
   print('\nResponse body data: ${resMap["data"]}');
 
+
+  if(topicName!.length > 24){
+    topicName = topicName!.substring(1, 23);
+  }
+
   if (status == 0) {
     Get.snackbar(
       'UNLIKE',
@@ -196,7 +201,7 @@ Future<void> donateSheet(
                 ),
               ),
             ),
-            Text("${contentCaption}"),
+            Text("${contentCaption}",maxLines: 3,),
             Column(
               children: <Widget>[
                 Row(

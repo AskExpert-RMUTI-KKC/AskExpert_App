@@ -52,7 +52,7 @@ class _CommentPageState extends State<CommentPage> {
 
     print('\nComment Response status: ${response.statusCode}');
     print('\nComment Response message: ${resMap["message"]}');
-      print('\nComment Response body data: ${resMap["data"]}');
+    print('\nComment Response body data: ${resMap["data"]}');
     print('\nComment Response resMap: ${resMap}');
     setState(() {
       for (int i = 0; i < resMap["data"].length; i++) {
@@ -130,7 +130,6 @@ class _CommentPageState extends State<CommentPage> {
   Future<void> Refresh() async {
     setState(() {
       comments = [];
-      topic = new TopicDataModel();
       topicCall(topicId);
       commentCall(topicId);
     });
@@ -288,7 +287,8 @@ class _CommentPageState extends State<CommentPage> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
+                                Text(
+                                    '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
                               ],
                             ),
                             Row(
@@ -421,60 +421,178 @@ class _CommentPageState extends State<CommentPage> {
                                 itemCount: comments.length,
                                 itemBuilder: (context, index) {
                                   return Card(
-                                    color: Colors.red,
                                     child: InkWell(
-                                      onLongPress: (){},
-                                      onTap: (){},
+                                      onLongPress: () {},
+                                      onTap: () {},
                                       child: Row(
                                         children: <Widget>[
                                           Container(
-                                            height: 30,
-                                          width: 30,
-                                          padding: EdgeInsets.all(0),
+                                              height: 30,
+                                              width: 30,
+                                              padding: EdgeInsets.all(0),
                                               decoration: BoxDecoration(
                                                 shape: BoxShape.circle,
                                               ),
-                                              child: buildImageProfileDonateSheet(comments[index].userInfoData!.profilePic!)),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  print(
+                                                      "Test ${comments[index].userInfoData?.userInfoId}");
+                                                  Get.to(ProfileTopicPage(),
+                                                      arguments: comments[index]
+                                                          .userInfoData
+                                                          ?.userInfoId);
+                                                },
+                                                child:
+                                                    buildImageProfileDonateSheet(
+                                                        comments[index]
+                                                            .userInfoData!
+                                                            .profilePic!),
+                                              )),
                                           Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: <Widget>[
                                               Row(
-                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
                                                 children: <Widget>[
-                                                  Text('${comments[index].userInfoData?.userName}'),
+                                                  Text(
+                                                      '${comments[index].userInfoData?.userName}'),
                                                   Row(children: <Widget>[
                                                     Container(
-                                                      padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              3, 2, 3, 2),
                                                       decoration: BoxDecoration(
-                                                          borderRadius: BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0) //                 <--- border radius here
-                                                          ),
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10.0) //                 <--- border radius here
+                                                                  ),
                                                           color: Colors.black),
                                                       child: Row(
                                                         children: [
                                                           Text(
                                                             '${comments[index].userInfoData?.expert}',
-                                                            style: TextStyle(color: Colors.white),
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .white),
                                                           ),
                                                           if (comments[index]
-                                                              .userInfoData
-                                                              ?.verifyStatus ==
+                                                                  .userInfoData
+                                                                  ?.verifyStatus ==
                                                               true)
                                                             Padding(
                                                                 padding:
-                                                                EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                                                    EdgeInsets
+                                                                        .fromLTRB(
+                                                                            10,
+                                                                            0,
+                                                                            0,
+                                                                            0),
                                                                 child: Icon(
-                                                                    FontAwesomeIcons.circleCheck,
-                                                                    color: Colors.lightBlueAccent)),
+                                                                    FontAwesomeIcons
+                                                                        .circleCheck,
+                                                                    color: Colors
+                                                                        .lightBlueAccent)),
                                                         ],
                                                       ),
                                                     ),
                                                   ]),
                                                 ],
-                                              )
+                                              ),
+                                              Container(
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.6,
+                                                  child: Text(
+                                                    '${comments[index].commentCaption}',
+                                                  )),
                                             ],
                                           ),
-
+                                          Column(
+                                            children: <Widget>[
+                                              IconButton(
+                                                  onPressed: () {
+                                                    donateSheet(
+                                                        comments[index]
+                                                            .commentId,
+                                                        comments[index]
+                                                            .commentCaption,
+                                                        comments[index]
+                                                            .userInfoData
+                                                            ?.userInfoId,
+                                                        comments[index]
+                                                            .userInfoData
+                                                            ?.profilePic,
+                                                        comments[index]
+                                                            .userInfoData
+                                                            ?.userName);
+                                                  },
+                                                  icon: Icon(
+                                                      FontAwesomeIcons.btc)),
+                                              Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    0, 0, 0, 0),
+                                                child: Text(
+                                                    '${NumberFormat.compact().format(comments[index].commentDonateCount)}'),
+                                              ),
+                                            ],
+                                          ),
+                                          Column(
+                                            children: <Widget>[
+                                              IconButton(
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      if (comments[index]
+                                                              .likeStatus ==
+                                                          0) {
+                                                        comments[index]
+                                                            .likeStatus = 1;
+                                                        comments[index]
+                                                                .commentLikeCount =
+                                                            (comments[index]
+                                                                    .commentLikeCount! +
+                                                                1);
+                                                      } else {
+                                                        comments[index]
+                                                            .likeStatus = 0;
+                                                        comments[index]
+                                                                .commentLikeCount =
+                                                            (comments[index]
+                                                                    .commentLikeCount! -
+                                                                1);
+                                                      }
+                                                      LikePushButton(
+                                                          comments[index]
+                                                              .commentId,
+                                                          comments[index]
+                                                              .likeStatus,
+                                                          comments[index]
+                                                              .commentCaption);
+                                                    });
+                                                  },
+                                                  icon: comments[index]
+                                                              .likeStatus ==
+                                                          0
+                                                      ? Icon(
+                                                          FontAwesomeIcons
+                                                              .heart,
+                                                          color: Colors.black)
+                                                      : Icon(
+                                                          FontAwesomeIcons
+                                                              .heartCircleCheck,
+                                                          color: Colors.red)),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        0, 0, 0, 0),
+                                                child: Text(
+                                                    '${comments[index].commentLikeCount}'),
+                                              ),
+                                            ],
+                                          ),
                                         ],
                                       ),
                                     ),
