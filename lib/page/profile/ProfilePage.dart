@@ -23,6 +23,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   late UserDataModel user = new UserDataModel();
+  late String userIdFormGetArguments;
 
   late Future getUser;
   Future<void> UserCall() async {
@@ -33,13 +34,21 @@ class _ProfilePageState extends State<ProfilePage> {
     _tokenJwt = "Bearer " + _tokenJwt!;
     print("_tokenJwt : ${_tokenJwt}");
 
-    var url = Uri.parse('${ConfigApp.apiUserFindById}');
-    print('\n URL :${url.toString()}');
-    var response = await http.post(url, headers: {
-      "Accept": "application/json",
-      "content-type": "application/json",
-      "Authorization": "${_tokenJwt}"
-    });
+    var response;
+    var url;
+    if(userIdFormGetArguments == 'Id'){
+      url = Uri.parse('${ConfigApp.apiUserFindById}');
+      print('\n URL :${url.toString()}');
+      response = await http.post(url, headers: {
+        "Accept": "application/json",
+        "content-type": "application/json",
+        "Authorization": "${_tokenJwt}"
+      });
+    }else{
+      url = Uri.parse('${ConfigApp.apiUserFindByUserId}');
+      print('\n URL :${url.toString()}');
+      response = await http.post(url,body: userIdFormGetArguments);
+    }
     Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
     print('\nResponse status: ${response.statusCode}');
@@ -60,8 +69,13 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    print('pathProfilePic${user.profilePic}');
-    print("ProfilePageLoad");
+    if(Get.arguments != null) {
+      userIdFormGetArguments = Get.arguments;
+    }
+    else
+      {
+        userIdFormGetArguments = 'Id';
+      }
     getUser = awaitUserCall();
   }
 

@@ -51,6 +51,7 @@ class ConfigApp {
   static const String apiUserFindByText = apiUrl + pageUser + "/findByText";
   static const String apiUserFindById = apiUrl + pageUser + "/findById";
   static const String apiUserRefreshJWT = apiUrl + pageUser + "/refreshJWT";
+  static const String apiUserFindByUserId = apiUrl + pageUser + "/findByUserId";
 
   //Topic
   static const String apiTopicFindAll = apiUrl + pageTopic + "/findAll";

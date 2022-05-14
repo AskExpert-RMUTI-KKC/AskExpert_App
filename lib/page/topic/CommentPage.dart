@@ -12,6 +12,7 @@ import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 
 import '../../utils/storageToken.dart';
+import '../profile/ProfilePage.dart';
 import '../profile/ProfileTopicPage.dart';
 import 'TopicCard.dart';
 import 'TopicLogic.dart';
@@ -222,7 +223,7 @@ class _CommentPageState extends State<CommentPage> {
                                   onTap: () {
                                     print(
                                         "Test ${topic.userInfoData?.userInfoId}");
-                                    Get.to(ProfileTopicPage(),
+                                    Get.to(ProfilePage(),
                                         arguments:
                                             topic.userInfoData?.userInfoId);
                                   },
@@ -437,7 +438,7 @@ class _CommentPageState extends State<CommentPage> {
                                                 onTap: () {
                                                   print(
                                                       "Test ${comments[index].userInfoData?.userInfoId}");
-                                                  Get.to(ProfileTopicPage(),
+                                                  Get.to(ProfilePage(),
                                                       arguments: comments[index]
                                                           .userInfoData
                                                           ?.userInfoId);

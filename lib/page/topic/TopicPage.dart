@@ -13,6 +13,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../profile/ProfilePage.dart';
 import 'TopicLogic.dart';
 
 class TopicPage extends StatefulWidget {
@@ -159,7 +160,7 @@ class _TopicPageState extends State<TopicPage> {
                         onTap: () {
                           print(
                               "Test ${topics[index].userInfoData?.userInfoId}");
-                          Get.to(ProfileTopicPage(),
+                          Get.to(ProfilePage(),
                               arguments:
                                   topics[index].userInfoData?.userInfoId);
                         },
