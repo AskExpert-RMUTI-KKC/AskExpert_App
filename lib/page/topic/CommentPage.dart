@@ -128,8 +128,8 @@ class _CommentPageState extends State<CommentPage> {
   }
 
   Future<void> Refresh() async {
+    comments = [];
     setState(() {
-      comments = [];
       topicCall(topicId);
       commentCall(topicId);
     });

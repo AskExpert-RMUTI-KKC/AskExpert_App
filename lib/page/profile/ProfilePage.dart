@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
 import 'package:askexpertapp/page/profile/ProfileSettingMenu.dart';
+import 'package:askexpertapp/page/profile/profileSettingPage.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
@@ -98,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
               actions: [
                 IconButton(
                     onPressed: () {
-                      Get.to(ProfileSettingMenu());
+                      Get.to(ProfileSetting());
                     },
                     icon: Icon(
                       FontAwesomeIcons.gear,
@@ -178,13 +179,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
                 // TODO MAKE FUNCTION FOR THIS CODE
 
-                TextButton(
-                    onPressed: () {
-                      DefaultCacheManager().emptyCache();
-                      print("clearCache");
-                      setState(() {});
-                    },
-                    child: Text("clearCache")),
                 Padding(
                   padding: EdgeInsets.fromLTRB(
                       0, 0, 0, 0), //child: buildImageProfilePage(),

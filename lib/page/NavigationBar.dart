@@ -32,7 +32,7 @@ class _NavigationBarState extends State<NavigationBarPage> {
   @override
   void initState() {
     print('type ${Get.arguments.runtimeType}');
-    if(Get.arguments != null){
+    if(Get.arguments != null && Get.arguments.toString().length< 2){
       setState(() {
         currentIndex = int.parse(Get.arguments);
       });
@@ -49,7 +49,7 @@ class _NavigationBarState extends State<NavigationBarPage> {
       // )
       ,
       bottomNavigationBar: BottomNavigationBar(
-        
+
         backgroundColor: const Color(ConfigApp.appbarBg),
         showUnselectedLabels: false,
         unselectedItemColor: Colors.grey.withOpacity(0.7),

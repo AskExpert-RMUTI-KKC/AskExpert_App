@@ -373,29 +373,6 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Verify",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Color(ConfigApp.buttonPrimary),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(300, 50),
-                      primary: Color(ConfigApp.buttonSecondary),
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                    ),
-                  ),
-                ),
-                Text('VerifyStatus'),
-                Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: ElevatedButton(
                     onPressed: () {
                       bool pass = _formKey.currentState!.validate();
                       if (pass) {
@@ -405,28 +382,6 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                     },
                     child: const Text(
                       "Save",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Color(ConfigApp.buttonPrimary),
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(300, 50),
-                      primary: Color(ConfigApp.buttonSecondary),
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(0, 100, 0, 10),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      "Logout",
                       style: TextStyle(
                         fontSize: 18,
                         color: Color(ConfigApp.buttonPrimary),

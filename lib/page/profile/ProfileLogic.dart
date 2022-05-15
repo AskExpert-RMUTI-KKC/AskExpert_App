@@ -17,6 +17,8 @@ import 'package:askexpertapp/utils/storageToken.dart';
 import 'package:intl/intl.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 
+import '../register_login/Login.dart';
+
 Widget buildImageProfilePage(String index) => ClipRRect(
   // backgroundImage: CachedNetworkImageProvider(
   //   '${Config.imgProfile}$index',
@@ -48,6 +50,7 @@ Future<void> logOut() async {
   await TokenStore.setToken("");
   String? getToken = await TokenStore.getToken();
   print("data SecureStorage : ${getToken}");
+  Get.offAll(LoginPage());
 }
 
 
