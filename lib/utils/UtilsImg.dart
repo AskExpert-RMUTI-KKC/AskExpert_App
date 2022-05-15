@@ -65,22 +65,22 @@ class UtilsImage {
     String? _authen = await TokenStore.getToken();
     _authen = "Bearer " + _authen!;
     var headers = {
-      "Accept": "application/json",
-      "content-type": "application/json",
+      // "Accept": "application/json",
+      // "content-type": "application/json",
       "Authorization": "${_authen}"
     };
 
     //print("body : ${body}");
     print("_authen : ${_authen}");
-    var request = http.MultipartRequest('POST', Uri.parse('${ConfigApp.imgUploadProfile}}'));
-    request.headers.addAll(headers);
+    var request = http.MultipartRequest('POST', Uri.parse('${ConfigApp.imgUploadProfile}'));
+    request.headers.addAll({"Authorization": "${_authen}"});
+    print('_authen ${request.headers.toString()}');
+    print('_authen URL  ${request.url.toString()}');
     Uint8List data = await file!.readAsBytes();
     List<int> list = data.cast();
     request.files.add(http.MultipartFile.fromBytes('file', list,filename: 'myFile.png'));
     var response = await request.send();
     response.stream.bytesToString().asStream().listen((event) {
-      var parsedJson = json.decode(event);
-      print(parsedJson);
       print('photo ${response.statusCode}');
       //It's done...
     });
