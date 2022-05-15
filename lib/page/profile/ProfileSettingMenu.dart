@@ -6,11 +6,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_navigation/src/snackbar/snackbar.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../dataModel/ExpertDataModel.dart';
+import '../../utils/UtilsImg.dart';
 import '../WelcomePage.dart';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
@@ -43,7 +46,8 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
   String? expertSelected;
   late Future getExpertList;
   UserDataModel user = UserDataModel();
-  PlatformFile? _image;
+
+  File? imageFile;
 
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
@@ -71,6 +75,10 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
+
+      if(imageFile != null){
+
+      }
       Get.offAll(NavigationBarPage(),arguments:'4');
     }
     else{
@@ -84,6 +92,8 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
       );
     }
   }
+
+
 
   Future<void> expertListCallApi() async {
     Map<String, String> params = Map();
@@ -148,7 +158,16 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
   }
 
   Future selectFile() async {
-    final test = await ImagePicker().pickImage(source: ImageSource.gallery);
+    final imageFile = await UtilsImage.pickImageProfile(true);
+    if(imageFile!=null){
+      print('\nImage File :${imageFile.path}');
+      setState(() {
+        final imageTemp = File(imageFile!.path);
+        this.imageFile = imageTemp;
+        UtilsImage().uploadImgProfile(imageFile);
+      });
+    }
+    else{return;}
   }
 
   @override
@@ -190,7 +209,9 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                     padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
                     width: 256,
                     height: 256,
-                    child: buildImageProfilePage('${user.profilePic}'),
+                    child: imageFile == null
+                        ? buildImageProfilePage('${user.profilePic}')
+                        : Image.file(imageFile!,height: 256,width: 256, fit: BoxFit.cover),
                   ),
                 ),
                 Form(

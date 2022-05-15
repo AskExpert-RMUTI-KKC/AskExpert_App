@@ -13,7 +13,6 @@ import 'package:http/http.dart' as http;
 
 import '../../utils/storageToken.dart';
 import '../profile/ProfilePage.dart';
-import '../profile/ProfileTopicPage.dart';
 import 'TopicCard.dart';
 import 'TopicLogic.dart';
 import 'package:intl/intl.dart';

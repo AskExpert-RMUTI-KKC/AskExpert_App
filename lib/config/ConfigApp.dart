@@ -37,6 +37,7 @@ class ConfigApp {
 
   //ImageCall
   static const String imgProfile = apiUrl + uploadsImgPath + "/imgProfile/";
+  static const String imgUploadProfile = apiUrl + "/image" + "/userInfoDataProfile/";
   static const String imgTopic = apiUrl + uploadsImgPath + "/imgTopic/";
   static const String imgComment = apiUrl + uploadsImgPath + "/imgComment/";
   static const String imgVerify = apiUrl + uploadsImgPath + "/imgVerify/";
