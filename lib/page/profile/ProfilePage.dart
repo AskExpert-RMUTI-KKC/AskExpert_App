@@ -69,7 +69,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    if(Get.arguments != null) {
+    if(Get.arguments != null && Get.arguments.toString().length> 16){
       userIdFormGetArguments = Get.arguments;
     }
     else

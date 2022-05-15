@@ -31,16 +31,12 @@ class _NavigationBarState extends State<NavigationBarPage> {
 
   @override
   void initState() {
-    // print('type ${Get.arguments.runtimeType}');
-    // if(Get.arguments != null){
-    //
-    //   print('currentIndex ${Get.arguments}');
-    //   String i = '${Get.arguments}' ;
-    //   int? index = int.tryParse(i);
-    //   setState(() {
-    //     currentIndex = index!;
-    //   });
-    // }
+    print('type ${Get.arguments.runtimeType}');
+    if(Get.arguments != null){
+      setState(() {
+        currentIndex = int.parse(Get.arguments);
+      });
+    }
     super.initState();
   }
   @override

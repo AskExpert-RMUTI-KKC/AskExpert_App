@@ -71,7 +71,7 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
-      Get.offAll(NavigationBarPage(),arguments:4);
+      Get.offAll(NavigationBarPage(),arguments:'4');
     }
     else{
       Get.snackbar(

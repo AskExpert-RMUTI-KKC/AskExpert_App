@@ -48,7 +48,11 @@ void routes(String check) async {
       print("data SecureStorage : ${getToken}");
 
       Get.offAll(NavigationBarPage());
-    } else {
+    }
+    else if(response.statusCode == 403){
+      Get.offAll(LoginPage());
+    }
+    else {
       Get.offAll(const WelcomePage());
     }
   } else {
