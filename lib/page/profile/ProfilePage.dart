@@ -70,8 +70,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    if(Get.arguments != null && Get.arguments.toString().length> 16){
-      userIdFormGetArguments = Get.arguments;
+    if(Get.arguments != null){
+      if(Get.arguments.toString().length> 16){
+        userIdFormGetArguments = Get.arguments;
+      }
     }
     else
       {
@@ -97,7 +99,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
               actions: [
-                IconButton(
+                userIdFormGetArguments == 'Id'
+                ?IconButton(
                     onPressed: () {
                       Get.to(ProfileSetting());
                     },
@@ -105,6 +108,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       FontAwesomeIcons.gear,
                       color: Colors.black,
                     ))
+                    :Container(),
               ],
               elevation: 0,
               centerTitle: false,
