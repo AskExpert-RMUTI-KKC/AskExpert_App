@@ -137,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             child: Row(
                               children: [
                                 Text(
-                                  '${user.expertGroupId}',
+                                  '${user.expertGroupListData!.expertPath}',
                                   style: TextStyle(color: Colors.white),
                                 ),
                                 if (user.verifyStatus ==

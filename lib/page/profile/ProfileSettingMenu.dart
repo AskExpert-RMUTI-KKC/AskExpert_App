@@ -358,7 +358,8 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                           }),
                           validator: (input) {
                             if (input == null) {
-                              return "please enter Expert";
+                              expertSelected = user.expertGroupId;
+                              return null;
                             } else {
                               return null;
                             }

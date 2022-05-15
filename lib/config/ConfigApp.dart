@@ -21,7 +21,7 @@ class ConfigApp {
     maxNrOfCacheObjects: 1000,
   ));
 
-  static const String apiUrl = "http://192.168.191.134:8080";
+  static const String apiUrl = "http://192.168.144.173:8080";
   static const String uploadsImgPath = "/uploads";
 
   static const String pageUser = "/user";
@@ -37,10 +37,16 @@ class ConfigApp {
 
   //ImageCall
   static const String imgProfile = apiUrl + uploadsImgPath + "/imgProfile/";
-  static const String imgUploadProfile = apiUrl + "/image" + "/userInfoDataProfile";
   static const String imgTopic = apiUrl + uploadsImgPath + "/imgTopic/";
   static const String imgComment = apiUrl + uploadsImgPath + "/imgComment/";
   static const String imgVerify = apiUrl + uploadsImgPath + "/imgVerify/";
+
+  //ImgUpload
+  static const String imgUploadProfile = apiUrl + "/image" + "/userInfoDataProfile";
+  static const String imgUploadTopic = apiUrl + "/image" + "/topicImg";
+  static const String imgUploadComment = apiUrl + "/image" + "/commentImg";
+  static const String imgUploadVerify = apiUrl + "/image" + "/verifyImg";
+
 
   //user
   static const String apiRegisterInfo = apiUrl + pageUser + "/userinfoWrite";

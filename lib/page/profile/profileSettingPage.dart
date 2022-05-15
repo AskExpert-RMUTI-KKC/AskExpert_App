@@ -28,6 +28,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
 import 'ProfileLogic.dart';
+import 'VerifyPage.dart';
 
 class ProfileSetting extends StatefulWidget {
   const ProfileSetting({Key? key}) : super(key: key);
@@ -37,6 +38,14 @@ class ProfileSetting extends StatefulWidget {
 }
 
 class _ProfileSettingState extends State<ProfileSetting> {
+
+
+  List<ExpertDataModel> expertList = [];
+  String? expertSelected;
+  late Future getExpertList;
+  UserDataModel user = UserDataModel();
+  File? imageFile;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +75,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
               Padding(
                 padding: const EdgeInsets.all(12.0),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {Get.to(VerifyPage());},
                   child: const Text(
                     "Verify",
                     style: TextStyle(
