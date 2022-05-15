@@ -75,9 +75,8 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
-
       if(imageFile != null){
-
+        UtilsImage().uploadImgProfile(imageFile);
       }
       Get.offAll(NavigationBarPage(),arguments:'4');
     }
@@ -164,7 +163,6 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
       setState(() {
         final imageTemp = File(imageFile!.path);
         this.imageFile = imageTemp;
-        UtilsImage().uploadImgProfile(imageFile);
       });
     }
     else{return;}

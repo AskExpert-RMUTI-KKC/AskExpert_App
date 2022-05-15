@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/ExpertDataModel.dart';
+import 'package:askexpertapp/page/NavigationBar.dart';
 import 'package:askexpertapp/page/register_login/RegisterPic.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
@@ -13,6 +14,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import "dart:io";
 import 'package:get/get.dart';
+
+import '../../utils/UtilsImg.dart';
 
 class RegisterInfoPage extends StatefulWidget {
   const RegisterInfoPage({Key? key}) : super(key: key);
@@ -31,6 +34,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
   List<ExpertDataModel> expertList = [];
   String? expertSelected;
   late Future getExpertList;
+  File? imageFile;
 
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
@@ -58,9 +62,9 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
-      Get.to(RegisterImgPage());
-    }
-    else{
+      UtilsImage().uploadImgProfile(imageFile);
+      Get.to(NavigationBarPage());
+    } else {
       Get.snackbar(
         "Register Report Status",
         '${resMap["message"]}',
@@ -105,6 +109,20 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     return "Success";
   }
 
+  Future selectFile() async {
+    final imageFile = await UtilsImage.pickImageProfile(true);
+    if (imageFile != null) {
+      print('\nImage File :${imageFile.path}');
+      setState(() {
+        final imageTemp = File(imageFile!.path);
+        this.imageFile = imageTemp;
+        UtilsImage().uploadImgProfile(imageFile);
+      });
+    } else {
+      return;
+    }
+  }
+
   @override
   void initState() {
     super.initState();
@@ -144,11 +162,28 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
+                      InkWell(
+                        onTap: () {
+                          selectFile();
+                        },
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                          width: 256,
+                          height: 256,
+                          child: imageFile == null
+                              ? Container(
+                                  height: 256,
+                                  width: 256,
+                                  child: Placeholder(),
+                                )
+                              : Image.file(imageFile!,
+                                  height: 256, width: 256, fit: BoxFit.cover),
+                        ),
+                      ),
                       Column(
                         children: <Widget>[
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
                               maxLength: 16,
                               decoration: const InputDecoration(
@@ -176,8 +211,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
                               maxLength: 16,
                               decoration: const InputDecoration(
@@ -204,8 +238,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
                               maxLength: 16,
                               decoration: const InputDecoration(
@@ -232,12 +265,10 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                             ),
                           ),
                           Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                             child: TextFormField(
                               maxLength: 512,
                               maxLines: 5,
-
                               decoration: const InputDecoration(
                                 label: Text("UserCaption"),
                                 border: OutlineInputBorder(
@@ -314,6 +345,17 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           ),
                           onPressed: () {
                             bool pass = _formKey.currentState!.validate();
+                            if (imageFile == null) {
+                              pass = false;
+                              Get.snackbar(
+                                "Register Report Status",
+                                'Please Upload Image Profile',
+                                icon: Icon(FontAwesomeIcons.person, color: Colors.black),
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Color(ConfigApp.warningSnackBar),
+                                colorText: Color(ConfigApp.warningSnackBarText),
+                              );
+                            }
                             if (pass) {
                               //_formKey.currentState!.reset();
                               _registerCallApi();

@@ -79,6 +79,7 @@ class UtilsImage {
     Uint8List data = await file!.readAsBytes();
     List<int> list = data.cast();
     request.files.add(http.MultipartFile.fromBytes('file', list,filename: 'myFile.png'));
+    //request.fields.addAll(params); !Add Body
     var response = await request.send();
     response.stream.bytesToString().asStream().listen((event) {
       print('photo ${response.statusCode}');
