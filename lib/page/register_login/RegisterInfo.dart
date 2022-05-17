@@ -63,7 +63,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
       UtilsImage().uploadImgProfile(imageFile);
-      Get.to(NavigationBarPage());
+      Get.offAll(NavigationBarPage());
     } else {
       Get.snackbar(
         "Register Report Status",

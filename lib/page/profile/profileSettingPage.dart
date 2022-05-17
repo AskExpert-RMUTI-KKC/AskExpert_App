@@ -46,6 +46,27 @@ class _ProfileSettingState extends State<ProfileSetting> {
   UserDataModel user = UserDataModel();
   File? imageFile;
 
+
+  Widget verifyStatus(){
+    print('\n\n\nverifyStatus ${user.verifyData?.verifyStatus}\n\n\n');
+    if(user.verifyData == null){
+      return Text('Verify Not Send');
+    }else if(user.verifyData?.verifyStatus == 'A'){
+      return Text('Verify Approved');
+    }else if(user.verifyData?.verifyStatus == 'D'){
+      return Text('Verify Rejected');
+    }else if(user.verifyData?.verifyStatus == 'W'){
+      return Text('Verify Waiting');
+    }
+    return Text('Hanya untuk Admin');
+  }
+
+  @override
+  void initState() {
+    user = Get.arguments;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +115,7 @@ class _ProfileSettingState extends State<ProfileSetting> {
                   ),
                 ),
               ),
-              Text('VerifyStatus'),
+              verifyStatus(),
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
                 child: ElevatedButton(

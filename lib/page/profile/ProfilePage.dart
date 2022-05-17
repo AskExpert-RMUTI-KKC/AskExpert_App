@@ -82,6 +82,8 @@ class _ProfilePageState extends State<ProfilePage> {
     getUser = awaitUserCall();
   }
 
+
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
@@ -102,7 +104,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 userIdFormGetArguments == 'Id'
                 ?IconButton(
                     onPressed: () {
-                      Get.to(ProfileSetting());
+                      Get.to(ProfileSetting(),arguments: user);
                     },
                     icon: Icon(
                       FontAwesomeIcons.gear,
@@ -164,14 +166,14 @@ class _ProfilePageState extends State<ProfilePage> {
                   children: <Widget>[
                     Icon(
                       FontAwesomeIcons.heartCircleCheck,
-                      color: Colors.red,
+                      color: Colors.black,
                     ),
                     Text('${NumberFormat.compact().format(user.likeCount)}'),
                     Icon(
                       FontAwesomeIcons.btc,
                       color: Colors.black,
                     ),
-                    Text('${NumberFormat.compact().format(user.likeCount)}'),
+                    Text('${NumberFormat.compact().format(user.tokenCount)}'),
                   ],
                 ),
 
