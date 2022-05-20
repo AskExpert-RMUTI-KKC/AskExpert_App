@@ -137,6 +137,9 @@ class _VerifyPageState extends State<VerifyPage> {
     response.stream.bytesToString().asStream().listen((event) {
       print('photo ${response.statusCode}');
       if(response.statusCode == 200){
+        Get.back();
+        Get.back();
+
         Get.snackbar(
           "Verify Report Status",
           'Send Verify Data Success',
@@ -145,7 +148,7 @@ class _VerifyPageState extends State<VerifyPage> {
           backgroundColor: Colors.greenAccent,
           colorText: Color(ConfigApp.textColor),
         );
-        Get.offAll(NavigationBarPage(),arguments:'4');
+
       }
       //It's done...
     });
