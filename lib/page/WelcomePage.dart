@@ -54,9 +54,14 @@ class _WelcomePageState extends State<WelcomePage> {
                   child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    Placeholder(),
-                    Placeholder(),
-                    Placeholder(),
+                    Image.asset('assets/images/owl1.png',),
+                    Text(
+                      "AskExpert",
+                      style: TextStyle(
+                        fontSize: 36,
+                        color: Color(ConfigApp.buttonSecondary),
+                      ),
+                    ),
                   ],
                 ),
               )),
