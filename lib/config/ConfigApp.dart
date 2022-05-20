@@ -21,7 +21,7 @@ class ConfigApp {
     maxNrOfCacheObjects: 1000,
   ));
 
-  static const String apiUrl = "https://6059-8-30-234-97.ap.ngrok.io";
+  static const String apiUrl = "http://192.168.115.173:8080";
   static const String uploadsImgPath = "/uploads";
 
   static const String pageUser = "/user";

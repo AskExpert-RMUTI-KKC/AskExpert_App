@@ -120,7 +120,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _LoginCallApiG() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
-    var body = jsonEncode({'email': _Gmail, 'password': _passWordG});
+    var body = jsonEncode({'email': _Gmail, 'passWord': _passWordG});
 
     var url = Uri.parse('${ConfigApp.apiLoginGoogle}');
     var response = await http.post(url, body: body, headers: {
@@ -241,181 +241,182 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color(ConfigApp.appbarBg),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      // TextFormField(
-                      //   decoration: new InputDecoration(label: Text("UserName")),
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: TextFormField(
-                          cursorColor: Color(ConfigApp.cursorColor),
-                          decoration: const InputDecoration(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    // TextFormField(
+                    //   decoration: new InputDecoration(label: Text("UserName")),
+                    // ),
+
+
+                    Expanded(child: SingleChildScrollView(
+                      child: Column(children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          child: TextFormField(
+                            cursorColor: Color(ConfigApp.cursorColor),
+                            decoration: const InputDecoration(
+                                icon: Icon(
+                                  Icons.email,
+                                  color: Color(ConfigApp.iconEmail),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color: Color(ConfigApp.buttonSecondary))),
+                                label: Text("Email"),
+                                hintText: "example@rmuti.ac.th"),
+                            keyboardType: TextInputType.emailAddress,
+                            controller: _email,
+                            validator: (input) {
+                              if (input!.isEmpty) {
+                                return "please enter Email";
+                              } else {
+                                return null;
+                              }
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          child: TextFormField(
+                            decoration: const InputDecoration(
+                              label: Text("PassWord"),
                               icon: Icon(
-                                Icons.email,
+                                Icons.password,
                                 color: Color(ConfigApp.iconEmail),
                               ),
                               border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
                                   borderRadius:
-                                      BorderRadius.all(Radius.circular(15)),
+                                  BorderRadius.all(Radius.circular(15)),
                                   borderSide: BorderSide(
-                                      color: Color(ConfigApp.buttonSecondary))),
-                              label: Text("Email"),
-                              hintText: "example@rmuti.ac.th"),
-                          keyboardType: TextInputType.emailAddress,
-                          controller: _email,
-                          validator: (input) {
-                            if (input!.isEmpty) {
-                              return "please enter Email";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            label: Text("PassWord"),
-                            icon: Icon(
-                              Icons.password,
-                              color: Color(ConfigApp.iconEmail),
+                                      color: Color(ConfigApp.buttonPrimary))),
                             ),
-                            border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                borderSide: BorderSide(
-                                    color: Color(ConfigApp.buttonPrimary))),
+                            obscureText: true,
+                            controller: _passWord,
+                            validator: (input) {
+                              if (input!.isEmpty) {
+                                return "please enter PassWord";
+                              } else {
+                                return null;
+                              }
+                            },
                           ),
-                          obscureText: true,
-                          controller: _passWord,
-                          validator: (input) {
-                            if (input!.isEmpty) {
-                              return "please enter PassWord";
-                            } else {
-                              return null;
-                            }
-                          },
                         ),
-                      ),
-                      // TextFormField(
-                      //   decoration: new InputDecoration(label: Text("re-PassWord")),
-                      //   obscureText: true,
-                      // ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: () {
-                                  _GsignIn();
-                                },
-                                iconSize: 40,
-                                icon: const Icon(
-                                  FontAwesomeIcons.google,
-                                  color: Color(ConfigApp.iconEmail),
+                        // TextFormField(
+                        //   decoration: new InputDecoration(label: Text("re-PassWord")),
+                        //   obscureText: true,
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                IconButton(
+                                  onPressed: () {
+                                    _GsignIn();
+                                  },
+                                  iconSize: 40,
+                                  icon: const Icon(
+                                    FontAwesomeIcons.google,
+                                    color: Color(ConfigApp.iconEmail),
+                                  ),
                                 ),
+                                Text(
+                                  "Google",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
+                                )
+                              ]),
+                        ),
+                        // Padding(
+                        //   padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                        //   child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.center,
+                        //       children: <Widget>[
+                        //         IconButton(
+                        //           onPressed: () {
+                        //             _FBsignIn();
+                        //           },
+                        //           iconSize: 40,
+                        //           icon: const Icon(
+                        //             FontAwesomeIcons.facebook,
+                        //             color: Color(ConfigApp.iconEmail),
+                        //           ),
+                        //         ),
+                        //         Text(
+                        //           "FaceBook",
+                        //           style: TextStyle(
+                        //             fontSize: 16,
+                        //           ),
+                        //         )
+                        //       ]),
+                        // ),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          child: TextButton(
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: const Size(300, 50),
+                              primary: Color(ConfigApp.buttonPrimary),
+                              elevation: 5,
+                              shape: shape,
+                              //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                            ),
+                            onPressed: () {
+                              Get.offAll(RegisterPage());
+                            },
+                            child: Text(
+                              'Register',
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Color(ConfigApp.buttonSecondary),
                               ),
-                              Text(
-                                "Google",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              )
-                            ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              IconButton(
-                                onPressed: () {
-                                  _FBsignIn();
-                                },
-                                iconSize: 40,
-                                icon: const Icon(
-                                  FontAwesomeIcons.facebook,
-                                  color: Color(ConfigApp.iconEmail),
-                                ),
-                              ),
-                              Text(
-                                "FaceBook",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                ),
-                              )
-                            ]),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(60.0),
-                      ),
+                            ),
+                          ),
+                        ),
+                      ],),
+                    )),
 
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: TextButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(300, 50),
-                            primary: Color(ConfigApp.buttonPrimary),
-                            elevation: 5,
-                            shape: shape,
-                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                          ),
-                          onPressed: () {
-                            Get.offAll(RegisterPage());
-                          },
-                          child: Text(
-                            'Register',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(ConfigApp.buttonSecondary),
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                      child: TextButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(300, 50),
+                          primary: Color(ConfigApp.buttonSecondary),
+                          elevation: 5,
+                          shape: shape,
+                          //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                        ),
+                        onPressed: () {
+                          bool pass = _formKey.currentState!.validate();
+                          if (pass) {
+                            //_formKey.currentState!.reset();
+                            _LoginCallApi();
+                            print("${_email.text}");
+                            print("${_passWord.text}");
+                          }
+                        },
+                        child: Text(
+                          'LOGIN',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color(ConfigApp.buttonPrimary),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        child: TextButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(300, 50),
-                            primary: Color(ConfigApp.buttonSecondary),
-                            elevation: 5,
-                            shape: shape,
-                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                          ),
-                          onPressed: () {
-                            bool pass = _formKey.currentState!.validate();
-                            if (pass) {
-                              //_formKey.currentState!.reset();
-                              _LoginCallApi();
-                              print("${_email.text}");
-                              print("${_passWord.text}");
-                            }
-                          },
-                          child: Text(
-                            'LOGIN',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(ConfigApp.buttonPrimary),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),

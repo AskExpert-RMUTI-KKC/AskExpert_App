@@ -37,6 +37,7 @@ void routes(String check) async {
       "content-type": "application/json",
       "Authorization": "${_authen}"
     });
+    print('\n url : ${url}');
     Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
     print('\nResponse status: ${response.statusCode}');
     print('\nResponse message: ${resMap["message"]}');

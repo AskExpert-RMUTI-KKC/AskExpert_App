@@ -50,57 +50,60 @@ class _WelcomePageState extends State<WelcomePage> {
         child: Center(
           child: Column(
             children: <Widget>[
-              Expanded(flex: 6, child: Placeholder()),
               Expanded(
-                  flex: 2,
-                  child: Column(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(LoginPage());
-                          },
-                          child: const Text(
-                            "Login",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(ConfigApp.buttonSecondary),
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(300, 50),
-                            primary: Color(ConfigApp.buttonPrimary),
-                            elevation: 5,
-                            shape: shape,
-                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Get.to(RegisterPage());
-                          },
-                          child: const Text(
-                            "Register",
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(ConfigApp.buttonPrimary),
-                            ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(300, 50),
-                            primary: Color(ConfigApp.buttonSecondary),
-                            elevation: 5,
-                            shape: shape,
-                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                          ),
-                        ),
-                      ),
-                    ],
-                  )),
+                  child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    Placeholder(),
+                    Placeholder(),
+                    Placeholder(),
+                  ],
+                ),
+              )),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.to(LoginPage());
+                  },
+                  child: const Text(
+                    "Login",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(ConfigApp.buttonSecondary),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 50),
+                    primary: Color(ConfigApp.buttonPrimary),
+                    elevation: 5,
+                    shape: shape,
+                    //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Get.to(RegisterPage());
+                  },
+                  child: const Text(
+                    "Register",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Color(ConfigApp.buttonPrimary),
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: const Size(300, 50),
+                    primary: Color(ConfigApp.buttonSecondary),
+                    elevation: 5,
+                    shape: shape,
+                    //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                  ),
+                ),
+              ),
             ],
           ),
         ),
