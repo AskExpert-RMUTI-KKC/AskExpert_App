@@ -138,19 +138,17 @@ class _TopicPageState extends State<TopicPage> {
       backgroundColor: const Color(ConfigApp.appbarBg),
       body: RefreshIndicator(
         onRefresh: Refresh,
-        child:
-            topics.length > 0
-            ?ListView.builder(
+        child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
           itemCount: topics.length,
           itemBuilder: (context,
               index) => /*TopicCardPage(topics: topics[index])*/ Container(
-            margin: EdgeInsets.fromLTRB(0, 10, 0  , 10),
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
             decoration: BoxDecoration(
-                 border: Border.all(color: Colors.black,width: 4),
-                 borderRadius: BorderRadius.circular(20),
+              border: Border.all(color: Colors.black, width: 4),
+              borderRadius: BorderRadius.circular(20),
             ),
             child: ListTile(
               onTap: () {
@@ -348,8 +346,7 @@ class _TopicPageState extends State<TopicPage> {
               ),
             ),
           ),
-        )
-            :Padding(padding: EdgeInsets.zero),
+        ),
       ), // ListView.builder
     );
   }
