@@ -195,7 +195,7 @@ class _CommentPageState extends State<CommentPage> {
 
   @override
   Widget build(BuildContext context) {
-    double c_width = MediaQuery.of(context).size.width * 0.8;
+    double c_width = MediaQuery.of(context).size.width * 0.7;
 
     return Scaffold(
       //Text('${topic.topicCaption}\n ${topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')
@@ -212,395 +212,415 @@ class _CommentPageState extends State<CommentPage> {
                     future: getTopic,
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        return Column(
-                          children: <Widget>[
-                            Row(
-                              children: <Widget>[
-                                InkWell(
-                                  child: buildImageProfile(
-                                      '${topic.userInfoData?.profilePic}'),
-                                  onTap: () {
-                                    print(
-                                        "Test ${topic.userInfoData?.userInfoId}");
-                                    Get.to(ProfilePage(),
-                                        arguments:
-                                            topic.userInfoData?.userInfoId);
-                                  },
+                        return Container(
+                          child: Column(
+                            children: <Widget>[
+                              Container(
+                                margin:EdgeInsets.fromLTRB(4, 10, 4, 10),
+                                padding:EdgeInsets.fromLTRB(4, 10, 4, 10),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black,width: 4),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                                // Container(
-                                //     height: 50,
-                                //     width: 50,
-                                //     child: Image.network(
-                                //         '${Config.imgProfile}')
-                                // ),
-                                // const Icon(
-                                //   FontAwesomeIcons.btc,
-                                //   size: 50,
-                                // ),
-                                Container(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  width: c_width,
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Text('${topic.userInfoData?.userName}'),
-                                      Row(children: <Widget>[
+                                child: Column(
+                                  children: <Widget>[
+                                    Row(
+                                      children: <Widget>[
+                                        InkWell(
+                                          child: buildImageProfile(
+                                              '${topic.userInfoData?.profilePic}'),
+                                          onTap: () {
+                                            print(
+                                                "Test ${topic.userInfoData?.userInfoId}");
+                                            Get.to(ProfilePage(),
+                                                arguments:
+                                                topic.userInfoData?.userInfoId);
+                                          },
+                                        ),
+                                        // Container(
+                                        //     height: 50,
+                                        //     width: 50,
+                                        //     child: Image.network(
+                                        //         '${Config.imgProfile}')
+                                        // ),
+                                        // const Icon(
+                                        //   FontAwesomeIcons.btc,
+                                        //   size: 50,
+                                        // ),
                                         Container(
                                           padding:
-                                              EdgeInsets.fromLTRB(3, 2, 3, 2),
-                                          decoration: BoxDecoration(
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                      10.0) //                 <--- border radius here
+                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          width: c_width,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                            children: <Widget>[
+                                              Text('${topic.userInfoData?.userName}'),
+                                              Row(children: <Widget>[
+                                                Container(
+                                                  padding:
+                                                  EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius: BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0) //                 <--- border radius here
+                                                      ),
+                                                      color: Colors.black),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        '${topic.userInfoData?.expert}',
+                                                        style: TextStyle(
+                                                            color: Colors.white),
+                                                      ),
+                                                      if (topic.userInfoData
+                                                          ?.verifyStatus ==
+                                                          true)
+                                                        Padding(
+                                                            padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                10, 0, 0, 0),
+                                                            child: Icon(
+                                                                FontAwesomeIcons
+                                                                    .circleCheck,
+                                                                color: Colors
+                                                                    .lightBlueAccent)),
+                                                    ],
                                                   ),
-                                              color: Colors.black),
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                '${topic.userInfoData?.expert}',
-                                                style: TextStyle(
-                                                    color: Colors.white),
-                                              ),
-                                              if (topic.userInfoData
-                                                      ?.verifyStatus ==
-                                                  true)
-                                                Padding(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            10, 0, 0, 0),
-                                                    child: Icon(
-                                                        FontAwesomeIcons
-                                                            .circleCheck,
-                                                        color: Colors
-                                                            .lightBlueAccent)),
+                                                ),
+                                              ]),
                                             ],
                                           ),
-                                        ),
-                                      ]),
-                                    ],
-                                  ),
-                                )
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                    '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
-                              ],
-                            ),
-                            Row(
-                              children: <Widget>[
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Container(
-                                    width: c_width,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                            '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
+                                      ],
+                                    ),
+                                    Row(
                                       children: <Widget>[
-                                        Text(
-                                          '${topic.topicHeadline}',
-                                          maxLines: 2,
-                                          style: TextStyle(fontSize: 20),
-                                        ),
-                                        Container(
-                                            padding:
-                                                EdgeInsets.fromLTRB(3, 2, 3, 2),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                        10.0) //                 <--- border radius here
-                                                    ),
-                                                color: Colors.black),
-                                            child: Text(
-                                              '${topic.topicGroupName}',
-                                              style: TextStyle(
-                                                  color: Colors.white),
-                                            )),
-                                        Text(
-                                          '${topic.topicCaption}',
-                                          maxLines: 4,
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          child: Container(
+                                            width: c_width,
+                                            child: Column(
+                                              crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Text(
+                                                  '${topic.topicHeadline}',
+                                                  maxLines: 2,
+                                                  style: TextStyle(fontSize: 20),
+                                                ),
+                                                Container(
+                                                    padding:
+                                                    EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.all(
+                                                            Radius.circular(
+                                                                10.0) //                 <--- border radius here
+                                                        ),
+                                                        color: Colors.black),
+                                                    child: Text(
+                                                      '${topic.topicGroupName}',
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    )),
+                                                Text(
+                                                  '${topic.topicCaption}',
+                                                  maxLines: 4,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Wrap(
-                              crossAxisAlignment: WrapCrossAlignment.center,
-                              children: <Widget>[
-                                Icon(FontAwesomeIcons.bookOpenReader),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                                  child: Text(
-                                      '${NumberFormat.compact().format(topic.topicReadCount)}'),
-                                ),
-                                Icon(FontAwesomeIcons.comment),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                  child: Text(
-                                      '${NumberFormat.compact().format(topic.topicCommentCount)}'),
-                                ),
-                                IconButton(
-                                    onPressed: () {
-                                      donateSheet(
-                                          topic.topicId,
-                                          topic.topicHeadline,
-                                          topic.userInfoData?.userInfoId,
-                                          topic.userInfoData?.profilePic,
-                                          topic.userInfoData?.userName);
-                                      /*Get.bottomSheet(
-                                    Container(
-                                      child: Column(
-                                        children: <Widget>[
-                                          ListTile(title: Text('TEST'),),
-                                          Text("Test")
-                                        ],
+                                    Wrap(
+                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                      children: <Widget>[
+                                        Icon(FontAwesomeIcons.bookOpenReader),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                          child: Text(
+                                              '${NumberFormat.compact().format(topic.topicReadCount)}'),
+                                        ),
+                                        Icon(FontAwesomeIcons.comment),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                          child: Text(
+                                              '${NumberFormat.compact().format(topic.topicCommentCount)}'),
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              donateSheet(
+                                                  topic.topicId,
+                                                  topic.topicHeadline,
+                                                  topic.userInfoData?.userInfoId,
+                                                  topic.userInfoData?.profilePic,
+                                                  topic.userInfoData?.userName);
+                                              /*Get.bottomSheet(
+                                      Container(
+                                        child: Column(
+                                          children: <Widget>[
+                                            ListTile(title: Text('TEST'),),
+                                            Text("Test")
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                    elevation: 20,
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(30.0),
-                                        topRight: Radius.circular(30.0),
+                                      elevation: 20,
+                                      backgroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.only(
+                                          topLeft: Radius.circular(30.0),
+                                          topRight: Radius.circular(30.0),
+                                        ),
                                       ),
+                                    );*/
+                                            },
+                                            icon: Icon(FontAwesomeIcons.btc)),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          child: Text(
+                                              '${NumberFormat.compact().format(topic.topicDonateCount)}'),
+                                        ),
+                                        IconButton(
+                                            onPressed: () {
+                                              setState(() {
+                                                if (topic.likeStatus == 0) {
+                                                  topic.likeStatus = 1;
+                                                  topic.topicLikeCount =
+                                                  (topic.topicLikeCount! + 1);
+                                                } else {
+                                                  topic.likeStatus = 0;
+                                                  topic.topicLikeCount =
+                                                  (topic.topicLikeCount! - 1);
+                                                }
+                                                LikePushButton(
+                                                    topic.topicId,
+                                                    topic.likeStatus,
+                                                    topic.topicHeadline);
+                                              });
+                                            },
+                                            icon: topic.likeStatus == 0
+                                                ? Icon(FontAwesomeIcons.heart,
+                                                color: Colors.black)
+                                                : Icon(
+                                                FontAwesomeIcons.heartCircleCheck,
+                                                color: Colors.red)),
+                                        Padding(
+                                          padding:
+                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          child: Text('${topic.topicLikeCount}'),
+                                        ),
+                                      ],
                                     ),
-                                  );*/
-                                    },
-                                    icon: Icon(FontAwesomeIcons.btc)),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Text(
-                                      '${NumberFormat.compact().format(topic.topicDonateCount)}'),
+                                  ],
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        if (topic.likeStatus == 0) {
-                                          topic.likeStatus = 1;
-                                          topic.topicLikeCount =
-                                              (topic.topicLikeCount! + 1);
-                                        } else {
-                                          topic.likeStatus = 0;
-                                          topic.topicLikeCount =
-                                              (topic.topicLikeCount! - 1);
-                                        }
-                                        LikePushButton(
-                                            topic.topicId,
-                                            topic.likeStatus,
-                                            topic.topicHeadline);
-                                      });
-                                    },
-                                    icon: topic.likeStatus == 0
-                                        ? Icon(FontAwesomeIcons.heart,
-                                            color: Colors.black)
-                                        : Icon(
-                                            FontAwesomeIcons.heartCircleCheck,
-                                            color: Colors.red)),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                  child: Text('${topic.topicLikeCount}'),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              child: ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                scrollDirection: Axis.vertical,
-                                shrinkWrap: true,
-                                padding: const EdgeInsets.all(8),
-                                itemCount: comments.length,
-                                itemBuilder: (context, index) {
-                                  return Card(
-                                    child: InkWell(
-                                      onLongPress: () {},
-                                      onTap: () {},
-                                      child: Row(
-                                        children: <Widget>[
-                                          Container(
-                                              height: 30,
-                                              width: 30,
-                                              padding: EdgeInsets.all(0),
-                                              decoration: BoxDecoration(
-                                                shape: BoxShape.circle,
-                                              ),
-                                              child: InkWell(
-                                                onTap: () {
-                                                  print(
-                                                      "Test ${comments[index].userInfoData?.userInfoId}");
-                                                  Get.to(ProfilePage(),
-                                                      arguments: comments[index]
-                                                          .userInfoData
-                                                          ?.userInfoId);
-                                                },
-                                                child:
-                                                    buildImageProfileDonateSheet(
-                                                        comments[index]
-                                                            .userInfoData!
-                                                            .profilePic!),
-                                              )),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: <Widget>[
-                                              Row(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: <Widget>[
-                                                  Text(
-                                                      '${comments[index].userInfoData?.userName}'),
-                                                  Row(children: <Widget>[
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              3, 2, 3, 2),
-                                                      decoration: BoxDecoration(
-                                                          borderRadius:
-                                                              BorderRadius.all(
-                                                                  Radius.circular(
-                                                                      10.0) //                 <--- border radius here
-                                                                  ),
-                                                          color: Colors.black),
-                                                      child: Row(
-                                                        children: [
-                                                          Text(
-                                                            '${comments[index].userInfoData?.expert}',
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .white),
-                                                          ),
-                                                          if (comments[index]
-                                                                  .userInfoData
-                                                                  ?.verifyStatus ==
-                                                              true)
-                                                            Padding(
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .fromLTRB(
-                                                                            10,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                child: Icon(
-                                                                    FontAwesomeIcons
-                                                                        .circleCheck,
-                                                                    color: Colors
-                                                                        .lightBlueAccent)),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ]),
-                                                ],
-                                              ),
-                                              Container(
-                                                  width: MediaQuery.of(context)
-                                                          .size
-                                                          .width *
-                                                      0.6,
-                                                  child: Text(
-                                                    '${comments[index].commentCaption}',
-                                                  )),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: <Widget>[
-                                              IconButton(
-                                                  onPressed: () {
-                                                    donateSheet(
-                                                        comments[index]
-                                                            .commentId,
-                                                        comments[index]
-                                                            .commentCaption,
-                                                        comments[index]
+                              ),
+                              Container(
+                                child: ListView.builder(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  padding: const EdgeInsets.all(8),
+                                  itemCount: comments.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.black, width: 2),
+                                        borderRadius: BorderRadius.circular(20),
+                                      ),
+                                      child: InkWell(
+                                        onLongPress: () {},
+                                        onTap: () {},
+                                        child: Row(
+                                          children: <Widget>[
+                                            Container(
+                                                height: 30,
+                                                width: 30,
+                                                padding: EdgeInsets.all(0),
+                                                decoration: BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                ),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    print(
+                                                        "Test ${comments[index].userInfoData?.userInfoId}");
+                                                    Get.to(ProfilePage(),
+                                                        arguments: comments[index]
                                                             .userInfoData
-                                                            ?.userInfoId,
-                                                        comments[index]
-                                                            .userInfoData
-                                                            ?.profilePic,
-                                                        comments[index]
-                                                            .userInfoData
-                                                            ?.userName);
+                                                            ?.userInfoId);
                                                   },
-                                                  icon: Icon(
-                                                      FontAwesomeIcons.btc)),
-                                              Padding(
-                                                padding: EdgeInsets.fromLTRB(
-                                                    0, 0, 0, 0),
-                                                child: Text(
-                                                    '${NumberFormat.compact().format(comments[index].commentDonateCount)}'),
-                                              ),
-                                            ],
-                                          ),
-                                          Column(
-                                            children: <Widget>[
-                                              IconButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      if (comments[index]
-                                                              .likeStatus ==
-                                                          0) {
-                                                        comments[index]
-                                                            .likeStatus = 1;
-                                                        comments[index]
-                                                                .commentLikeCount =
-                                                            (comments[index]
-                                                                    .commentLikeCount! +
-                                                                1);
-                                                      } else {
-                                                        comments[index]
-                                                            .likeStatus = 0;
-                                                        comments[index]
-                                                                .commentLikeCount =
-                                                            (comments[index]
-                                                                    .commentLikeCount! -
-                                                                1);
-                                                      }
-                                                      LikePushButton(
+                                                  child:
+                                                      buildImageProfileDonateSheet(
+                                                          comments[index]
+                                                              .userInfoData!
+                                                              .profilePic!),
+                                                )),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Row(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: <Widget>[
+                                                    Text(
+                                                        '${comments[index].userInfoData?.userName}'),
+                                                    Row(children: <Widget>[
+                                                      Container(
+                                                        padding:
+                                                            EdgeInsets.fromLTRB(
+                                                                3, 2, 3, 2),
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius.all(
+                                                                    Radius.circular(
+                                                                        10.0) //                 <--- border radius here
+                                                                    ),
+                                                            color: Colors.black),
+                                                        child: Row(
+                                                          children: [
+                                                            Text(
+                                                              '${comments[index].userInfoData?.expert}',
+                                                              style: TextStyle(
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                            if (comments[index]
+                                                                    .userInfoData
+                                                                    ?.verifyStatus ==
+                                                                true)
+                                                              Padding(
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .fromLTRB(
+                                                                              10,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                  child: Icon(
+                                                                      FontAwesomeIcons
+                                                                          .circleCheck,
+                                                                      color: Colors
+                                                                          .lightBlueAccent)),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ]),
+                                                  ],
+                                                ),
+                                                Container(
+                                                    width: MediaQuery.of(context)
+                                                            .size
+                                                            .width *
+                                                        0.6,
+                                                    child: Text(
+                                                      '${comments[index].commentCaption}',
+                                                    )),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: <Widget>[
+                                                IconButton(
+                                                    onPressed: () {
+                                                      donateSheet(
                                                           comments[index]
                                                               .commentId,
                                                           comments[index]
-                                                              .likeStatus,
+                                                              .commentCaption,
                                                           comments[index]
-                                                              .commentCaption);
-                                                    });
-                                                  },
-                                                  icon: comments[index]
-                                                              .likeStatus ==
-                                                          0
-                                                      ? Icon(
-                                                          FontAwesomeIcons
-                                                              .heart,
-                                                          color: Colors.black)
-                                                      : Icon(
-                                                          FontAwesomeIcons
-                                                              .heartCircleCheck,
-                                                          color: Colors.red)),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.fromLTRB(
-                                                        0, 0, 0, 0),
-                                                child: Text(
-                                                    '${comments[index].commentLikeCount}'),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
+                                                              .userInfoData
+                                                              ?.userInfoId,
+                                                          comments[index]
+                                                              .userInfoData
+                                                              ?.profilePic,
+                                                          comments[index]
+                                                              .userInfoData
+                                                              ?.userName);
+                                                    },
+                                                    icon: Icon(
+                                                        FontAwesomeIcons.btc)),
+                                                Padding(
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 0),
+                                                  child: Text(
+                                                      '${NumberFormat.compact().format(comments[index].commentDonateCount)}'),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              children: <Widget>[
+                                                IconButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        if (comments[index]
+                                                                .likeStatus ==
+                                                            0) {
+                                                          comments[index]
+                                                              .likeStatus = 1;
+                                                          comments[index]
+                                                                  .commentLikeCount =
+                                                              (comments[index]
+                                                                      .commentLikeCount! +
+                                                                  1);
+                                                        } else {
+                                                          comments[index]
+                                                              .likeStatus = 0;
+                                                          comments[index]
+                                                                  .commentLikeCount =
+                                                              (comments[index]
+                                                                      .commentLikeCount! -
+                                                                  1);
+                                                        }
+                                                        LikePushButton(
+                                                            comments[index]
+                                                                .commentId,
+                                                            comments[index]
+                                                                .likeStatus,
+                                                            comments[index]
+                                                                .commentCaption);
+                                                      });
+                                                    },
+                                                    icon: comments[index]
+                                                                .likeStatus ==
+                                                            0
+                                                        ? Icon(
+                                                            FontAwesomeIcons
+                                                                .heart,
+                                                            color: Colors.black)
+                                                        : Icon(
+                                                            FontAwesomeIcons
+                                                                .heartCircleCheck,
+                                                            color: Colors.red)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.fromLTRB(
+                                                          0, 0, 0, 0),
+                                                  child: Text(
+                                                      '${comments[index].commentLikeCount}'),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  );
-                                },
+                                    );
+                                  },
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         );
                       } else {
                         return Material(

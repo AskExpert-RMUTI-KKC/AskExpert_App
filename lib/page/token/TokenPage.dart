@@ -228,7 +228,12 @@ class _TokenPageState extends State<TokenPage> {
                               shrinkWrap: true,
                               padding: const EdgeInsets.all(8),
                               itemCount: transactionList.length,
-                              itemBuilder: (context, index) => Card(
+                              itemBuilder: (context, index) => Container(
+                                margin: EdgeInsets.fromLTRB(0, 4, 0  , 4),
+                                decoration: BoxDecoration(
+                                  border: Border.all(color: Colors.black,width: 4),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
                                 child: ListTile(
                                   onTap: () {
                                     if (transactionList[index].topicId != null)

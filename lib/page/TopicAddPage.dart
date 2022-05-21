@@ -249,7 +249,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
                     )),
 
                     Padding(
-                      padding: EdgeInsets.all(12),
+                      padding: EdgeInsets.fromLTRB(10, 0, 10,0),
                       child: TextButton(
                         style: ElevatedButton.styleFrom(
                           minimumSize: const Size(300, 50),

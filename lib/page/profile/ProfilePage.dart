@@ -184,11 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Text("${user.userCaption}"),
                 ),
                 // TODO MAKE FUNCTION FOR THIS CODE
-
-                Padding(
-                  padding: EdgeInsets.fromLTRB(
-                      0, 0, 0, 0), //child: buildImageProfilePage(),
-                )
               ],
             ),
           );
