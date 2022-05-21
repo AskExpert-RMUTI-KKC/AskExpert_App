@@ -80,7 +80,6 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-
     var url = Uri.parse('${ConfigApp.apiExpertFindAll}');
     print('\n URL :${url.toString()}');
     var response = await http.post(url, headers: {
@@ -165,16 +164,31 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                         },
                         child: Container(
                           padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                          width: 256,
-                          height: 256,
                           child: imageFile == null
                               ? Container(
-                                  height: 256,
-                                  width: 256,
-                                  child: Placeholder(),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        width: 256,
+                                        height: 256,
+                                        child: Image.asset(
+                                            'assets/images/AddProfile.png'),
+                                      ),
+                                      Text(
+                                        "กดเพื่อเลือกรูปภาพ",
+                                        style: TextStyle(fontSize: 26),
+                                      )
+                                    ],
+                                  ),
                                 )
-                              : Image.file(imageFile!,
-                                  height: 256, width: 256, fit: BoxFit.cover),
+                              : Container(
+                                  width: 256,
+                                  height: 256,
+                                  child: Image.file(imageFile!,
+                                      height: 256,
+                                      width: 256,
+                                      fit: BoxFit.cover),
+                                ),
                         ),
                       ),
                       Column(
@@ -347,9 +361,11 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                               Get.snackbar(
                                 "Register Report Status",
                                 'Please Upload Image Profile',
-                                icon: Icon(FontAwesomeIcons.person, color: Colors.black),
+                                icon: Icon(FontAwesomeIcons.person,
+                                    color: Colors.black),
                                 snackPosition: SnackPosition.BOTTOM,
-                                backgroundColor: Color(ConfigApp.warningSnackBar),
+                                backgroundColor:
+                                    Color(ConfigApp.warningSnackBar),
                                 colorText: Color(ConfigApp.warningSnackBarText),
                               );
                             }

@@ -261,15 +261,30 @@ class _VerifyPageState extends State<VerifyPage> {
                 InkWell(
                   onTap: (){selectFile();},
                   child: image == null
-                      ? Icon(
-                          FontAwesomeIcons.addressCard,
-                    size: 150,
-                        )
-                      : Image.file(
-                          image!,
-                          height: 256,
+                      ? Container(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
                           width: 256,
+                          height: 256,
+                          child: Image.asset(
+                              'assets/images/AddProfile.png'),
                         ),
+                        Text(
+                          "กดเพื่อเลือกรูปภาพ",
+                          style: TextStyle(fontSize: 26),
+                        )
+                      ],
+                    ),
+                  )
+                      : Container(
+                    width: 256,
+                    height: 256,
+                    child: Image.file(image!,
+                        height: 256,
+                        width: 256,
+                        fit: BoxFit.cover),
+                  ),
                 )
               ],
             ),

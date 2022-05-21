@@ -125,6 +125,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   )
                 else
                   Placeholder(),
+
                 Column(
                   children: <Widget>[
                     Text('@${user.userName}'),
