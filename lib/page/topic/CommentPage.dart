@@ -202,7 +202,24 @@ class _CommentPageState extends State<CommentPage> {
     double c_width = MediaQuery.of(context).size.width * 0.7;
 
     return Scaffold(
-      //Text('${topic.topicCaption}\n ${topicId}\n ${topic.topicGroup}\n ${topic.topicHeadline}\n ')
+      appBar: AppBar(
+        title: const Text(
+          '',
+          style: TextStyle(
+            color: Color(ConfigApp.textColor),
+            fontSize: 26,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+        actions: [],
+        elevation: 0,
+        centerTitle: false,
+        backgroundColor: const Color(ConfigApp.appbarBg),
+        iconTheme: IconThemeData(
+          color: Colors.black,
+        ),
+      ),
+      backgroundColor: const Color(ConfigApp.appbarBg),
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: RefreshIndicator(
