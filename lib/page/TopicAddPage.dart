@@ -134,24 +134,84 @@ class _TopicAddPageState extends State<TopicAddPage> {
       backgroundColor: const Color(ConfigApp.appbarBg),
         body: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
-          child: SingleChildScrollView(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Column(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Expanded(child: SingleChildScrollView(
+                      child: Column(
                         children: <Widget>[
-                          Padding(
-                            padding:
-                            const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-                            child: TextFormField(
-                              maxLength: 64,
+                          Column(
+                            children: <Widget>[
+                              Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                                child: TextFormField(
+                                  maxLength: 64,
+                                  decoration: const InputDecoration(
+                                    label: Text("topicHeadline"),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            Color(ConfigApp.buttonSecondary))),
+                                  ),
+                                  keyboardType: TextInputType.emailAddress,
+                                  controller: _topicHeadline,
+                                  validator: (input) {
+                                    if (input!.isEmpty) {
+                                      return "please enter topicHeadline";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
+                              Padding(
+                                padding:
+                                const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
+                                child: TextFormField(
+                                  maxLength: 512,
+                                  maxLines: 5,
+                                  decoration: const InputDecoration(
+                                    label: Text("topicCaption"),
+                                    border: OutlineInputBorder(
+                                      borderRadius:
+                                      BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    focusedBorder: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                        borderSide: BorderSide(
+                                            color:
+                                            Color(ConfigApp.buttonSecondary))),
+                                  ),
+                                  controller: _topicCaption,
+                                  validator: (input) {
+                                    if (input!.isEmpty) {
+                                      return "please enter topicCaption";
+                                    } else {
+                                      return null;
+                                    }
+                                  },
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 100,
+                            width: 200,
+                            child: DropdownButtonFormField<String>(
                               decoration: const InputDecoration(
-                                label: Text("topicHeadline"),
                                 border: OutlineInputBorder(
                                   borderRadius:
                                   BorderRadius.all(Radius.circular(15)),
@@ -160,14 +220,21 @@ class _TopicAddPageState extends State<TopicAddPage> {
                                     borderRadius:
                                     BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color:
-                                        Color(ConfigApp.buttonSecondary))),
+                                        color: Color(ConfigApp.buttonSecondary))),
                               ),
-                              keyboardType: TextInputType.emailAddress,
-                              controller: _topicHeadline,
+                              value: topicGroupSelected,
+                              items: topicGroupList
+                                  .map((DataList) => DropdownMenuItem(
+                                child: Text('${DataList.topicGroupPath}'),
+                                value: DataList.topicGroupId,
+                              ))
+                                  .toList(),
+                              onChanged: (item) => setState(() {
+                                topicGroupSelected = item;
+                              }),
                               validator: (input) {
-                                if (input!.isEmpty) {
-                                  return "please enter topicHeadline";
+                                if (input == null) {
+                                  return "please enter Expert";
                                 } else {
                                   return null;
                                 }
@@ -175,105 +242,41 @@ class _TopicAddPageState extends State<TopicAddPage> {
                             ),
                           ),
                           Padding(
-                            padding:
-                            const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-                            child: TextFormField(
-                                maxLength: 512,
-                                maxLines: 5,
-                              decoration: const InputDecoration(
-                                label: Text("topicCaption"),
-                                border: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                    borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
-                                    borderSide: BorderSide(
-                                        color:
-                                        Color(ConfigApp.buttonSecondary))),
-                              ),
-                              controller: _topicCaption,
-                              validator: (input) {
-                                if (input!.isEmpty) {
-                                  return "please enter topicCaption";
-                                } else {
-                                  return null;
-                                }
-                              },
-                            ),
+                            padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 100,
-                        width: 200,
-                        child: DropdownButtonFormField<String>(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                              BorderRadius.all(Radius.circular(15)),
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius:
-                                BorderRadius.all(Radius.circular(15)),
-                                borderSide: BorderSide(
-                                    color: Color(ConfigApp.buttonSecondary))),
-                          ),
-                          value: topicGroupSelected,
-                          items: topicGroupList
-                              .map((DataList) => DropdownMenuItem(
-                            child: Text('${DataList.topicGroupPath}'),
-                            value: DataList.topicGroupId,
-                          ))
-                              .toList(),
-                          onChanged: (item) => setState(() {
-                            topicGroupSelected = item;
-                          }),
-                          validator: (input) {
-                            if (input == null) {
-                              return "please enter Expert";
-                            } else {
-                              return null;
-                            }
-                          },
-                        ),
-                      ),
+                    )),
 
-                      // TODO : Expert List DropDown
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 8.0, 0, 8.0),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(12),
-                        child: TextButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: const Size(300, 50),
-                            primary: Color(ConfigApp.buttonSecondary),
-                            elevation: 5,
-                            shape: shape,
-                            //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                          ),
-                          onPressed: () {
-                            bool pass = _formKey.currentState!.validate();
-                            if (pass) {
-                              //_formKey.currentState!.reset();
-                              _createTopicCallApi();
-                              print("topicHeadline : ${_topicHeadline.text}");
-                              print("topicCaption : ${_topicCaption.text}");
-                            }
-                          },
-                          child: Text(
-                            'Create Topic',
-                            style: TextStyle(
-                              fontSize: 18,
-                              color: Color(ConfigApp.buttonPrimary),
-                            ),
+                    Padding(
+                      padding: EdgeInsets.all(12),
+                      child: TextButton(
+                        style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(300, 50),
+                          primary: Color(ConfigApp.buttonSecondary),
+                          elevation: 5,
+                          shape: shape,
+                          //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                        ),
+                        onPressed: () {
+                          bool pass = _formKey.currentState!.validate();
+                          if (pass) {
+                            //_formKey.currentState!.reset();
+                            _createTopicCallApi();
+                            print("topicHeadline : ${_topicHeadline.text}");
+                            print("topicCaption : ${_topicCaption.text}");
+                          }
+                        },
+                        child: Text(
+                          'Create Topic',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color(ConfigApp.buttonPrimary),
                           ),
                         ),
-                      )
-                    ],
-                  ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

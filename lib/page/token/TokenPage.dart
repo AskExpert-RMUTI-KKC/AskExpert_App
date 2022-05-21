@@ -139,9 +139,19 @@ class _TokenPageState extends State<TokenPage> {
                       child: Container(
                         child: Column(
                           children: <Widget>[
-                            Padding(
-                              padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
-                              child: Text("${user.token} Point"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(FontAwesomeIcons.btc,size: 30,),
+                                SizedBox(width: 10,),
+                                Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                                  child: Text(
+                                    "${user.token} Point",
+                                    style: TextStyle(fontSize: 26),
+                                  ),
+                                ),
+                              ],
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -169,8 +179,9 @@ class _TokenPageState extends State<TokenPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Icon(FontAwesomeIcons.deskpro),
-                                        Text("Withdraw"),
+                                        Icon(FontAwesomeIcons.circlePlus),
+                                        SizedBox(width: 10),
+                                        Text("Deposit"),
                                       ],
                                     ),
                                   ),
@@ -201,8 +212,10 @@ class _TokenPageState extends State<TokenPage> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: <Widget>[
-                                        Icon(FontAwesomeIcons.deskpro),
-                                        Text("Deposit"),
+                                        Icon(
+                                            FontAwesomeIcons.moneyBillTransfer),
+                                        SizedBox(width: 10),
+                                        Text("Withdraw"),
                                       ],
                                     ),
                                   ),

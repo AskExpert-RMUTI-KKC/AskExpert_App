@@ -143,11 +143,17 @@ class _TopicPageState extends State<TopicPage> {
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
           itemCount: topics.length,
-          itemBuilder:
-              (context, index) => /*TopicCardPage(topics: topics[index])*/ Card(
+          itemBuilder: (context,
+              index) => /*TopicCardPage(topics: topics[index])*/ Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 0  , 10),
+            decoration: BoxDecoration(
+                 border: Border.all(color: Colors.black,width: 4),
+                 borderRadius: BorderRadius.circular(20),
+            ),
             child: ListTile(
               onTap: () {
-                Get.to(CommentPage(), arguments: topics[index].topicId.toString());
+                Get.to(CommentPage(),
+                    arguments: topics[index].topicId.toString());
               },
               title: Column(
                 children: <Widget>[
@@ -218,8 +224,10 @@ class _TopicPageState extends State<TopicPage> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
-                  ],),
+                      Text(
+                          '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
+                    ],
+                  ),
                   //TODO today
                   Row(
                     children: <Widget>[
