@@ -145,7 +145,8 @@ class _VerifyPageState extends State<VerifyPage> {
           backgroundColor: Colors.greenAccent,
           colorText: Color(ConfigApp.textColor),
         );
-        Get.offAll(NavigationBarPage(),arguments:'4');
+        Get.offAll(NavigationBarPage());
+        Get.offAll(NavigationBarPage());
       }
       //It's done...
     });

@@ -138,7 +138,9 @@ class _TopicPageState extends State<TopicPage> {
       backgroundColor: const Color(ConfigApp.appbarBg),
       body: RefreshIndicator(
         onRefresh: Refresh,
-        child: ListView.builder(
+        child:
+            topics.length > 0
+            ?ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           padding: const EdgeInsets.all(8),
@@ -346,7 +348,8 @@ class _TopicPageState extends State<TopicPage> {
               ),
             ),
           ),
-        ),
+        )
+            :Padding(padding: EdgeInsets.zero),
       ), // ListView.builder
     );
   }

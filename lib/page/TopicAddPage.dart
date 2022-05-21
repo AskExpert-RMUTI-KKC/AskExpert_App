@@ -60,7 +60,8 @@ class _TopicAddPageState extends State<TopicAddPage> {
     if (response.statusCode == 200 && resMap["message"] == null) {
       print('\n\n\n${resMap["data"]["topicId"]}\n\n\n\n\n');
       // Get.offAll(NavigationBarPage(),arguments: '0');
-      Get.offAll(NavigationBarPage(),arguments: '0');
+      Get.offAll(NavigationBarPage());
+      Get.offAll(NavigationBarPage());
       String topicId = resMap["data"]["topicId"].toString();
       Get.to(CommentPage(),arguments: topicId);
     }
