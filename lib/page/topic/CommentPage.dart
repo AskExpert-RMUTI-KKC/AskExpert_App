@@ -89,6 +89,10 @@ class _CommentPageState extends State<CommentPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
+      comments = [];
+      setState(() {
+        commentCall(topicId);
+      });
     } else {
       // Get.snackbar(
       //   "Register Report Status",
@@ -216,10 +220,11 @@ class _CommentPageState extends State<CommentPage> {
                           child: Column(
                             children: <Widget>[
                               Container(
-                                margin:EdgeInsets.fromLTRB(4, 10, 4, 10),
-                                padding:EdgeInsets.fromLTRB(4, 10, 4, 10),
+                                margin: EdgeInsets.fromLTRB(4, 10, 4, 10),
+                                padding: EdgeInsets.fromLTRB(4, 10, 4, 10),
                                 decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.black,width: 4),
+                                  border:
+                                      Border.all(color: Colors.black, width: 4),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: Column(
@@ -233,8 +238,8 @@ class _CommentPageState extends State<CommentPage> {
                                             print(
                                                 "Test ${topic.userInfoData?.userInfoId}");
                                             Get.to(ProfilePage(),
-                                                arguments:
-                                                topic.userInfoData?.userInfoId);
+                                                arguments: topic
+                                                    .userInfoData?.userInfoId);
                                           },
                                         ),
                                         // Container(
@@ -248,38 +253,41 @@ class _CommentPageState extends State<CommentPage> {
                                         //   size: 50,
                                         // ),
                                         Container(
-                                          padding:
-                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
                                           width: c_width,
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             children: <Widget>[
-                                              Text('${topic.userInfoData?.userName}'),
+                                              Text(
+                                                  '${topic.userInfoData?.userName}'),
                                               Row(children: <Widget>[
                                                 Container(
-                                                  padding:
-                                                  EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      3, 2, 3, 2),
                                                   decoration: BoxDecoration(
-                                                      borderRadius: BorderRadius.all(
-                                                          Radius.circular(
-                                                              10.0) //                 <--- border radius here
-                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0) //                 <--- border radius here
+                                                              ),
                                                       color: Colors.black),
                                                   child: Row(
                                                     children: [
                                                       Text(
                                                         '${topic.userInfoData?.expert}',
                                                         style: TextStyle(
-                                                            color: Colors.white),
+                                                            color:
+                                                                Colors.white),
                                                       ),
                                                       if (topic.userInfoData
-                                                          ?.verifyStatus ==
+                                                              ?.verifyStatus ==
                                                           true)
                                                         Padding(
-                                                            padding:
-                                                            EdgeInsets.fromLTRB(
-                                                                10, 0, 0, 0),
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(10, 0,
+                                                                    0, 0),
                                                             child: Icon(
                                                                 FontAwesomeIcons
                                                                     .circleCheck,
@@ -295,7 +303,8 @@ class _CommentPageState extends State<CommentPage> {
                                       ],
                                     ),
                                     Row(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Text(
                                             '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
@@ -304,27 +313,30 @@ class _CommentPageState extends State<CommentPage> {
                                     Row(
                                       children: <Widget>[
                                         Padding(
-                                          padding:
-                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
                                           child: Container(
                                             width: c_width,
                                             child: Column(
                                               crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                                  CrossAxisAlignment.start,
                                               children: <Widget>[
                                                 Text(
                                                   '${topic.topicHeadline}',
                                                   maxLines: 2,
-                                                  style: TextStyle(fontSize: 20),
+                                                  style:
+                                                      TextStyle(fontSize: 20),
                                                 ),
                                                 Container(
                                                     padding:
-                                                    EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                        EdgeInsets.fromLTRB(
+                                                            3, 2, 3, 2),
                                                     decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.all(
-                                                            Radius.circular(
-                                                                10.0) //                 <--- border radius here
-                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius.all(
+                                                                Radius.circular(
+                                                                    10.0) //                 <--- border radius here
+                                                                ),
                                                         color: Colors.black),
                                                     child: Text(
                                                       '${topic.topicGroupName}',
@@ -342,19 +354,20 @@ class _CommentPageState extends State<CommentPage> {
                                       ],
                                     ),
                                     Wrap(
-                                      crossAxisAlignment: WrapCrossAlignment.center,
+                                      crossAxisAlignment:
+                                          WrapCrossAlignment.center,
                                       children: <Widget>[
                                         Icon(FontAwesomeIcons.bookOpenReader),
                                         Padding(
-                                          padding:
-                                          const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 10, 0),
                                           child: Text(
                                               '${NumberFormat.compact().format(topic.topicReadCount)}'),
                                         ),
                                         Icon(FontAwesomeIcons.comment),
                                         Padding(
-                                          padding:
-                                          const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              10, 0, 0, 0),
                                           child: Text(
                                               '${NumberFormat.compact().format(topic.topicCommentCount)}'),
                                         ),
@@ -363,8 +376,10 @@ class _CommentPageState extends State<CommentPage> {
                                               donateSheet(
                                                   topic.topicId,
                                                   topic.topicHeadline,
-                                                  topic.userInfoData?.userInfoId,
-                                                  topic.userInfoData?.profilePic,
+                                                  topic
+                                                      .userInfoData?.userInfoId,
+                                                  topic
+                                                      .userInfoData?.profilePic,
                                                   topic.userInfoData?.userName);
                                               /*Get.bottomSheet(
                                       Container(
@@ -387,7 +402,8 @@ class _CommentPageState extends State<CommentPage> {
                                             },
                                             icon: Icon(FontAwesomeIcons.btc)),
                                         Padding(
-                                          padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 0, 0),
                                           child: Text(
                                               '${NumberFormat.compact().format(topic.topicDonateCount)}'),
                                         ),
@@ -397,11 +413,13 @@ class _CommentPageState extends State<CommentPage> {
                                                 if (topic.likeStatus == 0) {
                                                   topic.likeStatus = 1;
                                                   topic.topicLikeCount =
-                                                  (topic.topicLikeCount! + 1);
+                                                      (topic.topicLikeCount! +
+                                                          1);
                                                 } else {
                                                   topic.likeStatus = 0;
                                                   topic.topicLikeCount =
-                                                  (topic.topicLikeCount! - 1);
+                                                      (topic.topicLikeCount! -
+                                                          1);
                                                 }
                                                 LikePushButton(
                                                     topic.topicId,
@@ -411,14 +429,16 @@ class _CommentPageState extends State<CommentPage> {
                                             },
                                             icon: topic.likeStatus == 0
                                                 ? Icon(FontAwesomeIcons.heart,
-                                                color: Colors.black)
+                                                    color: Colors.black)
                                                 : Icon(
-                                                FontAwesomeIcons.heartCircleCheck,
-                                                color: Colors.red)),
+                                                    FontAwesomeIcons
+                                                        .heartCircleCheck,
+                                                    color: Colors.red)),
                                         Padding(
-                                          padding:
-                                          const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                          child: Text('${topic.topicLikeCount}'),
+                                          padding: const EdgeInsets.fromLTRB(
+                                              0, 0, 0, 0),
+                                          child:
+                                              Text('${topic.topicLikeCount}'),
                                         ),
                                       ],
                                     ),
@@ -457,9 +477,10 @@ class _CommentPageState extends State<CommentPage> {
                                                     print(
                                                         "Test ${comments[index].userInfoData?.userInfoId}");
                                                     Get.to(ProfilePage(),
-                                                        arguments: comments[index]
-                                                            .userInfoData
-                                                            ?.userInfoId);
+                                                        arguments:
+                                                            comments[index]
+                                                                .userInfoData
+                                                                ?.userInfoId);
                                                   },
                                                   child:
                                                       buildImageProfileDonateSheet(
@@ -482,13 +503,15 @@ class _CommentPageState extends State<CommentPage> {
                                                         padding:
                                                             EdgeInsets.fromLTRB(
                                                                 3, 2, 3, 2),
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius.all(
-                                                                    Radius.circular(
-                                                                        10.0) //                 <--- border radius here
-                                                                    ),
-                                                            color: Colors.black),
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                borderRadius:
+                                                                    BorderRadius.all(
+                                                                        Radius.circular(
+                                                                            10.0) //                 <--- border radius here
+                                                                        ),
+                                                                color: Colors
+                                                                    .black),
                                                         child: Row(
                                                           children: [
                                                             Text(
@@ -502,13 +525,12 @@ class _CommentPageState extends State<CommentPage> {
                                                                     ?.verifyStatus ==
                                                                 true)
                                                               Padding(
-                                                                  padding:
-                                                                      EdgeInsets
-                                                                          .fromLTRB(
-                                                                              10,
-                                                                              0,
-                                                                              0,
-                                                                              0),
+                                                                  padding: EdgeInsets
+                                                                      .fromLTRB(
+                                                                          10,
+                                                                          0,
+                                                                          0,
+                                                                          0),
                                                                   child: Icon(
                                                                       FontAwesomeIcons
                                                                           .circleCheck,
@@ -521,10 +543,11 @@ class _CommentPageState extends State<CommentPage> {
                                                   ],
                                                 ),
                                                 Container(
-                                                    width: MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.6,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.6,
                                                     child: Text(
                                                       '${comments[index].commentCaption}',
                                                     )),
