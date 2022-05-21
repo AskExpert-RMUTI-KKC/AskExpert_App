@@ -372,26 +372,31 @@ class _RegisterPageState extends State<RegisterPage> {
                             Padding(
                               padding:
                                   const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    IconButton(
-                                      onPressed: () {
-                                        _GsignIn();
-                                      },
-                                      iconSize: 40,
-                                      icon: const Icon(
-                                        FontAwesomeIcons.google,
-                                        color: Color(ConfigApp.iconEmail),
+                              child: InkWell(
+                                onTap: () {
+                                  _GsignIn();
+                                },
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      IconButton(
+                                        onPressed: () {
+                                          _GsignIn();
+                                        },
+                                        iconSize: 40,
+                                        icon: const Icon(
+                                          FontAwesomeIcons.google,
+                                          color: Color(ConfigApp.iconEmail),
+                                        ),
                                       ),
-                                    ),
-                                    Text(
-                                      "Google",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                      ),
-                                    )
-                                  ]),
+                                      Text(
+                                        "Google",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      )
+                                    ]),
+                              ),
                             ),
                             // Padding(
                             //   padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
