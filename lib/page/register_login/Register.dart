@@ -64,7 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
       print('\nResponse body data: ${resMap["data"]}');
 
       //SAVE TOKEN
+      await TokenStore.setToken('${resMap["data"]}');
       String? getToken = await TokenStore.getToken();
+
       print("data SecureStorage : ${getToken}");
       if (resMap["message"] == "register") {
         Get.offAll(RegisterInfoPage());
@@ -220,7 +222,6 @@ class _RegisterPageState extends State<RegisterPage> {
       await TokenStore.setToken(resMap["data"]);
       String? getToken = await TokenStore.getToken();
       print("data SecureStorage : ${getToken}");
-
       Get.offAll(RegisterInfoPage());
     } else {
       print('\nResponse message: ${resMap["message"]}');

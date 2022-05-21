@@ -80,9 +80,6 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
 
-    String? _tokenJwt = await TokenStore.getToken();
-    _tokenJwt = "Bearer " + _tokenJwt!;
-    print("_tokenJwt : ${_tokenJwt}");
 
     var url = Uri.parse('${ConfigApp.apiExpertFindAll}');
     print('\n URL :${url.toString()}');
