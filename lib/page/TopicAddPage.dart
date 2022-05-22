@@ -88,7 +88,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
     if (response.statusCode == 200 && resMap["message"] == null) {
       String topicId = resMap["data"]["topicId"].toString();
       for (int i = 0; i < image.length; i++) {
-        sendImageTopic(image[i],topicId);
+        await sendImageTopic(image[i],topicId);
       }
 
       print('\n\n\n${resMap["data"]["topicId"]}\n\n\n\n\n');
