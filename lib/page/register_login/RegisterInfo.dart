@@ -39,6 +39,8 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
   Future<void> _registerCallApi() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
+    if(expertSelected == null)
+      expertSelected = "none";
     var body = jsonEncode({
       'firstName': _firstName.text,
       'lastName': _lastName.text,
@@ -305,6 +307,7 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           ),
                         ],
                       ),
+                      Text('ความชำนาญพิเศษ(หากมี)',style: TextStyle(fontSize: 16),),
                       SizedBox(
                         height: 100,
                         width: 200,
@@ -330,13 +333,15 @@ class _RegisterInfoPageState extends State<RegisterInfoPage> {
                           onChanged: (item) => setState(() {
                             expertSelected = item;
                           }),
-                          validator: (input) {
-                            if (input == null) {
-                              return "please enter Expert";
-                            } else {
-                              return null;
-                            }
-                          },
+
+                          // validator: (input) {
+                          //   if (input == null) {
+                          //     return "please enter Expert";
+                          //   } else {
+                          //     return null;
+                          //   }
+                          // },
+
                         ),
                       ),
 
