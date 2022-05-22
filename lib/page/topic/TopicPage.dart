@@ -190,7 +190,8 @@ class _TopicPageState extends State<TopicPage> {
                             children: <Widget>[
                               Text('${topics[index].userInfoData?.userName}'),
                               Row(children: <Widget>[
-                                Container(
+                                topics[index].userInfoData?.expert != null
+                                ?Container(
                                   padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
@@ -216,7 +217,8 @@ class _TopicPageState extends State<TopicPage> {
                                                 color: Colors.lightBlueAccent)),
                                     ],
                                   ),
-                                ),
+                                )
+                                :Container(),
                               ]),
                             ],
                           ),

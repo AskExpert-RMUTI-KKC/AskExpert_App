@@ -190,6 +190,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
       print('\nImage File :${imageFile.path}');
       setState(() {
         final imageTemp = File(imageFile!.path);
+        print('\n imageTemp path${imageTemp.path}');
         this.image.add(imageTemp);
       });
     } else {
@@ -227,6 +228,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
 
   @override
   void initState() {
+    image=[];
     topicGroupListCallApi();
     super.initState();
   }
@@ -389,8 +391,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
                                               AlignmentDirectional.topEnd,
                                           children: <Widget>[
                                             Container(
-                                              child: Image.asset(
-                                                  '${image[index].path}'),
+                                              child: Image.asset(image[index].path),
                                               height: 256,
                                             ),
                                             InkWell(

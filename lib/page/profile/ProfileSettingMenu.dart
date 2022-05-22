@@ -78,7 +78,8 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
       if(imageFile != null){
         UtilsImage().uploadImgProfile(imageFile);
       }
-      Get.offAll(NavigationBarPage(),arguments:'4');
+      Get.offAll(NavigationBarPage());
+      Get.offAll(NavigationBarPage());
     }
     else{
       Get.snackbar(

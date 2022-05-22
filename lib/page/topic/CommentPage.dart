@@ -280,15 +280,16 @@ class _CommentPageState extends State<CommentPage> {
                                               Text(
                                                   '${topic.userInfoData?.userName}'),
                                               Row(children: <Widget>[
-                                                Container(
+                                                topic.userInfoData?.expert != null
+                                                ?Container(
                                                   padding: EdgeInsets.fromLTRB(
                                                       3, 2, 3, 2),
                                                   decoration: BoxDecoration(
                                                       borderRadius:
-                                                          BorderRadius.all(
-                                                              Radius.circular(
-                                                                  10.0) //                 <--- border radius here
-                                                              ),
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0) //                 <--- border radius here
+                                                      ),
                                                       color: Colors.black),
                                                   child: Row(
                                                     children: [
@@ -296,15 +297,15 @@ class _CommentPageState extends State<CommentPage> {
                                                         '${topic.userInfoData?.expert}',
                                                         style: TextStyle(
                                                             color:
-                                                                Colors.white),
+                                                            Colors.white),
                                                       ),
                                                       if (topic.userInfoData
-                                                              ?.verifyStatus ==
+                                                          ?.verifyStatus ==
                                                           true)
                                                         Padding(
                                                             padding: EdgeInsets
                                                                 .fromLTRB(10, 0,
-                                                                    0, 0),
+                                                                0, 0),
                                                             child: Icon(
                                                                 FontAwesomeIcons
                                                                     .circleCheck,
@@ -312,7 +313,8 @@ class _CommentPageState extends State<CommentPage> {
                                                                     .lightBlueAccent)),
                                                     ],
                                                   ),
-                                                ),
+                                                )
+                                                :Container(),
                                               ]),
                                             ],
                                           ),
@@ -623,7 +625,8 @@ class _CommentPageState extends State<CommentPage> {
                                                     Text(
                                                         '${comments[index].userInfoData?.userName}'),
                                                     Row(children: <Widget>[
-                                                      Container(
+                                                      comments[index].userInfoData?.expert != null
+                                                      ?Container(
                                                         padding:
                                                             EdgeInsets.fromLTRB(
                                                                 3, 2, 3, 2),
@@ -662,7 +665,8 @@ class _CommentPageState extends State<CommentPage> {
                                                                           .lightBlueAccent)),
                                                           ],
                                                         ),
-                                                      ),
+                                                      )
+                                                      :Container(),
                                                     ]),
                                                   ],
                                                 ),

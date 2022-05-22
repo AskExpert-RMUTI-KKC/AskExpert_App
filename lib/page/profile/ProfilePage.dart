@@ -134,7 +134,8 @@ class _ProfilePageState extends State<ProfilePage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Container(
+                          user.expertGroupListData != null
+                              ?Container(
                             padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.all(Radius.circular(
@@ -157,7 +158,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                           color: Colors.lightBlueAccent)),
                               ],
                             ),
-                          ),
+                          )
+                              :Container()
                         ]),
                   ],
                 ),
