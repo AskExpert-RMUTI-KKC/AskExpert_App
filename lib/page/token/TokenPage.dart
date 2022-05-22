@@ -13,6 +13,7 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
+import 'package:get/get_navigation/src/snackbar/snackbar.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
@@ -54,6 +55,7 @@ class _TokenPageState extends State<TokenPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
+      transactionList=[];
       for (int i = 0; i < resMap["data"].length; i++) {
         transactionList.add(TransactionDataModel.fromJson(resMap["data"][i]));
       }
@@ -100,6 +102,108 @@ class _TokenPageState extends State<TokenPage> {
   Future<bool> AwaitTransactionCall() async {
     await UserCall();
     return true;
+  }
+
+  Future<void> deposit() async {
+    // print("ContentID : ${ContentID}  ");
+    // print("donatePoint : ${donatePoint}");
+    // print("userIdReceiver :  ${userIdReceiver}");
+
+    Map<String, String> params = Map();
+    //Map<String, String> data = Map();
+    var body = jsonEncode({
+      'tranAmount': int.parse('10'),
+    });
+    String? _authen = await TokenStore.getToken();
+    _authen = "Bearer " + _authen!;
+    print("body : ${body}");
+    print("_authen : ${_authen}");
+    var url = Uri.parse('${ConfigApp.apiTransactionDeposit}');
+    var response = await http.post(url, body: body, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      "Authorization": "${_authen}"
+    });
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
+
+    if (response.statusCode == 200 && resMap["message"] == null) {
+      awaitUserCall();
+      TransactionCall();
+      Get.snackbar("TokenTransfer Report Status", 'Success',
+          icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.black,
+          animationDuration: Duration(seconds: 2));
+    } else {
+      Get.back();
+      Get.snackbar(
+        "TokenTransfer Report Status",
+        '${resMap["message"]}',
+        icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Color(ConfigApp.warningSnackBar),
+        colorText: Color(ConfigApp.warningSnackBarText),
+      );
+      print('\nResponse status: ${response.statusCode}');
+      print('\nResponse message: ${resMap["message"]}');
+      print('\nResponse body data: ${resMap["data"]}');
+    }
+  }
+
+  Future<void> withdraw() async {
+    // print("ContentID : ${ContentID}  ");
+    // print("donatePoint : ${donatePoint}");
+    // print("userIdReceiver :  ${userIdReceiver}");
+
+    Map<String, String> params = Map();
+    //Map<String, String> data = Map();
+    var body = jsonEncode({
+      'tranAmount': user.token,
+    });
+    String? _authen = await TokenStore.getToken();
+    _authen = "Bearer " + _authen!;
+    print("body : ${body}");
+    print("_authen : ${_authen}");
+    var url = Uri.parse('${ConfigApp.apiTransactionWithdraw}');
+    var response = await http.post(url, body: body, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      "Authorization": "${_authen}"
+    });
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
+
+    if (response.statusCode == 200 && resMap["message"] == null) {
+      awaitUserCall();
+      TransactionCall();
+      Get.snackbar("TokenTransfer Report Status", 'Success',
+          icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+          snackPosition: SnackPosition.BOTTOM,
+          backgroundColor: Colors.green,
+          colorText: Colors.black,
+          animationDuration: Duration(seconds: 2));
+    } else {
+      Get.back();
+      Get.snackbar(
+        "TokenTransfer Report Status",
+        '${resMap["message"]}',
+        icon: Icon(FontAwesomeIcons.btc, color: Colors.black),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Color(ConfigApp.warningSnackBar),
+        colorText: Color(ConfigApp.warningSnackBarText),
+      );
+      print('\nResponse status: ${response.statusCode}');
+      print('\nResponse message: ${resMap["message"]}');
+      print('\nResponse body data: ${resMap["data"]}');
+    }
   }
 
   @override
@@ -167,7 +271,7 @@ class _TokenPageState extends State<TokenPage> {
                                             Radius.circular(15))),
                                   ),
                                   onPressed: () {
-                                    print('Pressed');
+                                    deposit();
                                   },
                                   child: Container(
                                     height: 50,
@@ -200,7 +304,7 @@ class _TokenPageState extends State<TokenPage> {
                                             Radius.circular(15))),
                                   ),
                                   onPressed: () {
-                                    print('Pressed');
+                                    withdraw();
                                   },
                                   child: Container(
                                     height: 50,

@@ -30,6 +30,8 @@ class _TopicAddPageState extends State<TopicAddPage> {
   final _topicHeadline = TextEditingController();
   final _topicCaption = TextEditingController();
 
+  List<File> image = [];
+
   List<TopicGroupDataModel> topicGroupList = [];
   String? topicGroupSelected;
   late Future getTopicGroupList;
