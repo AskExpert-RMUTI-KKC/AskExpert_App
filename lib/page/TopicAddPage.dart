@@ -391,7 +391,7 @@ class _TopicAddPageState extends State<TopicAddPage> {
                                               AlignmentDirectional.topEnd,
                                           children: <Widget>[
                                             Container(
-                                              child: Image.file(image[index],height: 512,),
+                                              child: Image.file(image[index],),
                                             ),
                                             InkWell(
                                               child: Container(

@@ -332,6 +332,7 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                           ),
                         ],
                       ),
+                      Text('ความชำนาญพิเศษ(หากมี)',style: TextStyle(fontSize: 16),),
                       SizedBox(
                         height: 100,
                         width: 200,
@@ -359,7 +360,7 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                           }),
                           validator: (input) {
                             if (input == null) {
-                              expertSelected = user.expertGroupId;
+                              expertSelected = "none";
                               return null;
                             } else {
                               return null;
