@@ -384,15 +384,14 @@ class _TopicAddPageState extends State<TopicAddPage> {
                                   itemCount: image.length,
                                   itemBuilder: (context,
                                           index) => /*TopicCardPage(topics: topics[index])*/ Container(
-                                        height: 300,
+
                                         alignment: Alignment.center,
                                         child: Stack(
                                           alignment:
                                               AlignmentDirectional.topEnd,
                                           children: <Widget>[
                                             Container(
-                                              child: Image.asset(image[index].path),
-                                              height: 256,
+                                              child: Image.file(image[index],height: 512,),
                                             ),
                                             InkWell(
                                               child: Container(
