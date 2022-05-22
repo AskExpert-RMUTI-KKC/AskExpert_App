@@ -141,7 +141,7 @@ class _TopicPageState extends State<TopicPage> {
         child: ListView.builder(
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
           itemCount: topics.length,
           itemBuilder: (context,
               index) => /*TopicCardPage(topics: topics[index])*/ Container(
@@ -150,100 +150,47 @@ class _TopicPageState extends State<TopicPage> {
               border: Border.all(color: Colors.black, width: 4),
               borderRadius: BorderRadius.circular(20),
             ),
-            child: ListTile(
+            child: InkWell(
               onTap: () {
                 Get.to(CommentPage(),
                     arguments: topics[index].topicId.toString());
               },
-              title: Column(
+              child: Column(
                 children: <Widget>[
-                  Row(
-                    children: <Widget>[
-                      InkWell(
-                        child: buildImageProfile(
-                            '${topics[index].userInfoData?.profilePic}'),
-                        onTap: () {
-                          print(
-                              "Test ${topics[index].userInfoData?.userInfoId}");
-                          Get.to(ProfilePage(),
-                              arguments:
-                                  topics[index].userInfoData?.userInfoId);
-                        },
-                      ),
-                      // Container(
-                      //     height: 50,
-                      //     width: 50,
-                      //     child: Image.network(
-                      //         '${Config.imgProfile}')
-                      // ),
-                      // const Icon(
-                      //   FontAwesomeIcons.btc,
-                      //   size: 50,
-                      // ),
-                      Container(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        width: c_width,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('${topics[index].userInfoData?.userName}'),
-                            Row(children: <Widget>[
-                              Container(
-                                padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(
-                                            10.0) //                 <--- border radius here
-                                        ),
-                                    color: Colors.black),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      '${topics[index].userInfoData?.expert}',
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    if (topics[index]
-                                            .userInfoData
-                                            ?.verifyStatus ==
-                                        true)
-                                      Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                          child: Icon(
-                                              FontAwesomeIcons.circleCheck,
-                                              color: Colors.lightBlueAccent)),
-                                  ],
-                                ),
-                              ),
-                            ]),
-                          ],
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 10, 0, 2),
+                    child: Row(
+                      children: <Widget>[
+                        InkWell(
+                          child: buildImageProfile(
+                              '${topics[index].userInfoData?.profilePic}'),
+                          onTap: () {
+                            print(
+                                "Test ${topics[index].userInfoData?.userInfoId}");
+                            Get.to(ProfilePage(),
+                                arguments:
+                                    topics[index].userInfoData?.userInfoId);
+                          },
                         ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                          '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
-                    ],
-                  ),
-                  //TODO today
-                  Row(
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                        child: Container(
+                        // Container(
+                        //     height: 50,
+                        //     width: 50,
+                        //     child: Image.network(
+                        //         '${Config.imgProfile}')
+                        // ),
+                        // const Icon(
+                        //   FontAwesomeIcons.btc,
+                        //   size: 50,
+                        // ),
+                        Container(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
                           width: c_width,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Text(
-                                '${topics[index].topicHeadline}',
-                                maxLines: 2,
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              Container(
+                              Text('${topics[index].userInfoData?.userName}'),
+                              Row(children: <Widget>[
+                                Container(
                                   padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
                                   decoration: BoxDecoration(
                                       borderRadius: BorderRadius.all(
@@ -251,23 +198,116 @@ class _TopicPageState extends State<TopicPage> {
                                               10.0) //                 <--- border radius here
                                           ),
                                       color: Colors.black),
-                                  child: Text(
-                                    '${topics[index].topicGroupName}',
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                              Text(
-                                '${topics[index].topicCaption}',
-                                maxLines: 4,
-                              ),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${topics[index].userInfoData?.expert}',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      if (topics[index]
+                                              .userInfoData
+                                              ?.verifyStatus ==
+                                          true)
+                                        Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                            child: Icon(
+                                                FontAwesomeIcons.circleCheck,
+                                                color: Colors.lightBlueAccent)),
+                                    ],
+                                  ),
+                                ),
+                              ]),
                             ],
                           ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                            '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
+                      ],
+                    ),
+                  ),
+
+
+                  topics[index].topicImg != null
+                  ?Container(
+                    padding: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                    child: Row(
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                          child: Container(
+                            width: c_width,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  '${topics[index].topicHeadline}',
+                                  maxLines: 2,
+                                  style: TextStyle(fontSize: 20),
+                                ),
+                                Container(
+                                    padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                10.0) //                 <--- border radius here
+                                            ),
+                                        color: Colors.black),
+                                    child: Text(
+                                      '${topics[index].topicGroupName}',
+                                      style: TextStyle(color: Colors.white),
+                                    )),
+                                Text(
+                                  '${topics[index].topicCaption}',
+                                  maxLines: 4,
+                                ),
+                              ],
+                            ),
+                          ),
                         ),
+                      ],
+                    ),
+                  )
+                  :Stack(
+                    alignment: Alignment.center,
+                    children: <Widget>[
+                      Image.asset('assets/images/bgText.jpg'),
+                      Text(
+                        '${topics[index].topicHeadline}',
+                        maxLines: 5,
+                        style: TextStyle(fontSize: 20),
                       ),
+                      Positioned(
+                        top: 10,
+                        left: 10,
+                        child: Container(
+                            padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.all(
+                                    Radius.circular(
+                                        10.0) //                 <--- border radius here
+                                ),
+                                color: Colors.black),
+                            child: Text(
+                              '${topics[index].topicGroupName}',
+                              style: TextStyle(color: Colors.white),
+                            )),
+                      )
                     ],
                   ),
+
                   topics[index].topicImg != null
                       ? Image.network('${ConfigApp.imgTopic}${topics[index].topicImg?[0].imgName}')
                       : Container(),
+
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: <Widget>[

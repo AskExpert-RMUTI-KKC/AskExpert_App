@@ -319,59 +319,163 @@ class _CommentPageState extends State<CommentPage> {
                                         )
                                       ],
                                     ),
-                                    Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                            '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
-                                      ],
+                                    Container(
+                                      padding: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                                      child: Row(
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                              '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
+                                        ],
+                                      ),
                                     ),
-                                    Row(
-                                      children: <Widget>[
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              0, 0, 0, 0),
-                                          child: Container(
-                                            width: c_width,
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Text(
-                                                  '${topic.topicHeadline}',
-                                                  maxLines: 2,
-                                                  style:
-                                                      TextStyle(fontSize: 20),
-                                                ),
-                                                Container(
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(
-                                                            3, 2, 3, 2),
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius.all(
-                                                                Radius.circular(
-                                                                    10.0) //                 <--- border radius here
-                                                                ),
-                                                        color: Colors.black),
-                                                    child: Text(
-                                                      '${topic.topicGroupName}',
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    )),
-                                                Text(
-                                                  '${topic.topicCaption}',
-                                                  maxLines: 4,
-                                                ),
-                                              ],
+
+                                    topic.topicImg != null
+                                        ?Container(
+                                      padding: EdgeInsets.fromLTRB(10, 2, 0, 2),
+                                      child: Row(
+                                        children: <Widget>[
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                            child: Container(
+                                              width: c_width,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                    '${topic.topicHeadline}',
+                                                    maxLines: 2,
+                                                    style: TextStyle(fontSize: 20),
+                                                  ),
+                                                  Container(
+                                                      padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius: BorderRadius.all(
+                                                              Radius.circular(
+                                                                  10.0) //                 <--- border radius here
+                                                          ),
+                                                          color: Colors.black),
+                                                      child: Text(
+                                                        '${topic.topicGroupName}',
+                                                        style: TextStyle(color: Colors.white),
+                                                      )),
+                                                  Text(
+                                                    '${topic.topicCaption}',
+                                                    maxLines: 4,
+                                                  ),
+                                                ],
+                                              ),
                                             ),
                                           ),
+                                        ],
+                                      ),
+                                    )
+                                        :Stack(
+                                      alignment: Alignment.center,
+                                      children: <Widget>[
+                                        Image.asset('assets/images/bgText.jpg'),
+                                        Text(
+                                          '${topic.topicHeadline}',
+                                          maxLines: 5,
+                                          style: TextStyle(fontSize: 20),
                                         ),
+                                        Positioned(
+                                          top: 10,
+                                          left: 10,
+                                          child: Container(
+                                              padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                              decoration: BoxDecoration(
+                                                  borderRadius: BorderRadius.all(
+                                                      Radius.circular(
+                                                          10.0) //                 <--- border radius here
+                                                  ),
+                                                  color: Colors.black),
+                                              child: Text(
+                                                '${topic.topicGroupName}',
+                                                style: TextStyle(color: Colors.white),
+                                              )),
+                                        )
                                       ],
                                     ),
+                                    // topic.topicImg != null
+                                    //     ? Row(
+                                    //         crossAxisAlignment:
+                                    //             CrossAxisAlignment.start,
+                                    //         children: [
+                                    //           Text(
+                                    //               '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topic.createdDate!))}'),
+                                    //         ],
+                                    //       )
+                                    //     : Container(),
+                                    // topic.topicImg != null
+                                    //     ? Row(
+                                    //         children: <Widget>[
+                                    //           Padding(
+                                    //             padding:
+                                    //                 const EdgeInsets.fromLTRB(
+                                    //                     0, 0, 0, 0),
+                                    //             child: Container(
+                                    //               width: c_width,
+                                    //               child: Column(
+                                    //                 crossAxisAlignment:
+                                    //                     CrossAxisAlignment
+                                    //                         .start,
+                                    //                 children: <Widget>[
+                                    //                   Text(
+                                    //                     '${topic.topicHeadline}',
+                                    //                     maxLines: 2,
+                                    //                     style: TextStyle(
+                                    //                         fontSize: 20),
+                                    //                   ),
+                                    //                   Container(
+                                    //                       padding: EdgeInsets
+                                    //                           .fromLTRB(
+                                    //                               3, 2, 3, 2),
+                                    //                       decoration:
+                                    //                           BoxDecoration(
+                                    //                               borderRadius:
+                                    //                                   BorderRadius.all(
+                                    //                                       Radius.circular(
+                                    //                                           10.0) //                 <--- border radius here
+                                    //                                       ),
+                                    //                               color: Colors
+                                    //                                   .black),
+                                    //                       child: Text(
+                                    //                         '${topic.topicGroupName}',
+                                    //                         style: TextStyle(
+                                    //                             color: Colors
+                                    //                                 .white),
+                                    //                       )),
+                                    //                   Text(
+                                    //                     '${topic.topicCaption}',
+                                    //                     maxLines: 4,
+                                    //                   ),
+                                    //                 ],
+                                    //               ),
+                                    //             ),
+                                    //           ),
+                                    //         ],
+                                    //       )
+                                    //     : Container(),
+
+
+
                                     topic.topicImg != null
-                                        ? Image.network('${ConfigApp.imgTopic}${topic.topicImg?[0].imgName}')
+                                        ? //Image.network( '${ConfigApp.imgTopic}${topic.topicImg?[0].imgName}')
+                                    ListView.builder(
+                                        scrollDirection: Axis.vertical,
+                                        shrinkWrap: true,
+                                        padding: const EdgeInsets.all(8),
+                                        physics: NeverScrollableScrollPhysics(),
+                                        itemCount: topic.topicImg?.length,
+                                        itemBuilder: (context,
+                                            index) => /*TopicCardPage(topics: topics[index])*/ Container(
+                                          alignment: Alignment.center,
+                                          child: Container(
+                                            padding: EdgeInsets.fromLTRB(0, 2, 0, 2),
+                                            child: Image.network( '${ConfigApp.imgTopic}${topic.topicImg?[index].imgName}')
+                                          ),
+                                        ))
                                         : Container(),
                                     Wrap(
                                       crossAxisAlignment:
