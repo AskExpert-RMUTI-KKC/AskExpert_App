@@ -370,6 +370,9 @@ class _CommentPageState extends State<CommentPage> {
                                         ),
                                       ],
                                     ),
+                                    topic.topicImg != null
+                                        ? Image.network('${ConfigApp.imgTopic}${topic.topicImg?[0].imgName}')
+                                        : Container(),
                                     Wrap(
                                       crossAxisAlignment:
                                           WrapCrossAlignment.center,

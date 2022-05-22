@@ -265,6 +265,9 @@ class _TopicPageState extends State<TopicPage> {
                       ),
                     ],
                   ),
+                  topics[index].topicImg != null
+                      ? Image.network('${ConfigApp.imgTopic}${topics[index].topicImg?[0].imgName}')
+                      : Container(),
                   Wrap(
                     crossAxisAlignment: WrapCrossAlignment.center,
                     children: <Widget>[
