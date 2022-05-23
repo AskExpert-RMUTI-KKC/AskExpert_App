@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/ExpertDataModel.dart';
 import 'package:askexpertapp/page/NavigationBar.dart';
+import 'package:askexpertapp/page/profile/ProfilePage.dart';
 import 'package:askexpertapp/page/register_login/RegisterPic.dart';
 import 'package:askexpertapp/page/topic/CommentPage.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +42,7 @@ import 'package:intl/intl.dart';
 
 import '../../config/ConfigApp.dart';
 import '../../dataModel/TopicGroupDataModel.dart';
+import '../topic/TopicLogic.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -140,18 +142,23 @@ class _SearchPageState extends State<SearchPage> {
     // print('\nResponse body data: ${resMap["data"]}');
     // print('\nResponse body data: ${resMap["data"]}');
   }
-  Future<void> SearchTopic() async{
 
+  Future<void> SearchTopic() async {
     String? _tokenJwt = await TokenStore.getToken();
     _tokenJwt = "Bearer " + _tokenJwt!;
     print("_tokenJwt : ${_tokenJwt}");
 
-    var url = Uri.parse('${ConfigApp.apiTopicFindAll}');
+    var body = jsonEncode({
+      'topicHeadLine': _keyword.text,
+      'topicGroup': topicGroupSelected,
+    });
+
+    var url = Uri.parse('${ConfigApp.apiTopicFindByText}');
     print('\n URL :${url.toString()}');
-    var response = await http.post(url, headers: {
+    var response = await http.post(url,body: body, headers: {
       "Accept": "application/json",
-      "content-type": "application/json",
-      "Authorization": "${_tokenJwt}"
+      "content-type": "application/json"
+      //,"Authorization": "${_tokenJwt}"
     });
     Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -159,6 +166,7 @@ class _SearchPageState extends State<SearchPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
+      users = [];
       for (int i = 0; i < resMap["data"].length; i++) {
         topics.add(TopicDataModel.fromJson(resMap["data"][i]));
       }
@@ -167,26 +175,45 @@ class _SearchPageState extends State<SearchPage> {
     // print('\nResponse body data: ${resMap["data"]}');
     // print('\nResponse body data: ${resMap["data"]}');
 
+  }
+
+  Future<void> SearchUser() async {
+    String? _tokenJwt = await TokenStore.getToken();
+    _tokenJwt = "Bearer " + _tokenJwt!;
+    print("_tokenJwt : ${_tokenJwt}");
+
+    var body = jsonEncode({
+      'userName': _keyword.text,
+      'expertGroup': expertSelected,
+    });
+
+    var url = Uri.parse('${ConfigApp.apiUserFindByText}');
+    print('\n URL :${url.toString()}');
+    var response = await http.post(url,body: body, headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      //"Authorization": "${_tokenJwt}"
+    });
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
     setState(() {
-      users=[];
+      topics = [];
+      for (int i = 0; i < resMap["data"].length; i++) {
+        users.add(UserDataModel.fromJson(resMap["data"][i]));
+      }
+      print('\nResponse topicAll: ${topics.length}');
     });
   }
-  Future<void> SearchUser() async{
 
-
-
-    setState(() {
-      topics=[];
-    });
-  }
   Future<void> SearchClick() async {
     if (searchLookingSelected == "Topic") {
       SearchTopic();
     } else if (searchLookingSelected == "User") {
       SearchUser();
-    } else {
-
-    }
+    } else {}
   }
 
   @override
@@ -201,6 +228,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    double c_width = MediaQuery.of(context).size.width * 0.7;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -375,12 +404,449 @@ class _SearchPageState extends State<SearchPage> {
                       //   }
                       // },
                     ),
-                    topics.isNotEmpty ? Container(
-
-                    ) : Container(),
+                    topics.isNotEmpty
+                        ? Container(
+                            child: ListView.builder(
+                              physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                              itemCount: topics.length,
+                              itemBuilder: (context,
+                                  index) => /*TopicCardPage(topics: topics[index])*/ Container(
+                                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.black, width: 4),
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.to(CommentPage(),
+                                        arguments:
+                                            topics[index].topicId.toString());
+                                  },
+                                  child: Column(
+                                    children: <Widget>[
+                                      Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 10, 0, 2),
+                                        child: Row(
+                                          children: <Widget>[
+                                            InkWell(
+                                              child: buildImageProfile(
+                                                  '${topics[index].userInfoData?.profilePic}'),
+                                              onTap: () {
+                                                print(
+                                                    "Test ${topics[index].userInfoData?.userInfoId}");
+                                                Get.to(ProfilePage(),
+                                                    arguments: topics[index]
+                                                        .userInfoData
+                                                        ?.userInfoId);
+                                              },
+                                            ),
+                                            // Container(
+                                            //     height: 50,
+                                            //     width: 50,
+                                            //     child: Image.network(
+                                            //         '${Config.imgProfile}')
+                                            // ),
+                                            // const Icon(
+                                            //   FontAwesomeIcons.btc,
+                                            //   size: 50,
+                                            // ),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      0, 0, 0, 0),
+                                              width: c_width,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: <Widget>[
+                                                  Text(
+                                                      '${topics[index].userInfoData?.userName}'),
+                                                  Row(children: <Widget>[
+                                                    topics[index]
+                                                                .userInfoData
+                                                                ?.expert !=
+                                                            null
+                                                        ? Container(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                    3, 2, 3, 2),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.all(
+                                                                            Radius.circular(
+                                                                                10.0) //                 <--- border radius here
+                                                                            ),
+                                                                    color: Colors
+                                                                        .black),
+                                                            child: Row(
+                                                              children: [
+                                                                Text(
+                                                                  '${topics[index].userInfoData?.expert}',
+                                                                  style: TextStyle(
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
+                                                                if (topics[index]
+                                                                        .userInfoData
+                                                                        ?.verifyStatus ==
+                                                                    true)
+                                                                  Padding(
+                                                                      padding: EdgeInsets
+                                                                          .fromLTRB(
+                                                                              10,
+                                                                              0,
+                                                                              0,
+                                                                              0),
+                                                                      child: Icon(
+                                                                          FontAwesomeIcons
+                                                                              .circleCheck,
+                                                                          color:
+                                                                              Colors.lightBlueAccent)),
+                                                              ],
+                                                            ),
+                                                          )
+                                                        : Container(),
+                                                  ]),
+                                                ],
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      Container(
+                                        padding:
+                                            EdgeInsets.fromLTRB(10, 2, 0, 2),
+                                        child: Row(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                '${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(topics[index].createdDate!))}'),
+                                          ],
+                                        ),
+                                      ),
+                                      topics[index].topicImg != null
+                                          ? Container(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10, 2, 0, 2),
+                                              child: Row(
+                                                children: <Widget>[
+                                                  Padding(
+                                                    padding: const EdgeInsets
+                                                        .fromLTRB(0, 0, 0, 0),
+                                                    child: Container(
+                                                      width: c_width,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: <Widget>[
+                                                          Text(
+                                                            '${topics[index].topicHeadline}',
+                                                            maxLines: 2,
+                                                            style: TextStyle(
+                                                                fontSize: 20),
+                                                          ),
+                                                          Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .fromLTRB(
+                                                                          3,
+                                                                          2,
+                                                                          3,
+                                                                          2),
+                                                              decoration:
+                                                                  BoxDecoration(
+                                                                      borderRadius: BorderRadius.all(
+                                                                          Radius.circular(
+                                                                              10.0) //                 <--- border radius here
+                                                                          ),
+                                                                      color: Colors
+                                                                          .black),
+                                                              child: Text(
+                                                                '${topics[index].topicGroupName}',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .white),
+                                                              )),
+                                                          Text(
+                                                            '${topics[index].topicCaption}',
+                                                            maxLines: 4,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : Stack(
+                                              alignment: Alignment.center,
+                                              children: <Widget>[
+                                                Image.asset(
+                                                    'assets/images/bgText.jpg'),
+                                                Text(
+                                                  '${topics[index].topicHeadline}',
+                                                  maxLines: 5,
+                                                  style:
+                                                      TextStyle(fontSize: 20),
+                                                ),
+                                                Positioned(
+                                                  top: 10,
+                                                  left: 10,
+                                                  child: Container(
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              3, 2, 3, 2),
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius.all(
+                                                                  Radius.circular(
+                                                                      10.0) //                 <--- border radius here
+                                                                  ),
+                                                          color: Colors.black),
+                                                      child: Text(
+                                                        '${topics[index].topicGroupName}',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white),
+                                                      )),
+                                                )
+                                              ],
+                                            ),
+                                      topics[index].topicImg != null
+                                          ? Image.network(
+                                              '${ConfigApp.imgTopic}${topics[index].topicImg?[0].imgName}')
+                                          : Container(),
+                                      Wrap(
+                                        crossAxisAlignment:
+                                            WrapCrossAlignment.center,
+                                        children: <Widget>[
+                                          Icon(FontAwesomeIcons.bookOpenReader),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 10, 0),
+                                            child: Text(
+                                                '${NumberFormat.compact().format(topics[index].topicReadCount)}'),
+                                          ),
+                                          Icon(FontAwesomeIcons.comment),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                10, 0, 0, 0),
+                                            child: Text(
+                                                '${NumberFormat.compact().format(topics[index].topicCommentCount)}'),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                donateSheet(
+                                                    topics[index].topicId,
+                                                    topics[index].topicHeadline,
+                                                    topics[index]
+                                                        .userInfoData
+                                                        ?.userInfoId,
+                                                    topics[index]
+                                                        .userInfoData
+                                                        ?.profilePic,
+                                                    topics[index]
+                                                        .userInfoData
+                                                        ?.userName);
+                                                /*Get.bottomSheet(
+                              Container(
+                                child: Column(
+                                  children: <Widget>[
+                                    ListTile(title: Text('TEST'),),
+                                    Text("Test")
+                                  ],
+                                ),
+                              ),
+                              elevation: 20,
+                              backgroundColor: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30.0),
+                                  topRight: Radius.circular(30.0),
+                                ),
+                              ),
+                            );*/
+                                              },
+                                              icon: Icon(FontAwesomeIcons.btc)),
+                                          Padding(
+                                            padding:
+                                                EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                            child: Text(
+                                                '${NumberFormat.compact().format(topics[index].topicDonateCount)}'),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  if (topics[index]
+                                                          .likeStatus ==
+                                                      0) {
+                                                    topics[index].likeStatus =
+                                                        1;
+                                                    topics[index]
+                                                            .topicLikeCount =
+                                                        (topics[index]
+                                                                .topicLikeCount! +
+                                                            1);
+                                                  } else {
+                                                    topics[index].likeStatus =
+                                                        0;
+                                                    topics[index]
+                                                            .topicLikeCount =
+                                                        (topics[index]
+                                                                .topicLikeCount! -
+                                                            1);
+                                                  }
+                                                  LikePushButton(
+                                                      topics[index].topicId,
+                                                      topics[index].likeStatus,
+                                                      topics[index]
+                                                          .topicHeadline);
+                                                });
+                                              },
+                                              icon: topics[index].likeStatus ==
+                                                      0
+                                                  ? Icon(FontAwesomeIcons.heart,
+                                                      color: Colors.black)
+                                                  : Icon(
+                                                      FontAwesomeIcons
+                                                          .heartCircleCheck,
+                                                      color: Colors.red)),
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                0, 0, 0, 0),
+                                            child: Text(
+                                                '${topics[index].topicLikeCount}'),
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(child: Text("ไม่พบผลการค้นหา"),),
                     users.isNotEmpty ? Container(
-
-                    ) : Container(),
+                      child: ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                        itemCount: users.length,
+                        itemBuilder: (context,
+                            index) => /*TopicCardPage(topics: topics[index])*/ Container(
+                          margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                          decoration: BoxDecoration(
+                            border:
+                            Border.all(color: Colors.black, width: 4),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Get.to(ProfilePage(),
+                                  arguments: users[index].userInfoId);
+                            },
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  padding:
+                                  EdgeInsets.fromLTRB(10, 10, 0, 2),
+                                  child: Row(
+                                    children: <Widget>[
+                                      InkWell(
+                                        child: buildImageProfile(
+                                            '${users[index].profilePic}'),
+                                        onTap: () {
+                                          print(
+                                              "Test ${users[index].userInfoId}");
+                                          Get.to(ProfilePage(),
+                                              arguments: users[index].userInfoId);
+                                        },
+                                      ),
+                                      // Container(
+                                      //     height: 50,
+                                      //     width: 50,
+                                      //     child: Image.network(
+                                      //         '${Config.imgProfile}')
+                                      // ),
+                                      // const Icon(
+                                      //   FontAwesomeIcons.btc,
+                                      //   size: 50,
+                                      // ),
+                                      Container(
+                                        padding:
+                                        const EdgeInsets.fromLTRB(
+                                            0, 0, 0, 0),
+                                        width: c_width,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          children: <Widget>[
+                                            Text(
+                                                '${users[index].userName}'),
+                                            Row(children: <Widget>[
+                                              users[index].expertGroupListData !=
+                                                  null
+                                                  ? Container(
+                                                padding: EdgeInsets
+                                                    .fromLTRB(
+                                                    3, 2, 3, 2),
+                                                decoration:
+                                                BoxDecoration(
+                                                    borderRadius:
+                                                    BorderRadius.all(
+                                                        Radius.circular(
+                                                            10.0) //                 <--- border radius here
+                                                    ),
+                                                    color: Colors
+                                                        .black),
+                                                child: Row(
+                                                  children: [
+                                                    Text(
+                                                      '${users[index].expertGroupListData?.expertPath}',
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .white),
+                                                    ),
+                                                    if (users[index].verifyStatus ==
+                                                        true)
+                                                      Padding(
+                                                          padding: EdgeInsets
+                                                              .fromLTRB(
+                                                              10,
+                                                              0,
+                                                              0,
+                                                              0),
+                                                          child: Icon(
+                                                              FontAwesomeIcons
+                                                                  .circleCheck,
+                                                              color:
+                                                              Colors.lightBlueAccent)),
+                                                  ],
+                                                ),
+                                              )
+                                                  : Container(),
+                                            ]),
+                                          ],
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ) : Container(child: Text("ไม่พบผลการค้นหา"),),
                   ],
                 ),
               )),
