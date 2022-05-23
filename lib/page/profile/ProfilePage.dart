@@ -128,39 +128,42 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 Column(
                   children: <Widget>[
-                    Text('@${user.userName}'),
-                    Text('${user.firstName} ${user.lastName}'),
-                    Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          user.expertGroupListData != null
-                              ?Container(
-                            padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                        10.0) //                 <--- border radius here
-                                    ),
-                                color: Colors.black),
-                            child: Row(
-                              children: [
-                                Text(
-                                  '${user.expertGroupListData!.expertPath}',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                if (user.verifyStatus ==
-                                    true)
-                                  Padding(
-                                      padding:
-                                      EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                      child: Icon(
-                                          FontAwesomeIcons.circleCheck,
-                                          color: Colors.lightBlueAccent)),
-                              ],
-                            ),
-                          )
-                              :Container()
-                        ]),
+                    Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 5),child: Text('@${user.userName}',style: TextStyle(fontSize: 20),)),
+                    Container(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: Text('${user.firstName} ${user.lastName}',style: TextStyle(fontSize: 20))),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                      child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            user.expertGroupListData != null
+                                ?Container(
+                              padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.all(Radius.circular(
+                                          10.0) //                 <--- border radius here
+                                      ),
+                                  color: Colors.black),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '${user.expertGroupListData!.expertPath}',
+                                    style: TextStyle(color: Colors.white,fontSize: 18),
+                                  ),
+                                  if (user.verifyStatus ==
+                                      true)
+                                    Padding(
+                                        padding:
+                                        EdgeInsets.fromLTRB(10, 0, 0, 0),
+                                        child: Icon(
+                                            FontAwesomeIcons.circleCheck,
+                                            color: Colors.lightBlueAccent)),
+                                ],
+                              ),
+                            )
+                                :Container()
+                          ]),
+                    ),
                   ],
                 ),
                 Row(
@@ -171,21 +174,32 @@ class _ProfilePageState extends State<ProfilePage> {
                       FontAwesomeIcons.heartCircleCheck,
                       color: Colors.black,
                     ),
-                    Text('${NumberFormat.compact().format(user.likeCount)}'),
+                    SizedBox(width: 10,),
+                    Text('${NumberFormat.compact().format(user.likeCount)}',style: TextStyle(fontSize: 18)),
+                    SizedBox(width: 10,),
                     Icon(
                       FontAwesomeIcons.btc,
                       color: Colors.black,
                     ),
-                    Text('${NumberFormat.compact().format(user.tokenCount)}'),
+                    SizedBox(width: 10,),
+                    Text('${NumberFormat.compact().format(user.tokenCount)}',style: TextStyle(fontSize: 18)),
                   ],
                 ),
 
                 Container(
-                  child: Text("Bio"),
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text("AboutMe",style: TextStyle(fontSize: 20),),
                 ),
                 Container(
-                  child: Text("${user.userCaption}"),
-                ),
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: Container( 
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(padding: EdgeInsets.all(10),child: Text("${user.userCaption}")),
+                  ),
+                )
                 // TODO MAKE FUNCTION FOR THIS CODE
               ],
             ),
