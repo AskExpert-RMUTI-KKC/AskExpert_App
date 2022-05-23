@@ -62,6 +62,8 @@ class _SearchPageState extends State<SearchPage> {
 
   final _keyword = TextEditingController();
 
+  bool isSearch = false;
+
   List<String> searchLooking = ["Topic", "User"];
   String? searchLookingSelected;
 
@@ -100,6 +102,7 @@ class _SearchPageState extends State<SearchPage> {
       expertList.add(ExpertDataModel.fromJson(params));
 
       for (int i = 0; i < resMap["data"].length; i++) {
+
         expertList.add(ExpertDataModel.fromJson(resMap["data"][i]));
       }
 
@@ -134,6 +137,7 @@ class _SearchPageState extends State<SearchPage> {
       topicGroupList.add(TopicGroupDataModel.fromJson(params));
 
       for (int i = 0; i < resMap["data"].length; i++) {
+
         topicGroupList.add(TopicGroupDataModel.fromJson(resMap["data"][i]));
       }
 
@@ -168,6 +172,7 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       users = [];
       for (int i = 0; i < resMap["data"].length; i++) {
+        isSearch = false;
         topics.add(TopicDataModel.fromJson(resMap["data"][i]));
       }
       print('\nResponse topicAll: ${topics.length}');
@@ -202,6 +207,7 @@ class _SearchPageState extends State<SearchPage> {
     setState(() {
       topics = [];
       for (int i = 0; i < resMap["data"].length; i++) {
+        isSearch = false;
         users.add(UserDataModel.fromJson(resMap["data"][i]));
       }
       print('\nResponse topicAll: ${topics.length}');
@@ -733,7 +739,7 @@ class _SearchPageState extends State<SearchPage> {
                               ),
                             ),
                           )
-                        : Container(child: Text("ไม่พบผลการค้นหา"),),
+                        : Container(),
                     users.isNotEmpty ? Container(
                       child: ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -846,7 +852,11 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                         ),
                       ),
-                    ) : Container(child: Text("ไม่พบผลการค้นหา"),),
+                    ) : Container(),
+
+                    isSearch?
+                        Container(child: Text("ไม่พบผลการค้นหา"),)
+                        :Container(),
                   ],
                 ),
               )),
@@ -863,6 +873,7 @@ class _SearchPageState extends State<SearchPage> {
                     //side: BorderSide(width: 1,color: Color(Config.textColor),)
                   ),
                   onPressed: () {
+                    isSearch = true;
                     SearchClick();
                   },
                   child: Text(
