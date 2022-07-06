@@ -96,12 +96,17 @@ class _RegisterPageState extends State<RegisterPage> {
     //Map<String, String> data = Map();
     var body = jsonEncode({'email': _Gmail, 'passWord': _passWordG});
 
+
+
     var url = Uri.parse('${ConfigApp.apiLoginGoogle}');
-    var response = await http.post(url, body: body, headers: {
-      "Accept": "application/json",
-      "content-type": "application/json"
-    });
-    await _HandleLogin(response);
+    if(_Gmail != null && _passWordG != null){
+      var response = await http.post(url, body: body, headers: {
+        "Accept": "application/json",
+        "content-type": "application/json"
+      });
+      await _HandleLogin(response);
+    }
+
   }
 
   Future<void> _GsignIn() async {

@@ -123,11 +123,14 @@ class _LoginPageState extends State<LoginPage> {
     var body = jsonEncode({'email': _Gmail, 'passWord': _passWordG});
 
     var url = Uri.parse('${ConfigApp.apiLoginGoogle}');
-    var response = await http.post(url, body: body, headers: {
-      "Accept": "application/json",
-      "content-type": "application/json"
-    });
-    await _HandleLogin(response);
+    if (_Gmail != null && _passWordG != null) {
+      var response = await http.post(url, body: body, headers: {
+        "Accept": "application/json",
+        "content-type": "application/json"
+      });
+      await _HandleLogin(response);
+    }
+
   }
 
   Future<void> _GsignIn() async {
@@ -253,166 +256,176 @@ class _LoginPageState extends State<LoginPage> {
                     //   decoration: new InputDecoration(label: Text("UserName")),
                     // ),
 
-
-                    Expanded(child: SingleChildScrollView(
-                      child: Column(children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                          child: TextFormField(
-                            cursorColor: Color(ConfigApp.cursorColor),
-                            decoration: const InputDecoration(
+                    Expanded(
+                        child: SingleChildScrollView(
+                      child: Column(
+                        children: <Widget>[
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextFormField(
+                              cursorColor: Color(ConfigApp.cursorColor),
+                              decoration: const InputDecoration(
+                                  icon: Icon(
+                                    Icons.email,
+                                    color: Color(ConfigApp.iconEmail),
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(15)),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(15)),
+                                      borderSide: BorderSide(
+                                          color: Color(
+                                              ConfigApp.buttonSecondary))),
+                                  label: Text("Email"),
+                                  hintText: "example@rmuti.ac.th"),
+                              keyboardType: TextInputType.emailAddress,
+                              controller: _email,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter Email";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextFormField(
+                              decoration: const InputDecoration(
+                                label: Text("PassWord"),
                                 icon: Icon(
-                                  Icons.email,
+                                  Icons.password,
                                   color: Color(ConfigApp.iconEmail),
                                 ),
                                 border: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                                ),
-                                focusedBorder: OutlineInputBorder(
                                     borderRadius:
-                                    BorderRadius.all(Radius.circular(15)),
+                                        BorderRadius.all(Radius.circular(15)),
                                     borderSide: BorderSide(
-                                        color: Color(ConfigApp.buttonSecondary))),
-                                label: Text("Email"),
-                                hintText: "example@rmuti.ac.th"),
-                            keyboardType: TextInputType.emailAddress,
-                            controller: _email,
-                            validator: (input) {
-                              if (input!.isEmpty) {
-                                return "please enter Email";
-                              } else {
-                                return null;
-                              }
-                            },
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                          child: TextFormField(
-                            decoration: const InputDecoration(
-                              label: Text("PassWord"),
-                              icon: Icon(
-                                Icons.password,
-                                color: Color(ConfigApp.iconEmail),
+                                        color: Color(ConfigApp.buttonPrimary))),
                               ),
-                              border: OutlineInputBorder(
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(15)),
-                                  borderSide: BorderSide(
-                                      color: Color(ConfigApp.buttonPrimary))),
+                              obscureText: true,
+                              controller: _passWord,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter PassWord";
+                                } else {
+                                  return null;
+                                }
+                              },
                             ),
-                            obscureText: true,
-                            controller: _passWord,
-                            validator: (input) {
-                              if (input!.isEmpty) {
-                                return "please enter PassWord";
-                              } else {
-                                return null;
-                              }
-                            },
                           ),
-                        ),
-                        // TextFormField(
-                        //   decoration: new InputDecoration(label: Text("re-PassWord")),
-                        //   obscureText: true,
-                        // ),
-                        Container(
-                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                          margin: const EdgeInsets.fromLTRB(50, 10, 50, 10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[200],
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10),
-                                bottomLeft: Radius.circular(10),
-                                bottomRight: Radius.circular(10)
+                          // TextFormField(
+                          //   decoration: new InputDecoration(label: Text("re-PassWord")),
+                          //   obscureText: true,
+                          // ),
+                          Container(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            margin: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10),
+                                  topRight: Radius.circular(10),
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10)),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 5,
+                                  blurRadius: 7,
+                                  offset: Offset(
+                                      0, 3), // changes position of shadow
+                                ),
+                              ],
                             ),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
-                                offset: Offset(0, 3), // changes position of shadow
-                              ),
-                            ],
-                          ),
-                          child: InkWell(
-                            onTap: () {
-                              _GsignIn();
-                            },
-                            child: Container(
-
-                              child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    // IconButton(
-                                    //   onPressed: () {
-                                    //     _GsignIn();
-                                    //   },
-                                    //   iconSize: 40,
-                                    //   icon: const Icon(
-                                    //     FontAwesomeIcons.google,
-                                    //     color: Color(ConfigApp.iconEmail),
-                                    //   ),
-                                    // ),
-                                    Image.asset("assets/images/google.png",width: 20,height: 20,),
-                                    Text(
-                                      "      Sign in with Google",
-                                      style: TextStyle(
-                                        fontSize: 16,
+                            child: InkWell(
+                              onTap: () {
+                                _GsignIn();
+                              },
+                              child: Container(
+                                child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      // IconButton(
+                                      //   onPressed: () {
+                                      //     _GsignIn();
+                                      //   },
+                                      //   iconSize: 40,
+                                      //   icon: const Icon(
+                                      //     FontAwesomeIcons.google,
+                                      //     color: Color(ConfigApp.iconEmail),
+                                      //   ),
+                                      // ),
+                                      Image.asset(
+                                        "assets/images/google.png",
+                                        width: 20,
+                                        height: 20,
                                       ),
-                                    )
-                                  ]),
-                            ),
-                          ),
-                        ),
-                        // Padding(
-                        //   padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                        //   child: Row(
-                        //       mainAxisAlignment: MainAxisAlignment.center,
-                        //       children: <Widget>[
-                        //         IconButton(
-                        //           onPressed: () {
-                        //             _FBsignIn();
-                        //           },
-                        //           iconSize: 40,
-                        //           icon: const Icon(
-                        //             FontAwesomeIcons.facebook,
-                        //             color: Color(ConfigApp.iconEmail),
-                        //           ),
-                        //         ),
-                        //         Text(
-                        //           "FaceBook",
-                        //           style: TextStyle(
-                        //             fontSize: 16,
-                        //           ),
-                        //         )
-                        //       ]),
-                        // ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
-                          child: TextButton(
-                            style: ElevatedButton.styleFrom(
-                              minimumSize: const Size(300, 50),
-                              primary: Color(ConfigApp.buttonPrimary),
-                              elevation: 5,
-                              shape: shape,
-                              //side: BorderSide(width: 1,color: Color(Config.textColor),)
-                            ),
-                            onPressed: () {
-                              Get.offAll(RegisterPage());
-                            },
-                            child: Text(
-                              'Register',
-                              style: TextStyle(
-                                fontSize: 18,
-                                color: Color(ConfigApp.buttonSecondary),
+                                      Text(
+                                        "      Sign in with Google",
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      )
+                                    ]),
                               ),
                             ),
                           ),
-                        ),
-                      ],),
+                          // Padding(
+                          //   padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          //   child: Row(
+                          //       mainAxisAlignment: MainAxisAlignment.center,
+                          //       children: <Widget>[
+                          //         IconButton(
+                          //           onPressed: () {
+                          //             _FBsignIn();
+                          //           },
+                          //           iconSize: 40,
+                          //           icon: const Icon(
+                          //             FontAwesomeIcons.facebook,
+                          //             color: Color(ConfigApp.iconEmail),
+                          //           ),
+                          //         ),
+                          //         Text(
+                          //           "FaceBook",
+                          //           style: TextStyle(
+                          //             fontSize: 16,
+                          //           ),
+                          //         )
+                          //       ]),
+                          // ),
+                          Padding(
+                            padding:
+                                const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                            child: TextButton(
+                              style: ElevatedButton.styleFrom(
+                                minimumSize: const Size(300, 50),
+                                primary: Color(ConfigApp.buttonPrimary),
+                                elevation: 5,
+                                shape: shape,
+                                //side: BorderSide(width: 1,color: Color(Config.textColor),)
+                              ),
+                              onPressed: () {
+                                Get.offAll(RegisterPage());
+                              },
+                              child: Text(
+                                'Register',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Color(ConfigApp.buttonSecondary),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
                     )),
 
                     Padding(
