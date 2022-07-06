@@ -171,6 +171,7 @@ class _SearchPageState extends State<SearchPage> {
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
       users = [];
+      topics = [];
       for (int i = 0; i < resMap["data"].length; i++) {
         isSearch = false;
         topics.add(TopicDataModel.fromJson(resMap["data"][i]));
@@ -206,6 +207,7 @@ class _SearchPageState extends State<SearchPage> {
     print('\nResponse body data: ${resMap["data"]}');
     setState(() {
       topics = [];
+      users = [];
       for (int i = 0; i < resMap["data"].length; i++) {
         isSearch = false;
         users.add(UserDataModel.fromJson(resMap["data"][i]));

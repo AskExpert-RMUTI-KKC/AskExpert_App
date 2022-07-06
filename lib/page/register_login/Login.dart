@@ -317,32 +317,54 @@ class _LoginPageState extends State<LoginPage> {
                         //   decoration: new InputDecoration(label: Text("re-PassWord")),
                         //   obscureText: true,
                         // ),
-                        Padding(
+                        Container(
                           padding: const EdgeInsets.fromLTRB(0, 12.0, 0, 12.0),
+                          margin: const EdgeInsets.fromLTRB(50, 10, 50, 10),
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(10),
+                                topRight: Radius.circular(10),
+                                bottomLeft: Radius.circular(10),
+                                bottomRight: Radius.circular(10)
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: Offset(0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
                           child: InkWell(
                             onTap: () {
                               _GsignIn();
                             },
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: <Widget>[
-                                  IconButton(
-                                    onPressed: () {
-                                      _GsignIn();
-                                    },
-                                    iconSize: 40,
-                                    icon: const Icon(
-                                      FontAwesomeIcons.google,
-                                      color: Color(ConfigApp.iconEmail),
-                                    ),
-                                  ),
-                                  Text(
-                                    "Google",
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                    ),
-                                  )
-                                ]),
+                            child: Container(
+
+                              child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    // IconButton(
+                                    //   onPressed: () {
+                                    //     _GsignIn();
+                                    //   },
+                                    //   iconSize: 40,
+                                    //   icon: const Icon(
+                                    //     FontAwesomeIcons.google,
+                                    //     color: Color(ConfigApp.iconEmail),
+                                    //   ),
+                                    // ),
+                                    Image.asset("assets/images/google.png",width: 20,height: 20,),
+                                    Text(
+                                      "      Sign in with Google",
+                                      style: TextStyle(
+                                        fontSize: 16,
+                                      ),
+                                    )
+                                  ]),
+                            ),
                           ),
                         ),
                         // Padding(
