@@ -10,6 +10,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'dart:convert';
 import 'TopicAddPage.dart';
+import 'chat/ChatPage.dart';
 
 class NavigationBarPage extends StatefulWidget {
   const NavigationBarPage({Key? key}) : super(key: key);
@@ -26,6 +27,7 @@ class _NavigationBarState extends State<NavigationBarPage> {
     SearchPage(),
     TopicAddPage(),
     TokenPage(),
+    ChatPage(),
     ProfilePage(),
   ];
 
@@ -81,6 +83,12 @@ class _NavigationBarState extends State<NavigationBarPage> {
               FontAwesomeIcons.btc,
             ),
             label: "Token",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              FontAwesomeIcons.message,
+            ),
+            label: "Chat",
           ),
           BottomNavigationBarItem(
             icon: Icon(

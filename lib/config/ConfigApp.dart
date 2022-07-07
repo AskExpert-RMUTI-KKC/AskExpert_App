@@ -34,6 +34,13 @@ class ConfigApp {
   static const String pageTopicGroupList = "/topicGroupList";
   static const String pageTransaction = "/transaction";
   static const String pageVerify = "/verify";
+  static const String pageChat = "/chat";
+
+  //ChatCall
+  static const String chatFirstContact = apiUrl + pageChat + "/firstContact";
+  static const String chatMyContact = apiUrl + pageChat + "/myContact";
+  static const String chatSendMes = apiUrl + pageChat + "/sendMes";
+  static const String chatMesWithRx = apiUrl + pageChat + "/chatMesWithRx";
 
   //ImageCall
   static const String imgProfile = apiUrl + uploadsImgPath + "/imgProfile/";
