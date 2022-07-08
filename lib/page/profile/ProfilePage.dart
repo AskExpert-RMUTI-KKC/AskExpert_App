@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
+import 'package:askexpertapp/page/chat/ChatMesPage.dart';
 import 'package:askexpertapp/page/profile/ProfileSettingMenu.dart';
 import 'package:askexpertapp/page/profile/profileSettingPage.dart';
 import 'package:askexpertapp/utils/storageToken.dart';
@@ -27,6 +28,7 @@ class _ProfilePageState extends State<ProfilePage> {
   late String userIdFormGetArguments;
 
   late Future getUser;
+
   Future<void> UserCall() async {
     Map<String, String> params = Map();
     //Map<String, String> data = Map();
@@ -37,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
     var response;
     var url;
-    if(userIdFormGetArguments == 'Id'){
+    if (userIdFormGetArguments == 'Id') {
       url = Uri.parse('${ConfigApp.apiUserFindById}');
       print('\n URL :${url.toString()}');
       response = await http.post(url, headers: {
@@ -45,10 +47,10 @@ class _ProfilePageState extends State<ProfilePage> {
         "content-type": "application/json",
         "Authorization": "${_tokenJwt}"
       });
-    }else{
+    } else {
       url = Uri.parse('${ConfigApp.apiUserFindByUserId}');
       print('\n URL :${url.toString()}');
-      response = await http.post(url,body: userIdFormGetArguments);
+      response = await http.post(url, body: userIdFormGetArguments);
     }
     Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -70,19 +72,15 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   void initState() {
-    if(Get.arguments != null){
-      if(Get.arguments.toString().length> 16){
+    if (Get.arguments != null) {
+      if (Get.arguments.toString().length > 16) {
         userIdFormGetArguments = Get.arguments;
       }
+    } else {
+      userIdFormGetArguments = 'Id';
     }
-    else
-      {
-        userIdFormGetArguments = 'Id';
-      }
     getUser = awaitUserCall();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -102,15 +100,15 @@ class _ProfilePageState extends State<ProfilePage> {
               ),
               actions: [
                 userIdFormGetArguments == 'Id'
-                ?IconButton(
-                    onPressed: () {
-                      Get.to(ProfileSetting(),arguments: user);
-                    },
-                    icon: Icon(
-                      FontAwesomeIcons.gear,
-                      color: Colors.black,
-                    ))
-                    :Container(),
+                    ? IconButton(
+                        onPressed: () {
+                          Get.to(ProfileSetting(), arguments: user);
+                        },
+                        icon: Icon(
+                          FontAwesomeIcons.gear,
+                          color: Colors.black,
+                        ))
+                    : Container(),
               ],
               elevation: 0,
               centerTitle: false,
@@ -128,8 +126,16 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 Column(
                   children: <Widget>[
-                    Container(padding: EdgeInsets.fromLTRB(0, 10, 0, 5),child: Text('@${user.userName}',style: TextStyle(fontSize: 20),)),
-                    Container(padding: EdgeInsets.fromLTRB(0, 0, 0, 5),child: Text('${user.firstName} ${user.lastName}',style: TextStyle(fontSize: 20))),
+                    Container(
+                        padding: EdgeInsets.fromLTRB(0, 10, 0, 5),
+                        child: Text(
+                          '@${user.userName}',
+                          style: TextStyle(fontSize: 20),
+                        )),
+                    Container(
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                        child: Text('${user.firstName} ${user.lastName}',
+                            style: TextStyle(fontSize: 20))),
                     Container(
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
                       child: Row(
@@ -137,31 +143,34 @@ class _ProfilePageState extends State<ProfilePage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             user.expertGroupListData != null
-                                ?Container(
-                              padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.all(Radius.circular(
-                                          10.0) //                 <--- border radius here
-                                      ),
-                                  color: Colors.black),
-                              child: Row(
-                                children: [
-                                  Text(
-                                    '${user.expertGroupListData!.expertPath}',
-                                    style: TextStyle(color: Colors.white,fontSize: 18),
-                                  ),
-                                  if (user.verifyStatus ==
-                                      true)
-                                    Padding(
-                                        padding:
-                                        EdgeInsets.fromLTRB(10, 0, 0, 0),
-                                        child: Icon(
-                                            FontAwesomeIcons.circleCheck,
-                                            color: Colors.lightBlueAccent)),
-                                ],
-                              ),
-                            )
-                                :Container()
+                                ? Container(
+                                    padding: EdgeInsets.fromLTRB(3, 2, 3, 2),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(
+                                                10.0) //                 <--- border radius here
+                                            ),
+                                        color: Colors.black),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          '${user.expertGroupListData!.expertPath}',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 18),
+                                        ),
+                                        if (user.verifyStatus == true)
+                                          Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  10, 0, 0, 0),
+                                              child: Icon(
+                                                  FontAwesomeIcons.circleCheck,
+                                                  color:
+                                                      Colors.lightBlueAccent)),
+                                      ],
+                                    ),
+                                  )
+                                : Container()
                           ]),
                     ),
                   ],
@@ -174,30 +183,72 @@ class _ProfilePageState extends State<ProfilePage> {
                       FontAwesomeIcons.heartCircleCheck,
                       color: Colors.black,
                     ),
-                    SizedBox(width: 10,),
-                    Text('${NumberFormat.compact().format(user.likeCount)}',style: TextStyle(fontSize: 18)),
-                    SizedBox(width: 10,),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('${NumberFormat.compact().format(user.likeCount)}',
+                        style: TextStyle(fontSize: 18)),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Icon(
                       FontAwesomeIcons.btc,
                       color: Colors.black,
                     ),
-                    SizedBox(width: 10,),
-                    Text('${NumberFormat.compact().format(user.tokenCount)}',style: TextStyle(fontSize: 18)),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text('${NumberFormat.compact().format(user.tokenCount)}',
+                        style: TextStyle(fontSize: 18)),
                   ],
                 ),
 
                 Container(
+                  margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                  padding: EdgeInsets.fromLTRB(64, 10, 64, 10),
+                  child: userIdFormGetArguments != 'Id'
+                      ? OutlinedButton(
+                          onPressed: () {
+                            Get.to(ChatMesPage(),arguments: user.userInfoId);
+                          },
+                          child: Center(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                Icon(
+                                  FontAwesomeIcons.message,
+                                  color: Colors.black,
+                                ),
+                                Text(
+                                  " Message",
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 18),
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Container(),
+                ),
+
+                Container(
                   padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                  child: Text("AboutMe",style: TextStyle(fontSize: 20),),
+                  child: Text(
+                    "AboutMe",
+                    style: TextStyle(fontSize: 20),
+                  ),
                 ),
                 Container(
                   padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
-                  child: Container( 
+                  child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 2),
                       borderRadius: BorderRadius.circular(20),
                     ),
-                    child: Container(padding: EdgeInsets.all(10),child: Text("${user.userCaption}")),
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("${user.userCaption}")),
                   ),
                 )
                 // TODO MAKE FUNCTION FOR THIS CODE

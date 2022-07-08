@@ -1,3 +1,4 @@
+import 'package:askexpertapp/dataModel/ChatContactDataModel.dart';
 import 'package:flutter/material.dart';
 
 import '../../config/ConfigApp.dart';
@@ -12,6 +13,10 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
 
   //Call ContactList
+  List<ChatContactDataModel> chatContactDataList = List.generate(
+    0,
+        (index) => ChatContactDataModel(),
+  );
 
 
   @override
