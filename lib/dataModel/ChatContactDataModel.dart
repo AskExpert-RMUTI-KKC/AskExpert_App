@@ -9,7 +9,7 @@ class ChatContactDataModel {
   int? chatTxUnReadCount;
   int? chatRxUnReadCount;
   int? createdDate;
-  UserInfoData? userInfoDataRx;
+  UserInfoData? userInfoData;
 
   ChatContactDataModel(
       {this.chatContactId,
@@ -20,7 +20,7 @@ class ChatContactDataModel {
         this.chatTxUnReadCount,
         this.chatRxUnReadCount,
         this.createdDate,
-        this.userInfoDataRx});
+        this.userInfoData});
 
   ChatContactDataModel.fromJson(Map<String, dynamic> json) {
     chatContactId = json['chatContactId'];
@@ -31,7 +31,7 @@ class ChatContactDataModel {
     chatTxUnReadCount = json['chatTxUnReadCount'];
     chatRxUnReadCount = json['chatRxUnReadCount'];
     createdDate = json['createdDate'];
-    userInfoDataRx = json['userInfoDataRx'] != null
+    userInfoData = json['userInfoDataRx'] != null
         ? new UserInfoData.fromJson(json['userInfoDataRx'])
         : null;
   }
@@ -46,8 +46,8 @@ class ChatContactDataModel {
     data['chatTxUnReadCount'] = this.chatTxUnReadCount;
     data['chatRxUnReadCount'] = this.chatRxUnReadCount;
     data['createdDate'] = this.createdDate;
-    if (this.userInfoDataRx != null) {
-      data['userInfoDataRx'] = this.userInfoDataRx!.toJson();
+    if (this.userInfoData != null) {
+      data['userInfoDataRx'] = this.userInfoData!.toJson();
     }
     return data;
   }

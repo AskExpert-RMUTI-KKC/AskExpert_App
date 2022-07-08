@@ -6,7 +6,7 @@ class ChatMesDataModel {
   String? chatTx;
   String? chatMes;
   int? createdDate;
-  UserInfoData? userInfoDataTx;
+  UserInfoData? userInfoData;
 
   ChatMesDataModel(
       {this.chatMesId,
@@ -14,7 +14,7 @@ class ChatMesDataModel {
         this.chatTx,
         this.chatMes,
         this.createdDate,
-        this.userInfoDataTx});
+        this.userInfoData});
 
   ChatMesDataModel.fromJson(Map<String, dynamic> json) {
     chatMesId = json['chatMesId'];
@@ -22,7 +22,7 @@ class ChatMesDataModel {
     chatTx = json['chatTx'];
     chatMes = json['chatMes'];
     createdDate = json['createdDate'];
-    userInfoDataTx = json['userInfoDataTx'] != null
+    userInfoData = json['userInfoDataTx'] != null
         ? new UserInfoData.fromJson(json['userInfoDataTx'])
         : null;
   }
@@ -34,8 +34,8 @@ class ChatMesDataModel {
     data['chatTx'] = this.chatTx;
     data['chatMes'] = this.chatMes;
     data['createdDate'] = this.createdDate;
-    if (this.userInfoDataTx != null) {
-      data['userInfoDataTx'] = this.userInfoDataTx!.toJson();
+    if (this.userInfoData != null) {
+      data['userInfoDataTx'] = this.userInfoData!.toJson();
     }
     return data;
   }
