@@ -75,6 +75,10 @@ class _ChatPageState extends State<ChatPage> {
     //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
   }
 
+  late String chatContactId;
+  late ChatContactDataModel chatContactDataModel = new ChatContactDataModel();
+  late String chatWith = "chatWith";
+
   @override
   void initState() {
     chatContactListCall();
@@ -131,8 +135,7 @@ class _ChatPageState extends State<ChatPage> {
                                   onTap: () {
                                     Get.to(ChatMesPage(),
                                         arguments: chatContactDataList[index]
-                                            .userInfoData
-                                            ?.userInfoId);
+                                            .chatContactId);
                                   },
                                   child: Row(
                                     children: <Widget>[

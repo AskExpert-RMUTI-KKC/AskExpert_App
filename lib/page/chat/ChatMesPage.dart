@@ -36,12 +36,12 @@ class ChatMesPage extends StatefulWidget {
 
 class _ChatMesPageState extends State<ChatMesPage> {
   late UserDataModel user = new UserDataModel();
-  late String userIdFormGetArguments;
+  late String contactIdFormArgument ;
   late Future getUser;
 
   late String chatContactId;
   late ChatContactDataModel chatContactDataModel = new ChatContactDataModel();
-  late String chatWith = "chatWith";
+  late String chatWith = "ChatWith";
 
   late Future getChatMes;
   List<ChatMesDataModel> chatMesList = List.generate(
@@ -65,7 +65,7 @@ class _ChatMesPageState extends State<ChatMesPage> {
 
     url = Uri.parse('${ConfigApp.chatFirstContact}');
     print('\n URL :${url.toString()}');
-    response = await http.post(url, body: userIdFormGetArguments, headers: {
+    response = await http.post(url, body:contactIdFormArgument , headers: {
       "Accept": "application/json",
       "content-type": "application/json",
       "Authorization": "${_tokenJwt}"
@@ -83,7 +83,6 @@ class _ChatMesPageState extends State<ChatMesPage> {
       chatWith = "@${chatContactDataModel.userInfoData?.userName}";
       print('chatContactId var ${chatContactId}');
       print('chatContactDataModel var ${chatContactDataModel.toJson()}');
-      chatMesListCall(chatContactId);
     });
     // print('\nResponse body data: ${resMap["data"]}');
     // print('\nResponse body data: ${resMap["data"]}');
@@ -126,7 +125,7 @@ class _ChatMesPageState extends State<ChatMesPage> {
     //Map<String, String> data = Map();
     var body = jsonEncode({
       'chatMes': _commentCaption.text,
-      'chatContactId': chatContactId,
+      'chatContactId': contactIdFormArgument,
     });
     String? _authen = await TokenStore.getToken();
     _authen = "Bearer " + _authen!;
@@ -156,6 +155,7 @@ class _ChatMesPageState extends State<ChatMesPage> {
       //   backgroundColor: Color(ConfigApp.warningSnackBar),
       //   colorText: Color(ConfigApp.warningSnackBarText),
       // );
+      Get.back();
     }
   }
 
@@ -218,8 +218,8 @@ class _ChatMesPageState extends State<ChatMesPage> {
     // TODO: implement initState
     if (Get.arguments.toString().length > 16) {
       print("${Get.arguments.toString()}");
-      userIdFormGetArguments = Get.arguments;
-      firstContact();
+      contactIdFormArgument = Get.arguments;
+      chatMesListCall(contactIdFormArgument);
     }
     super.initState();
   }

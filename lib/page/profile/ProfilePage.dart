@@ -14,6 +14,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 
+import '../../dataModel/ChatContactDataModel.dart';
 import 'ProfileLogic.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,6 +29,10 @@ class _ProfilePageState extends State<ProfilePage> {
   late String userIdFormGetArguments;
 
   late Future getUser;
+
+  late String chatContactId;
+  late ChatContactDataModel chatContactDataModel = new ChatContactDataModel();
+  late String chatWith = "chatWith";
 
   Future<void> UserCall() async {
     Map<String, String> params = Map();
@@ -68,6 +73,46 @@ class _ProfilePageState extends State<ProfilePage> {
   Future<String> awaitUserCall() async {
     await UserCall();
     return "1";
+  }
+
+  Future<void> firstContact(rx) async {
+    Map<String, String> params = Map();
+    //Map<String, String> data = Map();
+
+    String? _tokenJwt = await TokenStore.getToken();
+    _tokenJwt = "Bearer " + _tokenJwt!;
+    print("_tokenJwt : ${_tokenJwt}");
+
+    var response;
+    var url;
+
+    url = Uri.parse('${ConfigApp.chatFirstContact}');
+    print('\n URL :${url.toString()}');
+    response = await http.post(url, body: rx , headers: {
+      "Accept": "application/json",
+      "content-type": "application/json",
+      "Authorization": "${_tokenJwt}"
+    });
+
+    Map resMap = jsonDecode(utf8.decode(response.bodyBytes));
+
+    print('\nResponse status: ${response.statusCode}');
+    print('\nResponse message: ${resMap["message"]}');
+    print('\nResponse body data: ${resMap["data"]}');
+    setState(() {
+      print('chatContactId ${resMap["data"]["chatContactId"]}');
+      chatContactDataModel = ChatContactDataModel.fromJson(resMap["data"]);
+      chatContactId = resMap["data"]["chatContactId"];
+      chatWith = "@${chatContactDataModel.userInfoData?.userName}";
+      print('chatContactId var ${chatContactId}');
+      print('chatContactDataModel var ${chatContactDataModel.toJson()}');
+
+      Get.to(ChatMesPage(),arguments: chatContactId);
+
+
+    });
+    // print('\nResponse body data: ${resMap["data"]}');
+    // print('\nResponse body data: ${resMap["data"]}');
   }
 
   @override
@@ -209,7 +254,11 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: userIdFormGetArguments != 'Id'
                       ? OutlinedButton(
                           onPressed: () {
-                            Get.to(ChatMesPage(),arguments: user.userInfoId);
+                            firstContact(userIdFormGetArguments);
+
+
+
+
                           },
                           child: Center(
                             child: Row(
