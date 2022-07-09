@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/page/NavigationBar.dart';
 import 'package:file_picker/file_picker.dart';
@@ -42,6 +44,12 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
   final _lastName = TextEditingController();
   final _userName = TextEditingController();
   final _userCaption = TextEditingController();
+
+  final _telNumber = TextEditingController();
+  final _priceCall = TextEditingController();
+  final _priceVideo = TextEditingController();
+  final _liveLink = TextEditingController();
+
   List<ExpertDataModel> expertList = [];
   String? expertSelected;
   late Future getExpertList;
@@ -58,6 +66,10 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
       'userName': _userName.text,
       'userCaption': _userCaption.text,
       'expertGroupId': expertSelected,
+      'telNumber':_telNumber.text,
+      'priceCall':_priceCall.text,
+      'priceVideo':_priceVideo.text,
+      'liveLink':_liveLink.text,
     });
     String? _authen = await TokenStore.getToken();
     _authen = "Bearer " + _authen!;
@@ -152,6 +164,10 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
       _lastName.text =user.lastName!;
       _userName.text = user.userName!;
       _userCaption.text = user.userCaption!;
+      _telNumber.text =user.telNumber!;
+      _priceCall.text=user.priceCall!.toString();
+      _priceVideo.text=user.priceVideo!.toString();
+      _liveLink.text=user.liveLink!;
     });
     // print('\nResponse body data: ${resMap["data"]}');
     // print('\nResponse body data: ${resMap["data"]}');
@@ -302,6 +318,118 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                               },
                             ),
                           ),
+
+                          //TODO
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+                            child: TextFormField(
+                              maxLength: 16,
+                              decoration: const InputDecoration(
+                                label: Text("_telNumber"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color:
+                                        Color(ConfigApp.buttonSecondary))),
+                              ),
+                              controller: _telNumber,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter _telNumber";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+                            child: TextFormField(
+                              maxLength: 16,
+                              decoration: const InputDecoration(
+                                label: Text("_priceCall"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color:
+                                        Color(ConfigApp.buttonSecondary))),
+                              ),
+                              controller: _priceCall,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter _priceCall";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+                            child: TextFormField(
+                              maxLength: 16,
+                              decoration: const InputDecoration(
+                                label: Text("_priceVideo"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color:
+                                        Color(ConfigApp.buttonSecondary))),
+                              ),
+                              controller: _priceVideo,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter _priceVideo";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
+                            child: TextFormField(
+                              maxLength: 16,
+                              decoration: const InputDecoration(
+                                label: Text("_liveLink"),
+                                border: OutlineInputBorder(
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(15)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                    borderRadius:
+                                    BorderRadius.all(Radius.circular(15)),
+                                    borderSide: BorderSide(
+                                        color:
+                                        Color(ConfigApp.buttonSecondary))),
+                              ),
+                              controller: _liveLink,
+                              validator: (input) {
+                                if (input!.isEmpty) {
+                                  return "please enter _liveLink";
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),
+                          ),
+
+
                           Padding(
                             padding: const EdgeInsets.fromLTRB(0, 0.0, 0, 0.0),
                             child: TextFormField(

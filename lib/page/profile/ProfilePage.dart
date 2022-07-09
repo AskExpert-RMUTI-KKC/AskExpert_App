@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
@@ -299,7 +300,90 @@ class _ProfilePageState extends State<ProfilePage> {
                         padding: EdgeInsets.all(10),
                         child: Text("${user.userCaption}")),
                   ),
-                )
+                ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text(
+                    "Tel. Number",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("${user.telNumber}")),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text(
+                    "CallMePrice",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("${user.priceCall}")),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text(
+                    "VideoCallMePrice",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("${user.priceVideo}")),
+                  ),
+                ),
+
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                  child: Text(
+                    "MyLive",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.black, width: 2),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Container(
+                        padding: EdgeInsets.all(10),
+                        child: Text("${user.liveLink}")),
+                  ),
+                ),
+
+
+
                 // TODO MAKE FUNCTION FOR THIS CODE
               ],
             ),

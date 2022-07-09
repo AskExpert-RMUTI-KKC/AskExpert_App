@@ -10,6 +10,10 @@ class UserDataModel {
   String? expertGroupId;
   double? tokenCount;
   int? likeCount;
+  String? telNumber;
+  int? priceCall;
+  int? priceVideo;
+  String? liveLink;
   String? createdDateForOrder;
   int? createdDate;
   ExpertGroupListData? expertGroupListData;
@@ -27,6 +31,10 @@ class UserDataModel {
         this.expertGroupId,
         this.tokenCount,
         this.likeCount,
+        this.telNumber,
+        this.priceCall,
+        this.priceVideo,
+        this.liveLink,
         this.createdDateForOrder,
         this.createdDate,
         this.expertGroupListData,
@@ -44,6 +52,10 @@ class UserDataModel {
     expertGroupId = json['expertGroupId'];
     tokenCount = json['tokenCount'];
     likeCount = json['likeCount'];
+    telNumber = json['telNumber'];
+    priceCall = json['priceCall'];
+    priceVideo = json['priceVideo'];
+    liveLink = json['liveLink'];
     createdDateForOrder = json['createdDateForOrder'];
     createdDate = json['createdDate'];
     expertGroupListData = json['expertGroupListData'] != null
@@ -67,6 +79,10 @@ class UserDataModel {
     data['expertGroupId'] = this.expertGroupId;
     data['tokenCount'] = this.tokenCount;
     data['likeCount'] = this.likeCount;
+    data['telNumber'] = this.telNumber;
+    data['priceCall'] = this.priceCall;
+    data['priceVideo'] = this.priceVideo;
+    data['liveLink'] = this.liveLink;
     data['createdDateForOrder'] = this.createdDateForOrder;
     data['createdDate'] = this.createdDate;
     if (this.expertGroupListData != null) {
