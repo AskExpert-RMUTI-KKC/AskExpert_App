@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:askexpertapp/dataModel/ChatContactDataModel.dart';
+import 'package:askexpertapp/page/profile/ProfilePage.dart';
 import 'package:flutter/material.dart';
 import 'package:askexpertapp/config/ConfigApp.dart';
 import 'package:askexpertapp/dataModel/UserDataModel.dart';
@@ -120,10 +121,10 @@ class _ChatPageState extends State<ChatPage> {
                             itemCount: chatContactDataList.length,
                             itemBuilder: (context, index) {
                               return Container(
-                                margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                                margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
                                 decoration: BoxDecoration(
                                   border:
-                                      Border.all(color: Colors.black, width: 2),
+                                      Border.all(color: Colors.grey, width: 2),
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                                 child: InkWell(
@@ -136,8 +137,8 @@ class _ChatPageState extends State<ChatPage> {
                                   child: Row(
                                     children: <Widget>[
                                       Container(
-                                          height: 30,
-                                          width: 30,
+                                          height: 64,
+                                          width: 64,
                                           padding: EdgeInsets.all(0),
                                           decoration: BoxDecoration(
                                             shape: BoxShape.circle,
@@ -146,7 +147,7 @@ class _ChatPageState extends State<ChatPage> {
                                             onTap: () {
                                               print(
                                                   "Test ${chatContactDataList[index].userInfoData?.userInfoId}");
-                                              Get.to(ChatMesPage(),
+                                              Get.to(ProfilePage(),
                                                   arguments:
                                                       chatContactDataList[index]
                                                           .userInfoData
@@ -166,11 +167,11 @@ class _ChatPageState extends State<ChatPage> {
                                                 CrossAxisAlignment.center,
                                             children: <Widget>[
                                               Text(
-                                                  '${chatContactDataList[index].userInfoData?.userName}'),
+                                                  ' ${chatContactDataList[index].userInfoData?.userName}' ,style: TextStyle(fontSize: 18),),
                                               Row(children: <Widget>[
                                                 chatContactDataList[index]
                                                             .userInfoData
-                                                            ?.expert !=
+                                                            ?.expertGroupListData !=
                                                         null
                                                     ? Container(
                                                         padding:
@@ -188,7 +189,7 @@ class _ChatPageState extends State<ChatPage> {
                                                         child: Row(
                                                           children: [
                                                             Text(
-                                                              '${chatContactDataList[index].userInfoData?.expert}',
+                                                              '${chatContactDataList[index].userInfoData?.expertGroupListData?.expertPath}',
                                                               style: TextStyle(
                                                                   color: Colors
                                                                       .white),
@@ -214,6 +215,7 @@ class _ChatPageState extends State<ChatPage> {
                                                         ),
                                                       )
                                                     : Container(),
+
                                               ]),
                                             ],
                                           ),

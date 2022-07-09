@@ -180,15 +180,15 @@ class _TopicPageState extends State<TopicPage> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   shrinkWrap: true,
-                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 8),
+                  padding: const EdgeInsets.fromLTRB(2, 8, 0, 8),
                   itemCount: users.length,
                   itemBuilder: (context,
                       index) => /*TopicCardPage(topics: topics[index])*/ Container(
                     width: 150,
                     height: 150,
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                    margin: EdgeInsets.fromLTRB(2, 4, 2, 4),
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 4),
+                      border: Border.all(color: Colors.grey, width: 2),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: InkWell(

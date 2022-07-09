@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:askexpertapp/dataModel/ChatContactDataModel.dart';
 import 'package:askexpertapp/dataModel/ChatMesDataModel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -113,14 +114,12 @@ class _ChatMesPageState extends State<ChatMesPage> {
       for (int i = 0; i < resMap["data"].length; i++) {
         chatMesList.add(ChatMesDataModel.fromJson(resMap["data"][i]));
       }
-
     });
     // print('\nResponse body data: ${resMap["data"]}');
     // print('\nResponse body data: ${resMap["data"]}');
   }
 
   //chat
-
 
   Future<void> sendMesApi() async {
     Map<String, String> params = Map();
@@ -145,11 +144,8 @@ class _ChatMesPageState extends State<ChatMesPage> {
     print('\nResponse message: ${resMap["message"]}');
     print('\nResponse body data: ${resMap["data"]}');
     if (response.statusCode == 200 && resMap["message"] == null) {
-
       setState(() {
-
         chatMesList.add(ChatMesDataModel.fromJson(resMap["data"]));
-
       });
     } else {
       // Get.snackbar(
@@ -217,7 +213,6 @@ class _ChatMesPageState extends State<ChatMesPage> {
     //TODO : https://www.youtube.com/watch?v=eENDlIgadr4&list=WL&index=8&ab_channel=JohannesMilke
   }
 
-
   @override
   void initState() {
     // TODO: implement initState
@@ -259,219 +254,220 @@ class _ChatMesPageState extends State<ChatMesPage> {
               children: <Widget>[
                 Expanded(
                   child: SingleChildScrollView(
-                      child:  Container(
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                child: ListView.builder(
-                                  physics: NeverScrollableScrollPhysics(),
-
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  padding: const EdgeInsets.all(8),
-                                  itemCount: chatMesList.length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.black, width: 2),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: InkWell(
-                                        onLongPress: () {},
-                                        onTap: () {},
-                                        child: Row(
-                                          children: <Widget>[
-                                            Container(
-                                                height: 30,
-                                                width: 30,
-                                                padding: EdgeInsets.all(0),
-                                                decoration: BoxDecoration(
-                                                  shape: BoxShape.circle,
-                                                ),
-                                                child: InkWell(
-                                                  onTap: () {
-                                                    print(
-                                                        "Test ${chatMesList[index].userInfoData?.userInfoId}");
-                                                    Get.to(ProfilePage(),
-                                                        arguments:
-                                                            chatMesList[index]
-                                                                .userInfoData
-                                                                ?.userInfoId);
-                                                  },
-                                                  child:
-                                                      buildImageProfileDonateSheet(
-                                                          chatMesList[index]
-                                                              .userInfoData!
-                                                              .profilePic!),
-                                                )),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: <Widget>[
-                                                Row(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
-                                                  children: <Widget>[
-                                                    Text(
-                                                        '${chatMesList[index].userInfoData?.userName}'),
-                                                    Row(children: <Widget>[
-                                                      chatMesList[index]
-                                                                  .userInfoData
-                                                                  ?.expert !=
-                                                              null
-                                                          ? Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .fromLTRB(
-                                                                          3,
-                                                                          2,
-                                                                          3,
-                                                                          2),
-                                                              decoration:
-                                                                  BoxDecoration(
-                                                                      borderRadius: BorderRadius.all(
-                                                                          Radius.circular(
-                                                                              10.0) //                 <--- border radius here
-                                                                          ),
-                                                                      color: Colors
-                                                                          .black),
-                                                              child: Row(
-                                                                children: [
-                                                                  Text(
-                                                                    '${chatMesList[index].userInfoData?.expert}',
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .white),
-                                                                  ),
-                                                                  if (chatMesList[
-                                                                              index]
-                                                                          .userInfoData
-                                                                          ?.verifyStatus ==
-                                                                      true)
-                                                                    Padding(
-                                                                        padding: EdgeInsets.fromLTRB(
-                                                                            10,
-                                                                            0,
-                                                                            0,
-                                                                            0),
-                                                                        child: Icon(
-                                                                            FontAwesomeIcons
-                                                                                .circleCheck,
-                                                                            color:
-                                                                                Colors.lightBlueAccent)),
-                                                                ],
-                                                              ),
-                                                            )
-                                                          : Container(),
-                                                    ]),
-                                                  ],
-                                                ),
-                                                Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.6,
-                                                    child: Text(
-                                                      '${chatMesList[index].chatMes}',
-                                                    )),
-                                              ],
-                                            ),
-
-                                            //TODO
-                                            // Column(
-                                            //   children: <Widget>[
-                                            //     IconButton(
-                                            //         onPressed: () {
-                                            //           donateSheet(
-                                            //               comments[index]
-                                            //                   .commentId,
-                                            //               comments[index]
-                                            //                   .commentCaption,
-                                            //               comments[index]
-                                            //                   .userInfoData
-                                            //                   ?.userInfoId,
-                                            //               comments[index]
-                                            //                   .userInfoData
-                                            //                   ?.profilePic,
-                                            //               comments[index]
-                                            //                   .userInfoData
-                                            //                   ?.userName);
-                                            //         },
-                                            //         icon: Icon(
-                                            //             FontAwesomeIcons.btc)),
-                                            //     Padding(
-                                            //       padding: EdgeInsets.fromLTRB(
-                                            //           0, 0, 0, 0),
-                                            //       child: Text(
-                                            //           '${NumberFormat.compact().format(comments[index].commentDonateCount)}'),
-                                            //     ),
-                                            //   ],
-                                            // ),
-                                            // Column(
-                                            //   children: <Widget>[
-                                            //     IconButton(
-                                            //         onPressed: () {
-                                            //           setState(() {
-                                            //             if (comments[index]
-                                            //                 .likeStatus ==
-                                            //                 0) {
-                                            //               comments[index]
-                                            //                   .likeStatus = 1;
-                                            //               comments[index]
-                                            //                   .commentLikeCount =
-                                            //               (comments[index]
-                                            //                   .commentLikeCount! +
-                                            //                   1);
-                                            //             } else {
-                                            //               comments[index]
-                                            //                   .likeStatus = 0;
-                                            //               comments[index]
-                                            //                   .commentLikeCount =
-                                            //               (comments[index]
-                                            //                   .commentLikeCount! -
-                                            //                   1);
-                                            //             }
-                                            //             LikePushButton(
-                                            //                 comments[index]
-                                            //                     .commentId,
-                                            //                 comments[index]
-                                            //                     .likeStatus,
-                                            //                 comments[index]
-                                            //                     .commentCaption);
-                                            //           });
-                                            //         },
-                                            //         icon: comments[index]
-                                            //             .likeStatus ==
-                                            //             0
-                                            //             ? Icon(
-                                            //             FontAwesomeIcons
-                                            //                 .heart,
-                                            //             color: Colors.black)
-                                            //             : Icon(
-                                            //             FontAwesomeIcons
-                                            //                 .heartCircleCheck,
-                                            //             color: Colors.red)),
-                                            //     Padding(
-                                            //       padding:
-                                            //       const EdgeInsets.fromLTRB(
-                                            //           0, 0, 0, 0),
-                                            //       child: Text(
-                                            //           '${comments[index].commentLikeCount}'),
-                                            //     ),
-                                            //   ],
-                                            // ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  },
+                      child: Container(
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          child: ListView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            padding: const EdgeInsets.all(8),
+                            itemCount: chatMesList.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                margin: EdgeInsets.fromLTRB(0, 4, 0, 4),
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(color: Colors.grey, width: 2),
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
-                              ),
-                            ],
+                                child: InkWell(
+                                  onLongPress: () {},
+                                  onTap: () {},
+                                  child: Row(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                          height: 64,
+                                          width: 64,
+                                          padding: EdgeInsets.all(0),
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                          ),
+                                          child: InkWell(
+                                            onTap: () {
+                                              print(
+                                                  "Test ${chatMesList[index].userInfoData?.userInfoId}");
+                                              Get.to(ProfilePage(),
+                                                  arguments: chatMesList[index]
+                                                      .userInfoData
+                                                      ?.userInfoId);
+                                            },
+                                            child: buildImageProfileDonateSheet(
+                                                chatMesList[index]
+                                                    .userInfoData!
+                                                    .profilePic!),
+                                          )),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: <Widget>[
+                                          Row(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.center,
+                                            children: <Widget>[
+                                              Text(
+                                                ' ${chatMesList[index].userInfoData?.userName}' ,style: TextStyle(fontSize: 16),),
+                                              Row(children: <Widget>[
+                                                chatMesList[index]
+                                                    .userInfoData
+                                                    ?.expertGroupListData !=
+                                                    null
+                                                    ? Container(
+                                                  padding:
+                                                  EdgeInsets.fromLTRB(
+                                                      3, 2, 3, 2),
+                                                  decoration:
+                                                  BoxDecoration(
+                                                      borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(
+                                                              10.0) //                 <--- border radius here
+                                                      ),
+                                                      color: Colors
+                                                          .black),
+                                                  child: Row(
+                                                    children: [
+                                                      Text(
+                                                        '${chatMesList[index].userInfoData?.expertGroupListData?.expertPath}',
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .white),
+                                                      ),
+                                                      if (chatMesList[
+                                                      index]
+                                                          .userInfoData
+                                                          ?.verifyStatus ==
+                                                          true)
+                                                        Padding(
+                                                            padding: EdgeInsets
+                                                                .fromLTRB(
+                                                                10,
+                                                                0,
+                                                                0,
+                                                                0),
+                                                            child: Icon(
+                                                                FontAwesomeIcons
+                                                                    .circleCheck,
+                                                                color: Colors
+                                                                    .lightBlueAccent)),
+                                                    ],
+                                                  ),
+                                                )
+                                                    : Container(),
+
+                                              ]),
+
+                                              Text(
+                                                  ' ${DateFormat('dd/MM/yyyy, HH:mm').format(DateTime.fromMillisecondsSinceEpoch(chatMesList[index].createdDate!))}'),
+                                            ],
+
+                                          ),
+                                          Container(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.6,
+                                              child: Text(
+                                                ' ${chatMesList[index].chatMes}',style: TextStyle(fontSize: 20),
+                                              )),
+                                        ],
+                                      ),
+
+                                      //TODO
+                                      // Column(
+                                      //   children: <Widget>[
+                                      //     IconButton(
+                                      //         onPressed: () {
+                                      //           donateSheet(
+                                      //               comments[index]
+                                      //                   .commentId,
+                                      //               comments[index]
+                                      //                   .commentCaption,
+                                      //               comments[index]
+                                      //                   .userInfoData
+                                      //                   ?.userInfoId,
+                                      //               comments[index]
+                                      //                   .userInfoData
+                                      //                   ?.profilePic,
+                                      //               comments[index]
+                                      //                   .userInfoData
+                                      //                   ?.userName);
+                                      //         },
+                                      //         icon: Icon(
+                                      //             FontAwesomeIcons.btc)),
+                                      //     Padding(
+                                      //       padding: EdgeInsets.fromLTRB(
+                                      //           0, 0, 0, 0),
+                                      //       child: Text(
+                                      //           '${NumberFormat.compact().format(comments[index].commentDonateCount)}'),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      // Column(
+                                      //   children: <Widget>[
+                                      //     IconButton(
+                                      //         onPressed: () {
+                                      //           setState(() {
+                                      //             if (comments[index]
+                                      //                 .likeStatus ==
+                                      //                 0) {
+                                      //               comments[index]
+                                      //                   .likeStatus = 1;
+                                      //               comments[index]
+                                      //                   .commentLikeCount =
+                                      //               (comments[index]
+                                      //                   .commentLikeCount! +
+                                      //                   1);
+                                      //             } else {
+                                      //               comments[index]
+                                      //                   .likeStatus = 0;
+                                      //               comments[index]
+                                      //                   .commentLikeCount =
+                                      //               (comments[index]
+                                      //                   .commentLikeCount! -
+                                      //                   1);
+                                      //             }
+                                      //             LikePushButton(
+                                      //                 comments[index]
+                                      //                     .commentId,
+                                      //                 comments[index]
+                                      //                     .likeStatus,
+                                      //                 comments[index]
+                                      //                     .commentCaption);
+                                      //           });
+                                      //         },
+                                      //         icon: comments[index]
+                                      //             .likeStatus ==
+                                      //             0
+                                      //             ? Icon(
+                                      //             FontAwesomeIcons
+                                      //                 .heart,
+                                      //             color: Colors.black)
+                                      //             : Icon(
+                                      //             FontAwesomeIcons
+                                      //                 .heartCircleCheck,
+                                      //             color: Colors.red)),
+                                      //     Padding(
+                                      //       padding:
+                                      //       const EdgeInsets.fromLTRB(
+                                      //           0, 0, 0, 0),
+                                      //       child: Text(
+                                      //           '${comments[index].commentLikeCount}'),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
                           ),
+                        ),
+                      ],
+                    ),
                   )),
                 ),
                 _buildCommentAdd(),

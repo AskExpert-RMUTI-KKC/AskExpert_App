@@ -1,4 +1,5 @@
 import 'CommentDataModel.dart';
+import 'UserDataModel.dart';
 
 class ChatContactDataModel {
   String? chatContactId;
@@ -9,7 +10,7 @@ class ChatContactDataModel {
   int? chatTxUnReadCount;
   int? chatRxUnReadCount;
   int? createdDate;
-  UserInfoData? userInfoData;
+  UserDataModel? userInfoData;
 
   ChatContactDataModel(
       {this.chatContactId,
@@ -32,7 +33,7 @@ class ChatContactDataModel {
     chatRxUnReadCount = json['chatRxUnReadCount'];
     createdDate = json['createdDate'];
     userInfoData = json['userInfoDataRx'] != null
-        ? new UserInfoData.fromJson(json['userInfoDataRx'])
+        ? new UserDataModel.fromJson(json['userInfoDataRx'])
         : null;
   }
 
