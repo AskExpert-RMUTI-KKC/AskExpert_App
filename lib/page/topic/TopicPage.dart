@@ -91,6 +91,7 @@ class _TopicPageState extends State<TopicPage> {
 
   Future<void> Refresh() async {
     setState(() {
+      users = [];
       topics = [];
       topicCall();
       findTopTenLike();

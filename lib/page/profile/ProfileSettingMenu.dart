@@ -501,7 +501,9 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                     ],
                   ),
                 ),
-                Padding(
+                Container(
+                  height: 100,
+                  width: 300,
                   padding: const EdgeInsets.all(12.0),
                   child: ElevatedButton(
                     onPressed: () {
@@ -519,7 +521,6 @@ class _ProfileSettingMenuState extends State<ProfileSettingMenu> {
                       ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      minimumSize: const Size(300, 50),
                       primary: Color(ConfigApp.buttonSecondary),
                       elevation: 5,
                       shape: RoundedRectangleBorder(
